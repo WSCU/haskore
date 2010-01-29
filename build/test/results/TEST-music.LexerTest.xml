@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="forgiveness-machine" name="music.LexerTest" tests="8" time="0.174" timestamp="2010-01-28T23:54:55">
+  <properties>
+    <property name="javac.test.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar:build/classes:/home/austin/netbeans-6.5.1/platform9/modules/ext/junit-4.5.jar" />
+    <property name="libs.DataBindingME.src" value="" />
+    <property name="libs.j2me_ant_ext.javadoc" value="" />
+    <property name="org.openide.TopManager.GUI" value="true" />
+    <property name="libs.theme-default.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/defaulttheme.jar" />
+    <property name="libs.proguard.javadoc" value="" />
+    <property name="libs.junit.javadoc" value="/home/austin/netbeans-6.5.1/java2/docs/junit-3.8.2-api.zip" />
+    <property name="libs.nsicom-ant-utils.src" value="" />
+    <property name="libs.nokiaS80-ant-utils.javadoc" value="" />
+    <property name="ant.core.lib" value="/home/austin/netbeans-6.5.1/java2/ant/lib/ant.jar" />
+    <property name="libs.swing-app-framework.src" value="" />
+    <property name="libs.jakarta_slide_ant_webdav.javadoc" value="" />
+    <property name="javadoc.windowtitle" value="" />
+    <property name="libs.toplink.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/toplink/toplink-essentials.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/toplink/toplink-essentials-agent.jar" />
+    <property name="user.dir" value="/home/austin/NetBeansProjects/Music" />
+    <property name="libs.theme-default-green.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/defaulttheme-green.jar" />
+    <property name="libs.hibernate-persistence.javadoc" value="" />
+    <property name="libs.JMUnit4CLDC10.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/jmunit-1.2.1-api.zip" />
+    <property name="java.vm.version" value="14.2-b01" />
+    <property name="libs.DataBindingME.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/netbeans_databindingme.jar" />
+    <property name="libs.jstl11.maven-pom" value="" />
+    <property name="libs.nsicom-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/ant/nblib/org-netbeans-modules-j2me-cdc-project-nsicom.jar" />
+    <property name="libs.MySQLDriver.classpath" value="/home/austin/netbeans-6.5.1/ide10/modules/ext/mysql-connector-java-5.1.6-bin.jar" />
+    <property name="libs.jstl11.src" value="" />
+    <property name="javadoc.notree" value="false" />
+    <property name="libs.DataBindingME-PIM.maven-pom" value="" />
+    <property name="libs.hibernate-support.maven-pom" value="" />
+    <property name="libs.hibernate-support.javadoc" value="" />
+    <property name="libs.exceptionhandler-runtime.maven-pom" value="" />
+    <property name="libs.NetBeans MIDP Components.maven-pom" value="" />
+    <property name="jdk.home" value="/usr/lib/jvm/java-6-sun" />
+    <property name="libs.javac-api.src" value="" />
+    <property name="javadoc.noindex" value="false" />
+    <property name="libs.theme-default-green.runtime" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/defaulttheme-green.jar" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="libs.theme-default-gray.runtime" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/defaulttheme-gray.jar" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="libs.semc-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/org-netbeans-modules-j2me-cdc-project-semc.jar" />
+    <property name="nb.show.statistics.ui" value="usageStatisticsEnabled" />
+    <property name="libs.jsf-extensions.maven-pom" value="" />
+    <property name="libs.jdbcsupport-runtime.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/sqlx.jar" />
+    <property name="have.tests" value="true" />
+    <property name="libs.nokiaS80-ant-utils.maven-pom" value="" />
+    <property name="libs.jdbcsupport-designtime.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/sqlx.jar" />
+    <property name="org.xml.sax.driver" value="com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser" />
+    <property name="libs.nb_svg_midp_components.src" value="/home/austin/netbeans-6.5.1/mobility8/sources/nb_svg_midp_components-src.zip" />
+    <property name="libs.NetBeans MIDP Components WMA.src" value="/home/austin/netbeans-6.5.1/mobility8/sources/netbeans_midp_components_wma-src.zip" />
+    <property name="libs.javac-api.javadoc" value="" />
+    <property name="os.name" value="Linux" />
+    <property name="libs.beans-binding.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/beansbinding-1.2.1.jar" />
+    <property name="libs.DataBindingME-SVG.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/netbeans_databindingme_svg-api.zip" />
+    <property name="libs.restapi.javadoc" value="/home/austin/netbeans-6.5.1/enterprise5/docs/jsr311-api-doc.zip" />
+    <property name="libs.JWSAntTasks.maven-pom" value="" />
+    <property name="rave.build" value="thresher-fcs" />
+    <property name="libs.restapi.classpath" value="/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/jsr311-api.jar" />
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi" />
+    <property name="libs.nsicom-ant-utils.javadoc" value="" />
+    <property name="libs.jaxb.maven-pom" value="" />
+    <property name="os.arch" value="i386" />
+    <property name="user.name" value="austin" />
+    <property name="libs.jsf12.javadoc" value="/home/austin/netbeans-6.5.1/enterprise5/docs/javaee5-doc-api.zip" />
+    <property name="libs.swing-layout.maven-pom" value="" />
+    <property name="build.classes.dir" value="build/classes" />
+    <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
+    <property name="build.sysclasspath" value="ignore" />
+    <property name="libs.jaxws21.javadoc" value="/home/austin/netbeans-6.5.1/java2/docs/jaxws-2_1-api-doc.zip" />
+    <property name="rubyplatform.default.ruby_kind" value="JRuby" />
+    <property name="includes" value="**" />
+    <property name="user.country" value="US" />
+    <property name="manifest.file" value="manifest.mf" />
+    <property name="libs.jstl11.javadoc" value="/home/austin/netbeans-6.5.1/enterprise5/docs/javaee5-doc-api.zip" />
+    <property name="libs.JMUnit4CLDC11.src" value="" />
+    <property name="javadoc.encoding" value="UTF-8" />
+    <property name="javac.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar" />
+    <property name="libs.jsfsupport-designtime.javadoc" value="/home/austin/netbeans-6.5.1/visualweb2/docs/appbase-doc.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/dataprovider-doc.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/jsfcl-doc.zip" />
+    <property name="libs.bdj-ant-utils.src" value="" />
+    <property name="debug-transport" value="dt_socket" />
+    <property name="netbeans.system_http_non_proxy_hosts" value="" />
+    <property name="netbeans.home" value="/home/austin/netbeans-6.5.1/platform9" />
+    <property name="build.compiler.emacs" value="true" />
+    <property name="rubyplatform.Ruby.ruby_kind" value="Ruby" />
+    <property name="libs.ejb3-persistence.src" value="" />
+    <property name="libs.nokiaS80-ant-utils.src" value="" />
+    <property name="libs.jdbcsupport-runtime.javadoc" value="" />
+    <property name="libs.cdc-pp-awt-layout.javadoc" value="" />
+    <property name="libs.j2me_ant_ext.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/org-netbeans-modules-mobility-antext.jar:/home/austin/netbeans-6.5.1/ide10/modules/org-netbeans-modules-classfile.jar" />
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/endorsed" />
+    <property name="libs.groovy-all.src" value="" />
+    <property name="netbeans.dynamic.classpath" value="/home/austin/netbeans-6.5.1/platform9/core/org-openide-filesystems.jar:/home/austin/netbeans-6.5.1/platform9/core/core.jar:/home/austin/netbeans-6.5.1/platform9/core/locale/core_pt_BR.jar:/home/austin/netbeans-6.5.1/platform9/core/locale/org-openide-filesystems_zh_CN.jar:/home/austin/netbeans-6.5.1/platform9/core/locale/core_zh_CN.jar:/home/austin/netbeans-6.5.1/platform9/core/locale/core_ja.jar:/home/austin/netbeans-6.5.1/platform9/core/locale/org-openide-filesystems_pt_BR.jar:/home/austin/netbeans-6.5.1/platform9/core/locale/org-openide-filesystems_ja.jar:/home/austin/netbeans-6.5.1/nb6.5/core/org-netbeans-upgrader.jar:/home/austin/netbeans-6.5.1/nb6.5/core/locale/org-netbeans-upgrader_pt_BR.jar:/home/austin/netbeans-6.5.1/nb6.5/core/locale/org-netbeans-upgrader_zh_CN.jar:/home/austin/netbeans-6.5.1/nb6.5/core/locale/core_nb_zh_CN.jar:/home/austin/netbeans-6.5.1/nb6.5/core/locale/org-netbeans-upgrader_ja.jar:/home/austin/netbeans-6.5.1/nb6.5/core/locale/core_nb_ja.jar:/home/austin/netbeans-6.5.1/nb6.5/core/locale/core_nb.jar:/home/austin/netbeans-6.5.1/nb6.5/core/locale/core_nb_pt_BR.jar" />
+    <property name="libs.cdc-agui-swing-layout.maven-pom" value="" />
+    <property name="libs.cdc-pp-awt-layout.src" value="/home/austin/netbeans-6.5.1/mobility8/sources/cdc-pp-awt-layout-src.zip" />
+    <property name="java.vm.specification.version" value="1.0" />
+    <property name="libs.jakarta_slide_ant_webdav.src" value="" />
+    <property name="libs.sjmc-ant-utils.maven-pom" value="" />
+    <property name="libs.groovy-all.maven-pom" value="" />
+    <property name="libs.JMUnit4CLDC10.maven-pom" value="" />
+    <property name="libs.hibernate-persistence.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/antlr-2.7.6.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/asm.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/asm-attrs.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/cglib-2.1.3.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/commons-collections-2.1.1.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/commons-logging-1.1.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/dom4j-1.6.1.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/ehcache-1.2.3.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/jdbc2_0-stdext.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/jta.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate3.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-tools.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-annotations.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-commons-annotations.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-entitymanager.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/javassist.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/ejb3-persistence.jar" />
+    <property name="libs.jaxws21.src" value="" />
+    <property name="platforms.Sun_Java_TM__Wireless_Toolkit_2_5_2_for_CLDC.preverifycommandline" value="" />
+    <property name="libs.swing-app-framework.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/appframework-1.0.3.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/swing-worker-1.1.jar" />
+    <property name="libs.jakarta_slide_ant_webdav.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/commons-httpclient-3.0.1.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/commons-logging-1.1.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/jdom-1.0.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/jakarta-slide-webdavlib-2.1.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/jakarta-slide-ant-webdav-2.1.jar" />
+    <property name="java.vendor" value="Sun Microsystems Inc." />
+    <property name="libs.JMUnit4CLDC10.src" value="" />
+    <property name="javac.debug" value="true" />
+    <property name="javadoc.splitindex" value="true" />
+    <property name="file.separator" value="/" />
+    <property name="libs.IdentityAntTasks.src" value="" />
+    <property name="libs.ActiveSync.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/nbactivesync-5.0.jar" />
+    <property name="platforms.Sun_Java_TM__Wireless_Toolkit_2_5_2_for_CLDC.home" value="/home/austin/netbeans-6.5.1/mobility8/WTK2.5.2" />
+    <property name="libs.junit_4.maven-pom" value="" />
+    <property name="netbeans.buildnumber" value="200903060201" />
+    <property name="libs.JWSAntTasks.javadoc" value="" />
+    <property name="build.generated.sources.dir" value="build/generated-sources" />
+    <property name="libs.webui-runtime.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/webui.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/commons-fileupload-1.0.jar" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="libs.junit.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/junit-3.8.2.jar" />
+    <property name="libs.jaxb.javadoc" value="" />
+    <property name="libs.struts.classpath" value="/home/austin/netbeans-6.5.1/enterprise5/modules/ext/struts/antlr.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/struts/commons-beanutils.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/struts/commons-digester.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/struts/commons-logging.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/struts/commons-validator.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/struts/jakarta-oro.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/struts/struts.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/commons-fileupload-1.0.jar" />
+    <property name="libs.woodstock-theme-default.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/webui-jsf-suntheme.jar" />
+    <property name="org.openide.awt.SwingBrowserImpl.do-not-block-awt" value="false" />
+    <property name="ant.file.Music1" value="/home/austin/NetBeansProjects/Music/build.xml" />
+    <property name="ant.home" value="/home/austin/netbeans-6.5.1/java2/ant" />
+    <property name="libs.junit_4.src" value="/home/austin/netbeans-6.5.1/java2/docs/junit-4.5-src.jar" />
+    <property name="libs.ricoh-ant-utils.maven-pom" value="" />
+    <property name="rubyplatform.default.gem_home" value="/home/austin/netbeans-6.5.1/ruby2/jruby-1.1.4/lib/ruby/gems/1.8" />
+    <property name="libs.absolutelayout.maven-pom" value="" />
+    <property name="ant.java.version" value="1.6" />
+    <property name="java.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386/server:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/../lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386/client:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/../lib/i386:/usr/java/packages/lib/i386:/lib:/usr/lib" />
+    <property name="javadoc.author" value="false" />
+    <property name="libs.IdentityAntTasks.classpath" value="/home/austin/netbeans-6.5.1/identity2/ant/nblib/org-netbeans-modules-identity-ant.jar:/home/austin/netbeans-6.5.1/identity2/modules/org-netbeans-modules-identity-profile-api.jar" />
+    <property name="java.util.logging.config.class" value="org.netbeans.core.startup.TopLogging" />
+    <property name="libs.PostgreSQLDriver.src" value="" />
+    <property name="sun.arch.data.model" value="32" />
+    <property name="basedir" value="/home/austin/NetBeansProjects/Music" />
+    <property name="libs.ActiveSync.src" value="" />
+    <property name="jar.compress" value="false" />
+    <property name="libs.NetBeans MIDP Components PDA.src" value="/home/austin/netbeans-6.5.1/mobility8/sources/netbeans_midp_components_pda-src.zip" />
+    <property name="libs.jstl11.classpath" value="/home/austin/netbeans-6.5.1/enterprise5/modules/ext/standard.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jstl.jar" />
+    <property name="path.separator" value=":" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="libs.semc-ant-utils.javadoc" value="" />
+    <property name="libs.jaxws21.classpath" value="/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/activation.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/api/jaxb-api.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/jaxb-impl.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/jaxb-xjc.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/api/jsr173_api.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/FastInfoset.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/http.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/api/jaxws-api.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/jaxws-rt.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/jaxws-tools.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/api/jsr181-api.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/api/jsr250-api.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/mimepull.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/resolver.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/api/saaj-api.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/saaj-impl.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/sjsxp.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/stax-ex.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/streambuffer.jar" />
+    <property name="libs.struts.src" value="" />
+    <property name="user.language" value="en" />
+    <property name="libs.dojo.scriptpath" value="/home/austin/netbeans-6.5.1/webcommon1/modules/ext/javascript/dojo-1.1.1.zip" />
+    <property name="libs.spring-framework.classpath" value="/home/austin/netbeans-6.5.1/ide10/modules/ext/commons-logging-1.1.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/cglib-2.2.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/spring/spring-2.5.jar" />
+    <property name="run.test.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar:build/classes:/home/austin/netbeans-6.5.1/platform9/modules/ext/junit-4.5.jar:build/test/classes" />
+    <property name="useJavaUtilZip" value="true" />
+    <property name="libs.swing-layout.javadoc" value="/home/austin/netbeans-6.5.1/platform9/docs/swing-layout-1.0.3-doc.zip" />
+    <property name="rubyplatform.Ruby.interpreter" value="/usr/bin/ruby" />
+    <property name="libs.swing-app-framework.javadoc" value="/home/austin/netbeans-6.5.1/java2/docs/appframework-1.0.3-doc.zip" />
+    <property name="libs.ejb3-persistence.maven-pom" value="" />
+    <property name="libs.proguard.classpath" value="/home/austin/netbeans-6.5.1/mobility8/external/proguard/proguard4.2.jar" />
+    <property name="libs.DataBindingME-SVG.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/netbeans_databindingme_svg.jar" />
+    <property name="https.nonProxyHosts" value="localhost|127.0.0.1|forgiveness-machine" />
+    <property name="libs.PostgreSQLDriver.maven-pom" value="" />
+    <property name="java.class.version" value="50.0" />
+    <property name="libs.cdc-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/org-netbeans-modules-j2me-cdc-project.jar" />
+    <property name="netbeans.system_http_proxy" value="DIRECT" />
+    <property name="libs.NetBeans MIDP Components WMA.maven-pom" value="" />
+    <property name="user.properties.file" value="/home/austin/.netbeans/6.5/build.properties" />
+    <property name="platforms.Sun_Java_TM__Wireless_Toolkit_2_5_2_for_CLDC.runcommandline" value="" />
+    <property name="libs.spring-framework.src" value="" />
+    <property name="libs.javac-api.maven-pom" value="" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="libs.JWSAntTasks.classpath" value="/home/austin/netbeans-6.5.1/java2/ant/extra/org-netbeans-modules-javawebstart-anttasks.jar" />
+    <property name="libs.ant-contrib.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/ant-contrib-1.0b3.jar" />
+    <property name="rubyplatform.Ruby.ruby_lib_dir" value="/usr/lib/ruby/1.8" />
+    <property name="rubyplatform.default.ruby_lib_dir" value="/home/austin/netbeans-6.5.1/ruby2/jruby-1.1.4/lib/ruby/1.8" />
+    <property name="libs.jsfsupport-designtime.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/jsfcl.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/appbase.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/dataprovider.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/sqlx.jar" />
+    <property name="libs.scriptaculous.scriptpath" value="/home/austin/netbeans-6.5.1/webcommon1/modules/ext/javascript/scriptaculous-js-1.8.1.zip" />
+    <property name="version-output" value="java version &quot;1.6" />
+    <property name="javadoc.preview" value="true" />
+    <property name="nbplatform.default.harness.dir" value="/home/austin/netbeans-6.5.1/harness" />
+    <property name="rubyplatform.default.jruby_version" value="1.1.4" />
+    <property name="java.home" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre" />
+    <property name="libs.ricoh-ant-utils.src" value="" />
+    <property name="libs.spring-webmvc.src" value="" />
+    <property name="libs.ant-contrib.javadoc" value="" />
+    <property name="debug.test.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar:build/classes:/home/austin/netbeans-6.5.1/platform9/modules/ext/junit-4.5.jar:build/test/classes" />
+    <property name="rubyplatform.default.gem_version" value="1.2.0" />
+    <property name="netbeans.importclass" value="org.netbeans.upgrade.AutoUpgrade" />
+    <property name="libs.webui-designtime.src" value="/home/austin/netbeans-6.5.1/visualweb2/docs/webui-src.zip" />
+    <property name="org.openide.TopManager" value="org.netbeans.core.NonGui" />
+    <property name="libs.savaje-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/org-netbeans-modules-j2me-cdc-project-savaje.jar" />
+    <property name="libs.toplink.maven-pom" value="" />
+    <property name="libs.DataBindingME.maven-pom" value="" />
+    <property name="libs.PostgreSQLDriver.javadoc" value="" />
+    <property name="libs.restlib.classpath" value="/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/jersey.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/http.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/wadl2java.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/rome-0.9.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/jdom-1.0.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/jettison-1.0-RC1.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/asm-3.1.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/grizzly-servlet-webserver-1.7.3.2.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/rest/jersey-spring.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/activation.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/api/jaxb-api.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/jaxb-impl.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/jaxb-xjc.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/api/jsr173_api.jar" />
+    <property name="libs.exceptionhandler-runtime.javadoc" value="" />
+    <property name="libs.JMUnit4CLDC11.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/jmunit-1.2.1-api.zip" />
+    <property name="libs.nsicom-ant-utils.maven-pom" value="" />
+    <property name="libs.jsfsupport-runtime.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/jsfcl.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/appbase.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/dataprovider.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/sqlx.jar" />
+    <property name="libs.MySQLDriver.maven-pom" value="" />
+    <property name="libs.savaje-ant-utils.src" value="" />
+    <property name="http.nonProxyHosts" value="localhost|127.0.0.1|forgiveness-machine" />
+    <property name="libs.junit_4.javadoc" value="/home/austin/netbeans-6.5.1/java2/docs/junit-4.5-api.zip" />
+    <property name="libs.spring-webmvc.javadoc" value="" />
+    <property name="libs.toplink.src" value="" />
+    <property name="libs.cdc-pp-awt-layout.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/cdc-pp-awt-layout.jar" />
+    <property name="rubyplatform.Ruby.ruby_release_date" value="2008-08-11" />
+    <property name="libs.webui.javadoc" value="/home/austin/netbeans-6.5.1/visualweb2/docs/webui-doc.zip" />
+    <property name="libs.cdc-agui-swing-layout.src" value="/home/austin/netbeans-6.5.1/mobility8/sources/cdc-agui-swing-layout-src.zip" />
+    <property name="libs.jsf12-support.javadoc" value="/home/austin/netbeans-6.5.1/visualweb2/docs/appbase-doc.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/dataprovider-doc.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/jsfcl-doc.zip" />
+    <property name="run.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar:build/classes" />
+    <property name="rubyplatform.default.ruby_platform" value="java" />
+    <property name="libs.hibernate-support.src" value="" />
+    <property name="libs.theme-default.runtime" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/defaulttheme.jar" />
+    <property name="libs.JMUnit4CLDC11.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/jmunit4cldc11-1.2.1.jar" />
+    <property name="libs.nb_svg_midp_components.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/nb_svg_midp_components.jar" />
+    <property name="libs.NetBeans MIDP Components PDA.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/netbeans_midp_components_pda.jar" />
+    <property name="libs.semc-ant-utils.maven-pom" value="" />
+    <property name="libs.jdbcsupport-runtime.maven-pom" value="" />
+    <property name="libs.restapi.src" value="" />
+    <property name="libs.NetBeans MIDP Components.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/netbeans_midp_components_basic-api.zip" />
+    <property name="sun.management.compiler" value="HotSpot Tiered Compilers" />
+    <property name="javac.deprecation" value="false" />
+    <property name="javadoc.use" value="true" />
+    <property name="libs.jdbcsupport-runtime.src" value="" />
+    <property name="libs.jdbcsupport-designtime.maven-pom" value="" />
+    <property name="libs.theme-default-gray.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/defaulttheme-gray.jar" />
+    <property name="sun.java2d.noddraw" value="true" />
+    <property name="platforms.Sun_Java_TM__Wireless_Toolkit_2_5_2_for_CLDC.type" value="UEI-1.0.1" />
+    <property name="libs.spring-webmvc.classpath" value="/home/austin/netbeans-6.5.1/enterprise5/modules/ext/spring/spring-webmvc-2.5.jar" />
+    <property name="javac.compilerargs" value="" />
+    <property name="ant.file" value="/home/austin/NetBeansProjects/Music/build.xml" />
+    <property name="libs.beans-binding.maven-pom" value="" />
+    <property name="libs.bdj-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/org-netbeans-modules-j2me-cdc-project-bdj.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/security.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/bdjo.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/bcprov-jdk15-139.jar" />
+    <property name="libs.jsf12.classpath" value="/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jsf-1_2/commons-beanutils.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jsf-1_2/commons-collections.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jsf-1_2/commons-digester.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jsf-1_2/commons-logging.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jsf-1_2/jsf-api.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jsf-1_2/jsf-impl.jar" />
+    <property name="sun.awt.exception.handler" value="org.netbeans.core.startup.TopLogging$AWTHandler" />
+    <property name="libs.restapi.maven-pom" value="" />
+    <property name="libs.beans-binding.src" value="" />
+    <property name="libs.NetBeans MIDP Components PDA.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/netbeans_midp_components_pda-api.zip" />
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="libs.DataBindingME-PIM.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/netbeans_databindingme_pim-api.zip" />
+    <property name="libs.swing-layout.src" value="/home/austin/netbeans-6.5.1/platform9/docs/swing-layout-1.0.3-src.zip" />
+    <property name="libs.webui.src" value="/home/austin/netbeans-6.5.1/visualweb2/docs/webui-src.zip" />
+    <property name="libs.j2me_ant_ext.src" value="" />
+    <property name="org.openide.major.version" value="IDE/1" />
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM" />
+    <property name="netbeans.user" value="/home/austin/.netbeans/6.5" />
+    <property name="javadoc.additionalparam" value="" />
+    <property name="libs.ricoh-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/org-netbeans-modules-j2me-cdc-project-ricoh.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/RicohAntTasks-2.0.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/commons-httpclient-3.0.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/commons-logging-1.1.jar:/home/austin/netbeans-6.5.1/mobility8/modules/ext/commons-codec-1.3.jar" />
+    <property name="java.io.tmpdir" value="/tmp" />
+    <property name="java.vendor.url" value="http://java.sun.com/" />
+    <property name="libs.prototype.scriptpath" value="/home/austin/netbeans-6.5.1/webcommon1/modules/ext/javascript/prototype-1.6.0.2.zip" />
+    <property name="jspc.classpath" value="/home/austin/netbeans-6.5.1/java2/ant/lib/ant.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/servlet2.5-jsp2.1-api.jar:${j2ee.platform.classpath}:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/glassfish-jspparser-2.0.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/glassfish-logging-2.0.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/commons-logging-1.1.jar:/home/austin/netbeans-6.5.1/java2/ant/lib/ant-launcher.jar" />
+    <property name="libs.jsf-extensions.src" value="" />
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386" />
+    <property name="have.sources" value="true" />
+    <property name="debug.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar:build/classes" />
+    <property name="libs.woodstock-theme-default.runtime" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/webui-jsf-suntheme.jar" />
+    <property name="javadoc.private" value="false" />
+    <property name="libs.bdj-ant-utils.javadoc" value="" />
+    <property name="test.src.dir" value="test" />
+    <property name="meta.inf.dir" value="src/META-INF" />
+    <property name="javadoc.encoding.used" value="UTF-8" />
+    <property name="libs.DataBindingME-SVG.src" value="" />
+    <property name="dist.jar" value="dist/Music1.jar" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="ant.project.name" value="Music1" />
+    <property name="libs.jdbcsupport-designtime.javadoc" value="" />
+    <property name="libs.j2me_ant_ext.maven-pom" value="" />
+    <property name="sun.cpu.isalist" value="" />
+    <property name="libs.CopyLibs.javadoc" value="" />
+    <property name="libs.ActiveSync.javadoc" value="" />
+    <property name="org.openide.specification.version" value="6.2" />
+    <property name="libs.DataBindingME-PIM.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/netbeans_databindingme_pim.jar" />
+    <property name="libs.hibernate-support.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/antlr-2.7.6.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/asm.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/asm-attrs.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/cglib-2.1.3.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/commons-collections-2.1.1.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/commons-logging-1.1.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/dom4j-1.6.1.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/ehcache-1.2.3.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/jdbc2_0-stdext.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/jta.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate3.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-tools.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-annotations.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-commons-annotations.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/hibernate-entitymanager.jar:/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/javassist.jar" />
+    <property name="user.home" value="/home/austin" />
+    <property name="libs.exceptionhandler-runtime.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/errorhandler.jar" />
+    <property name="debug-args-line" value="-Xdebug" />
+    <property name="libs.NetBeans MIDP Components.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/netbeans_midp_components_basic.jar" />
+    <property name="libs.JWSAntTasks.src" value="" />
+    <property name="libs.CopyLibs.maven-pom" value="" />
+    <property name="libs.hibernate-persistence.maven-pom" value="" />
+    <property name="libs.absolutelayout.javadoc" value="" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="libs.webui.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/webui.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/commons-fileupload-1.0.jar" />
+    <property name="libs.swing-app-framework.maven-pom" value="" />
+    <property name="libs.jakarta_slide_ant_webdav.maven-pom" value="" />
+    <property name="libs.NetBeans MIDP Components WMA.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/netbeans_midp_components_wma.jar" />
+    <property name="libs.yahooui.scriptpath" value="/home/austin/netbeans-6.5.1/webcommon1/modules/ext/javascript/yui-2.5.2.zip" />
+    <property name="libs.woodstock-components.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/webui-jsf.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/commons-fileupload-1.0.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/json-2.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/jsf-extensions-common-0.1.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/jsf-extensions-dynamic-faces-0.1.jar" />
+    <property name="libs.sjmc-ant-utils.src" value="" />
+    <property name="libs.jsf-extensions.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/jsf-extensions-dynamic-faces-0.1.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/jsf-extensions-common-0.1.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/jsf-1_2/commons-logging.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/shale-remoting-1.0.4.jar" />
+    <property name="libs.jsf-extensions.javadoc" value="" />
+    <property name="libs.jdbcsupport-designtime.src" value="" />
+    <property name="java.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="libs.cdc-agui-swing-layout.javadoc" value="" />
+    <property name="libs.javac-api.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/javac-api-nb-7.0-b07.jar" />
+    <property name="java.version" value="1.6.0_16" />
+    <property name="libs.nokiaS80-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/org-netbeans-modules-j2me-cdc-project-nokiaS80.jar" />
+    <property name="javadoc.version" value="false" />
+    <property name="libs.NetBeans MIDP Components WMA.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/netbeans_midp_components_wma-api.zip" />
+    <property name="libs.MySQLDriver.javadoc" value="" />
+    <property name="org.openide.version" value="deprecated" />
+    <property name="source.encoding" value="UTF-8" />
+    <property name="libs.ActiveSync.maven-pom" value="" />
+    <property name="rubyplatform.Ruby.ruby_patchlevel" value="72" />
+    <property name="libs.junit.maven-pom" value="" />
+    <property name="libs.jsf12-support.src" value="/home/austin/netbeans-6.5.1/visualweb2/docs/appbase-src.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/dataprovider-src.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/jsfcl-src.zip" />
+    <property name="libs.struts.maven-pom" value="" />
+    <property name="netbeans.home+have.tests" value="true" />
+    <property name="rubyplatform.Ruby.ruby_version" value="1.8.7" />
+    <property name="rubyplatform.default.ruby_version" value="1.8.6" />
+    <property name="libs.jaxb.src" value="" />
+    <property name="libs.IdentityAntTasks.maven-pom" value="" />
+    <property name="libs.cdc-ant-utils.src" value="" />
+    <property name="work.dir" value="/home/austin/NetBeansProjects/Music" />
+    <property name="libs.jaxb.classpath" value="/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/activation.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/api/jaxb-api.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/jaxb-impl.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/jaxb-xjc.jar:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/api/jsr173_api.jar" />
+    <property name="rubyplatform.default.ruby_release_date" value="2008-08-28" />
+    <property name="php.global.include.path" value="" />
+    <property name="do.depend" value="false" />
+    <property name="dist.javadoc.dir" value="dist/javadoc" />
+    <property name="libs.swing-layout.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar" />
+    <property name="libs.restlib.src" value="" />
+    <property name="javac.source" value="1.5" />
+    <property name="build.generated.dir" value="build/generated" />
+    <property name="rubyplatform.Ruby.ruby_platform" value="i486-linux" />
+    <property name="line.separator" value="
+" />
+    <property name="libs.hibernate-persistence.src" value="" />
+    <property name="libs.proguard.src" value="" />
+    <property name="java.specification.version" value="1.6" />
+    <property name="libs.nb_svg_midp_components.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/nb_svg_midp_components-api.zip" />
+    <property name="libs.jaxws21.maven-pom" value="" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="libs.cdc-ant-utils.javadoc" value="" />
+    <property name="libs.jsf12-support.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/jsfcl.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/appbase.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/dataprovider.jar:/home/austin/netbeans-6.5.1/visualweb2/modules/ext/sqlx.jar" />
+    <property name="libs.spring-framework.maven-pom" value="" />
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/resources.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/rt.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/jsse.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/jce.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/charsets.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/classes" />
+    <property name="libs.woodstock-components.javadoc" value="/home/austin/netbeans-6.5.1/visualweb2/docs/webui-jsf-doc.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/webui-jsf-tld.zip" />
+    <property name="javac.target" value="1.5" />
+    <property name="build.test.classes.dir" value="build/test/classes" />
+    <property name="src.dir" value="src" />
+    <property name="libs.IdentityAntTasks.javadoc" value="" />
+    <property name="libs.proguard.maven-pom" value="" />
+    <property name="libs.DataBindingME-SVG.maven-pom" value="" />
+    <property name="libs.jsf12.src" value="" />
+    <property name="libs.savaje-ant-utils.javadoc" value="" />
+    <property name="nbplatform.default.netbeans.dest.dir" value="/home/austin/netbeans-6.5.1" />
+    <property name="libs.struts.javadoc" value="/home/austin/netbeans-6.5.1/enterprise5/docs/struts-1.2.9-javadoc.zip" />
+    <property name="jaxbwiz.endorsed.dirs" value="&quot;/home/austin/netbeans-6.5.1/platform9/../ide12/modules/ext/jaxb/api&quot;" />
+    <property name="platforms.Sun_Java_TM__Wireless_Toolkit_2_5_2_for_CLDC.debugcommandline" value="" />
+    <property name="libs.cdc-ant-utils.maven-pom" value="" />
+    <property name="jspctask.classpath" value="/home/austin/netbeans-6.5.1/enterprise5/ant/extra/jspcompile.jar" />
+    <property name="libs.cdc-agui-swing-layout.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/cdc-agui-swing-layout.jar" />
+    <property name="libs.webui-designtime.classpath" value="/home/austin/netbeans-6.5.1/visualweb2/modules/ext/webui.jar:/home/austin/netbeans-6.5.1/enterprise5/modules/ext/commons-fileupload-1.0.jar" />
+    <property name="dist.dir" value="dist" />
+    <property name="libs.groovy-all.javadoc" value="" />
+    <property name="libs.groovy-all.classpath" value="/home/austin/netbeans-6.5.1/groovy1/modules/ext/groovy-all.jar" />
+    <property name="libs.sjmc-ant-utils.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/org-netbeans-modules-j2me-cdc-project-sjmc.jar" />
+    <property name="libs.JMUnit4CLDC10.classpath" value="/home/austin/netbeans-6.5.1/mobility8/modules/ext/jmunit4cldc10-1.2.1.jar" />
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob" />
+    <property name="rubyplatform.default.gem_path" value="/home/austin/.gem/ruby/1.8" />
+    <property name="default.javac.source" value="1.6" />
+    <property name="debug-transport-by-os" value="dt_socket" />
+    <property name="javac.compilerargs.jaxws" value="" />
+    <property name="sun.jnu.encoding" value="UTF-8" />
+    <property name="libs.MySQLDriver.src" value="" />
+    <property name="libs.ant-contrib.maven-pom" value="" />
+    <property name="libs.woodstock-components.src" value="/home/austin/netbeans-6.5.1/visualweb2/docs/webui-jsf-src.zip" />
+    <property name="build.test.results.dir" value="build/test/results" />
+    <property name="java.runtime.version" value="1.6.0_16-b01" />
+    <property name="libs.ejb3-persistence.javadoc" value="" />
+    <property name="libs.NetBeans MIDP Components.src" value="/home/austin/netbeans-6.5.1/mobility8/sources/netbeans_midp_components_basic-src.zip" />
+    <property name="jna.platform.library.path" value="/usr/lib32:/usr/lib:/lib" />
+    <property name="libs.sjmc-ant-utils.javadoc" value="" />
+    <property name="default.javac.target" value="1.6" />
+    <property name="libs.junit_4.classpath" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/junit-4.5.jar" />
+    <property name="user.timezone" value="" />
+    <property name="ant.file.Music1-impl" value="/home/austin/NetBeansProjects/Music/nbproject/build-impl.xml" />
+    <property name="libs.jsfsupport-designtime.src" value="/home/austin/netbeans-6.5.1/visualweb2/docs/appbase-src.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/dataprovider-src.zip:/home/austin/netbeans-6.5.1/visualweb2/docs/jsfcl-src.zip" />
+    <property name="libs.ant-contrib.src" value="" />
+    <property name="netbeans.dirs" value="/home/austin/netbeans-6.5.1/nb6.5:/home/austin/netbeans-6.5.1/ide10:/home/austin/netbeans-6.5.1/java2:/home/austin/netbeans-6.5.1/xml2:/home/austin/netbeans-6.5.1/apisupport1:/home/austin/netbeans-6.5.1/webcommon1:/home/austin/netbeans-6.5.1/websvccommon1:/home/austin/netbeans-6.5.1/enterprise5:/home/austin/netbeans-6.5.1/mobility8:/home/austin/netbeans-6.5.1/profiler3:/home/austin/netbeans-6.5.1/gsf1:/home/austin/netbeans-6.5.1/ruby2:/home/austin/netbeans-6.5.1/php1:/home/austin/netbeans-6.5.1/visualweb2:/home/austin/netbeans-6.5.1/soa2:/home/austin/netbeans-6.5.1/identity2:/home/austin/netbeans-6.5.1/harness:/home/austin/netbeans-6.5.1/cnd2:/home/austin/netbeans-6.5.1/groovy1:/home/austin/netbeans-6.5.1/python1:" />
+    <property name="rubyplatform.default.interpreter" value="/home/austin/netbeans-6.5.1/ruby2/jruby-1.1.4/bin/jruby" />
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/ext:/usr/java/packages/lib/ext" />
+    <property name="libs.exceptionhandler-runtime.src" value="" />
+    <property name="libs.semc-ant-utils.src" value="" />
+    <property name="libs.savaje-ant-utils.maven-pom" value="" />
+    <property name="libs.absolutelayout.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/AbsoluteLayout.jar" />
+    <property name="excludes" value="" />
+    <property name="libs.restlib.maven-pom" value="" />
+    <property name="libs.DataBindingME.javadoc" value="/home/austin/netbeans-6.5.1/mobility8/modules/docs/netbeans_databindingme-api.zip" />
+    <property name="apple.laf.useScreenMenuBar" value="true" />
+    <property name="java.class.path" value="/home/austin/netbeans-6.5.1/platform9/modules/ext/swing-layout-1.0.3.jar:/home/austin/NetBeansProjects/Music/build/classes:/home/austin/netbeans-6.5.1/platform9/modules/ext/junit-4.5.jar:/home/austin/NetBeansProjects/Music/build/test/classes:/home/austin/netbeans-6.5.1/java2/ant/lib/ant-launcher.jar:/home/austin/netbeans-6.5.1/java2/ant/lib/ant.jar:/home/austin/netbeans-6.5.1/java2/ant/patches/72080.jar" />
+    <property name="libs.webui-designtime.javadoc" value="/home/austin/netbeans-6.5.1/visualweb2/docs/webui-doc.zip" />
+    <property name="libs.absolutelayout.src" value="" />
+    <property name="libs.cdc-pp-awt-layout.maven-pom" value="" />
+    <property name="os.version" value="2.6.28-17-generic" />
+    <property name="application.args" value="" />
+    <property name="libs.JMUnit4CLDC11.maven-pom" value="" />
+    <property name="libs.toplink.javadoc" value="/home/austin/netbeans-6.5.1/enterprise5/docs/javaee5-doc-api.zip" />
+    <property name="sun.desktop" value="gnome" />
+    <property name="libs.nb_svg_midp_components.maven-pom" value="" />
+    <property name="rubyplatform.default.ruby_patchlevel" value="114" />
+    <property name="libs.ricoh-ant-utils.javadoc" value="" />
+    <property name="libs.NetBeans MIDP Components PDA.maven-pom" value="" />
+    <property name="libs.restlib.javadoc" value="/home/austin/netbeans-6.5.1/enterprise5/docs/jersey-api-doc.zip" />
+    <property name="libs.beans-binding.javadoc" value="/home/austin/netbeans-6.5.1/java2/docs/beansbinding-1.2.1-doc.zip" />
+    <property name="rave.version" value="2.0.0" />
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+    <property name="java.vm.vendor" value="Sun Microsystems Inc." />
+    <property name="libs.CopyLibs.classpath" value="/home/austin/netbeans-6.5.1/java2/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar" />
+    <property name="libs.spring-webmvc.maven-pom" value="" />
+    <property name="jaxws.endorsed.dir" value="/home/austin/netbeans-6.5.1/java2/modules/ext/jaxws21/api:/home/austin/netbeans-6.5.1/ide10/modules/ext/jaxb/api" />
+    <property name="run.jvmargs" value="" />
+    <property name="libs.ejb3-persistence.classpath" value="/home/austin/netbeans-6.5.1/java2/modules/ext/hibernate/ejb3-persistence.jar" />
+    <property name="libs.spring-framework.javadoc" value="" />
+    <property name="libs.DataBindingME-PIM.src" value="" />
+    <property name="libs.jquery.scriptpath" value="/home/austin/netbeans-6.5.1/webcommon1/modules/ext/javascript/jquery-1.2.6.zip" />
+    <property name="libs.bdj-ant-utils.maven-pom" value="" />
+    <property name="libs.PostgreSQLDriver.classpath" value="/home/austin/netbeans-6.5.1/ide10/modules/ext/postgresql-8.3-603.jdbc3.jar" />
+    <property name="libs.jsf12.maven-pom" value="" />
+    <property name="libs.junit.src" value="" />
+    <property name="main.class" value="music.Top" />
+    <property name="libs.CopyLibs.src" value="" />
+    <property name="build.dir" value="build" />
+    <property name="ant.version" value="Apache Ant version 1.7.1 compiled on June 27 2008" />
+    <property name="file.encoding" value="UTF-8" />
+    <property name="build.classes.excludes" value="**/*.java,**/*.form" />
+    <property name="javadoc.nonavbar" value="false" />
+    <property name="platform.active" value="default_platform" />
+  </properties>
+  <testcase classname="music.LexerTest" name="testLexString" time="0.011" />
+  <testcase classname="music.LexerTest" name="testLexString1" time="0.0010" />
+  <testcase classname="music.LexerTest" name="testLexString2" time="0.0010" />
+  <testcase classname="music.LexerTest" name="testLexString3" time="0.0010" />
+  <testcase classname="music.LexerTest" name="testLexString4" time="0.0040" />
+  <testcase classname="music.LexerTest" name="testLexString5" time="0.0040" />
+  <testcase classname="music.LexerTest" name="testLexString6" time="0.0040" />
+  <testcase classname="music.LexerTest" name="testLexString7" time="0.0050" />
+  <system-out><![CDATA[,34.56,.,func,End of File
+[]
+,34.56,.,func,End of File
+numberToken
+numberToken
+opToken
+opToken
+varToken
+varToken
+eofToken
+eofToken
+whiteToken
+whiteToken
+eofToken
+eofToken
+varToken
+varToken
+whiteToken
+whiteToken
+varToken
+varToken
+eofToken
+eofToken
+numberToken
+numberToken
+eofToken
+eofToken
+[]
+,c3,!, ,(,2,+,h,),End of File
+varToken
+varToken
+opToken
+opToken
+whiteToken
+whiteToken
+puncToken
+puncToken
+numberToken
+numberToken
+opToken
+opToken
+varToken
+varToken
+puncToken
+puncToken
+eofToken
+eofToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+puncToken
+eofToken
+eofToken
+varToken
+varToken
+opToken
+opToken
+varToken
+varToken
+whiteToken
+whiteToken
+whiteToken
+whiteToken
+whiteToken
+whiteToken
+numberToken
+numberToken
+eofToken
+eofToken
+varToken
+varToken
+varToken
+varToken
+numberToken
+numberToken
+eofToken
+eofToken
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

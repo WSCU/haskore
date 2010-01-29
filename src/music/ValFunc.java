@@ -1,0 +1,1 @@
+package music;/** * The Functional Music project * @author Western State College, CIS412 class */public abstract class ValFunc extends Value {    @Override    public boolean isFunc() {        return true;    }    // A function is either a primitive or a lambda but either    // is capable of being applied    public abstract Value apply(Thunk t);}
