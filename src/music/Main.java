@@ -1,160 +1,79 @@
-
-
 package music;
 
-
-
 import java.awt.Graphics;
-
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
-
 import javax.swing.event.HyperlinkListener;
 
-
-
-
-
 /**
-
  * The Functional Music project
-
  * @author Western State College, CIS412 class
-
  */
-
-
-
-public class Main extends javax.swing.JFrame{
-
-    
+public class Main extends javax.swing.JFrame {
 
     public String HTML;
-
     public String program_text;
-
     public ArrayList<PianoKey> whiteKeys = new ArrayList<PianoKey>();
-
     public ArrayList<PianoKey> blackKeys = new ArrayList<PianoKey>();
 
-    
-
     /** Creates new form Main */
-
     public Main() {
-
         Symbol.init();
-
         initComponents();
-
         HyperlinkListener hyperlinkListener = new ActivatedHyperlinkListener(display_field);
-
         display_field.addHyperlinkListener(hyperlinkListener);
 
-        
-
         //create the 7 white keys
-
-        for(int i = 0; i < 7; i++) {
-
+        for (int i = 0; i < 7; i++) {
             int width = keyboard.getWidth() / 7;
-
-            int height = keyboard.getHeight() - 2 ;
-
-            PianoKey temp =  new PianoKeyWhite(i,width*i,0,width,height);
-
+            int height = keyboard.getHeight() - 2;
+            PianoKey temp = new PianoKeyWhite(i, width * i, 0, width, height);
             whiteKeys.add(temp);
-
         }
-
         //create the 5 black keys
-
-        for(int i = 0; i < 5; i++) {
-
+        for (int i = 0; i < 5; i++) {
             int position = keyboard.getWidth() / 7 - 3;
-
-            int width = (int)(keyboard.getWidth() / 7 * .75);
-
+            int width = (int) (keyboard.getWidth() / 7 * .75);
             int height = keyboard.getHeight() / 2;
-
-            PianoKey temp =  new PianoKeyBlack(i,position * (i + 1),0,width,height);
-
+            PianoKey temp = new PianoKeyBlack(i, position * (i + 1), 0, width, height);
             blackKeys.add(temp);
-
         }
-
     }
-
-    
 
     public class GPanel extends JPanel {
 
         @Override
-
         public void paintComponent(Graphics g) {
-
             super.paintComponent(g);
-
-            for(PianoKey key : whiteKeys) {
-
+            for (PianoKey key : whiteKeys) {
                 key.draw(g);
-
             }
-
-            for(PianoKey key : blackKeys) {
-
+            for (PianoKey key : blackKeys) {
                 key.draw(g);
-
             }
-
-        } 
-
+        }
     }
-
-    
 
     //helper methods
-
     private void insert(String text) {
-
         program_text = display_field.getText();
-
         int start = display_field.getSelectionStart();
-
         String first_part = program_text.substring(0, start);
-
         String last_part = program_text.substring(start, program_text.length());
-
         String selected_text = display_field.getSelectedText();
-
-        if(selected_text == null) {
-
+        if (selected_text == null) {
             program_text = first_part + text + "( )" + last_part;
-
         } else {
-
             String replacement = text + "(" + selected_text + ")";
-
             program_text = program_text.replaceFirst(selected_text, replacement);
-
         }
-
         display_field.setEditable(true);
-
         display_field.setContentType("text");
-
         display_field.setText(program_text);
-
     }
-
-    
-
-
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         keyboard = new GPanel();
         octave = new javax.swing.JPanel();
         tempoInsert = new javax.swing.JButton();
@@ -173,16 +92,13 @@ public class Main extends javax.swing.JFrame{
         compileLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         display_field = new javax.swing.JEditorPane();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         keyboard.setBackground(new java.awt.Color(255, 255, 255));
         keyboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 keyboardMouseClicked(evt);
             }
         });
-
         org.jdesktop.layout.GroupLayout keyboardLayout = new org.jdesktop.layout.GroupLayout(keyboard);
         keyboard.setLayout(keyboardLayout);
         keyboardLayout.setHorizontalGroup(
@@ -193,18 +109,14 @@ public class Main extends javax.swing.JFrame{
             keyboardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 202, Short.MAX_VALUE)
         );
-
         octave.setBackground(new java.awt.Color(255, 255, 255));
-
         tempoInsert.setText("Insert");
         tempoInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tempoInsertActionPerformed(evt);
             }
         });
-
         tempoLabel.setText("Tempo:");
-
         tempoSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "half", "quarter", "eighth" }));
         tempoSelection.setName("Piano\nTrumpet\nGuitar"); // NOI18N
         tempoSelection.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +124,6 @@ public class Main extends javax.swing.JFrame{
                 tempoSelectionActionPerformed(evt);
             }
         });
-
         org.jdesktop.layout.GroupLayout octaveLayout = new org.jdesktop.layout.GroupLayout(octave);
         octave.setLayout(octaveLayout);
         octaveLayout.setHorizontalGroup(
@@ -240,18 +151,14 @@ public class Main extends javax.swing.JFrame{
                 .add(tempoInsert)
                 .addContainerGap())
         );
-
         instruments.setBackground(new java.awt.Color(255, 255, 255));
-
         instrumentInsert.setText("Insert");
         instrumentInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 instrumentInsertActionPerformed(evt);
             }
         });
-
         instrumentLabel.setText("Instrument:");
-
         InstrumentSelection.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Piano", "Harpsichord", "Vibes", "Organ", "Guitar", "Electric", "Bass", "Violin", "Viola", "Cello", "Trumpet", "Trombone", "Horn", "Sax", "Oboe", "Bassoon", "Clarinet", "Flute", "PanFlute", "Kalimba", "Woodblock" }));
         InstrumentSelection.setName("Piano\nTrumpet\nGuitar"); // NOI18N
         InstrumentSelection.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +166,6 @@ public class Main extends javax.swing.JFrame{
                 InstrumentSelectionActionPerformed(evt);
             }
         });
-
         org.jdesktop.layout.GroupLayout instrumentsLayout = new org.jdesktop.layout.GroupLayout(instruments);
         instruments.setLayout(instrumentsLayout);
         instrumentsLayout.setHorizontalGroup(
@@ -283,15 +189,10 @@ public class Main extends javax.swing.JFrame{
                 .add(instrumentInsert)
                 .addContainerGap())
         );
-
         help.setBackground(new java.awt.Color(255, 255, 255));
-
         helpButton.setText("Help");
-
         sampleMusicButton.setText("Sample Music");
-
         helpLabel.setText("Help");
-
         org.jdesktop.layout.GroupLayout helpLayout = new org.jdesktop.layout.GroupLayout(help);
         help.setLayout(helpLayout);
         helpLayout.setHorizontalGroup(
@@ -319,18 +220,14 @@ public class Main extends javax.swing.JFrame{
                 .add(helpButton)
                 .addContainerGap())
         );
-
         compile.setBackground(new java.awt.Color(255, 255, 255));
-
         runProgramButton.setText("Run Program");
         runProgramButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runProgramButtonActionPerformed(evt);
             }
         });
-
         compileLabel.setText("Run");
-
         org.jdesktop.layout.GroupLayout compileLayout = new org.jdesktop.layout.GroupLayout(compile);
         compile.setLayout(compileLayout);
         compileLayout.setHorizontalGroup(
@@ -353,9 +250,7 @@ public class Main extends javax.swing.JFrame{
                 .add(runProgramButton)
                 .addContainerGap())
         );
-
         jScrollPane2.setViewportView(display_field);
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -391,124 +286,64 @@ public class Main extends javax.swing.JFrame{
                 .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 330, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-
     private void runProgramButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runProgramButtonActionPerformed
-
-        if(runProgramButton.getText().equals("Run Program")) {
-
+        if (runProgramButton.getText().equals("Run Program")) {
             runProgramButton.setText("Edit Program");
-
             program_text = display_field.getText();
-
-            ArrayList<LexerError> lexerror = Lexer.lexString(program_text,"Testing GUI");
-
+            ArrayList<LexerError> lexerror = Lexer.lexString(program_text, "Testing GUI");
             HTML = HTMLObject.generate(Lexer.tokens);
-
             display_field.setContentType("text/html");
-
             display_field.setText(HTML);
-
             display_field.setEditable(false);
-
-        }
-
-        else {
-
+        } else {
             runProgramButton.setText("Run Program");
-
             display_field.setEditable(true);
-
             display_field.setContentType("text");
-
             display_field.setText(program_text);
-
         }
 
-        
-
-                
 
 }//GEN-LAST:event_runProgramButtonActionPerformed
 
-
-
     private void InstrumentSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstrumentSelectionActionPerformed
-
 }//GEN-LAST:event_InstrumentSelectionActionPerformed
 
-
-
     private void tempoSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tempoSelectionActionPerformed
-
         // TODO add your handling code here:
-
 }//GEN-LAST:event_tempoSelectionActionPerformed
 
-    
-
     private void instrumentInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instrumentInsertActionPerformed
-
-        insert((String)InstrumentSelection.getSelectedItem());
-
+        insert((String) InstrumentSelection.getSelectedItem());
     }//GEN-LAST:event_instrumentInsertActionPerformed
 
-    
-
     private void tempoInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tempoInsertActionPerformed
-
-        insert((String)tempoSelection.getSelectedItem());
-
+        insert((String) tempoSelection.getSelectedItem());
     }//GEN-LAST:event_tempoInsertActionPerformed
 
-
-
     private void keyboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keyboardMouseClicked
-
         int mouseX = evt.getX();
-
         int mouseY = evt.getY();
-
-        for(PianoKey key : whiteKeys) {
-
-            if(key.within(mouseX, mouseY)) {
-
-                System.out.println("You clicked the " + key.note + " key");    
-
+        for (PianoKey key : whiteKeys) {
+            if (key.within(mouseX, mouseY)) {
+                System.out.println("You clicked the " + key.note + " key");
             }
-
         }
-
     }//GEN-LAST:event_keyboardMouseClicked
 
-
-
     /**
-
      * @param args the command line arguments
-
      */
-
     public static void main(String args[]) {
-
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-
                 new Main().setVisible(true);
-
             }
-
         });
-
     }
-
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox InstrumentSelection;
     private javax.swing.JPanel compile;
@@ -529,10 +364,4 @@ public class Main extends javax.swing.JFrame{
     private javax.swing.JLabel tempoLabel;
     private javax.swing.JComboBox tempoSelection;
     // End of variables declaration//GEN-END:variables
-
-
-
-    
-
 }
-

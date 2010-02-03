@@ -10,10 +10,11 @@ package music;
 //import java.math.*;
 
 public class MakePrims {
+
     static int serial = 0;
-    static String [][] prims = {{"!", "MMM", "MusTogether.musTogether"},
-                                {"up", "NMM", "thing"},
-                                {"c3", "M", "thingy"}};
+    static String[][] prims = {{"!", "MMM", "MusTogether.musTogether"},
+        {"up", "NMM", "thing"},
+        {"c3", "M", "thingy"}};
 //    static String [] unaryMathFns =
 //    {"abs", "acos", "atan", "ceil", "cos", "exp", "floor", "log",
 //     "round", "sin", "sqrt", "tan", "toDegrees", "toRadians"};
@@ -21,7 +22,7 @@ public class MakePrims {
 //    {"atan2", "max", "min", "pow"};
 //    static String [] infixMathFns = {"+", "*", "/"};
 //    static String [] infixCompare = {">", "<", "<=", ">="};
-    
+
     public static void main(String args[]) {
         writePrims(prims);
 //        writePrims(unaryMathFns, 0);
@@ -32,23 +33,27 @@ public class MakePrims {
 
     private static void writePrims(String[][] names) {
         String program = "";
-        for(String[] name:names){
+        for (String[] name : names) {
             program = "Prim prim" + serial + "= new Prim() {\n";
             program += "    public Value call(ArrayList<Thunk> args) {\n";
             String type = name[1];
             String arguments = "";
-            for (int i = 0; i < type.length()-1; i++) {
-                switch(type.charAt(i)){
-                    case 'M':program += "        Music temp"+i+"= args.get("+i+").asMusic();\n";  break;
-                    case 'N':program += "        double temp"+i+"= args.get("+i+").asNum();\n";  break;
+            for (int i = 0; i < type.length() - 1; i++) {
+                switch (type.charAt(i)) {
+                    case 'M':
+                        program += "        Music temp" + i + "= args.get(" + i + ").asMusic();\n";
+                        break;
+                    case 'N':
+                        program += "        double temp" + i + "= args.get(" + i + ").asNum();\n";
+                        break;
                 }
-                arguments += "temp"+i+(i+1<type.length()?", ":"");
+                arguments += "temp" + i + (i + 1 < type.length() ? ", " : "");
             }
-            program += "        return Value.value("+name[2]+"("+arguments+"));\n";
-            program += "    public String name() {return \""+name[0]+"\";};};\n";
-            program += "result.addVar(\""+name[0]+"\", new Thunk(new ValFunc(prim"+serial+")));\n";
-            serial ++;
-        System.out.println(program);
+            program += "        return Value.value(" + name[2] + "(" + arguments + "));\n";
+            program += "    public String name() {return \"" + name[0] + "\";};};\n";
+            program += "result.addVar(\"" + name[0] + "\", new Thunk(new ValFunc(prim" + serial + ")));\n";
+            serial++;
+            System.out.println(program);
         }
     }
 }
