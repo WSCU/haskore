@@ -42,12 +42,16 @@ public class LexerTest {
     @Test
     public void testLexString(){
         music.Symbol.init();
-        String program = "34.56.func";
+        String program = "m = 34.56.func";
         String fname = "LexerTest3";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol("34.56"), "34.56", new Place(fname, 0, 0), TokenType.numberToken));
-        expResult.addToken(new Token(Symbol.toSymbol("."), ".", new Place(fname, 0, 5), TokenType.opToken));
-        expResult.addToken(new Token(Symbol.toSymbol("func"), "func", new Place(fname, 0, 6), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("m"), "m", new Place(fname, 0, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 1), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol("="), "=", new Place(fname, 0, 2), TokenType.opToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 3), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol("34.56"), "34.56", new Place(fname, 0, 4), TokenType.numberToken));
+        expResult.addToken(new Token(Symbol.toSymbol("."), ".", new Place(fname, 0, 9), TokenType.opToken));
+        expResult.addToken(new Token(Symbol.toSymbol("func"), "func", new Place(fname, 0, 10), TokenType.varToken));
 
         expResult.addToken(Token.eof);
         System.out.println(expResult);
