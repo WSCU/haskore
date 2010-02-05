@@ -196,11 +196,19 @@ public class ParserTest {
      */
     @Test
     public void testRequirePunct() {
-        System.out.println("requirePunct");
-        Symbol s = null;
+        music.Symbol.init();
+        String program = "mm=34.56+33;";
+        String fname = "LexerTest3";
+        ArrayList errors = Lexer.lexString(program, fname);
+        Symbol s = Symbol.equals;
+        Parser.setToks(Lexer.tokens);
+        
+          System.out.println(Parser.toks.next());
+          System.out.println(Parser.toks.next());
+        
         Parser.requirePunct(s);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
