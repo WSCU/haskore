@@ -93,17 +93,22 @@ public class ParserTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of parseAPat method, of class Parser.
+       /**
+     * This test fails. It is not yet known if this is because of a bug.
+     * The parseAPat method calls the next() method on its TokenStream toks.
+     * Since our token is in column 0 the next method returns a Token.semicolon
+     * The semicolon causes the ParsePat method to hit its else statement and
+     * generate a ParseError
      */
     @Test
-    public void testParseAPat() {
-        System.out.println("parseAPat");
-        Pat expResult = null;
+    public void testParsePat2() {
+        System.out.println("Testing parseAPat");
+        Pat expResult = new PatConst(new Token(Symbol.toSymbol("5"), "5", new Place("testParseAPat", 0, 0), TokenType.numberToken));
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("5"), "5", new Place("testParseAPat", 0, 0), TokenType.numberToken));
+        Parser.setToks(tokens);
         Pat result = Parser.parseAPat();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        compareParsedObjects(expResult, result);
     }
 
     /**
@@ -111,12 +116,26 @@ public class ParserTest {
      */
     @Test
     public void testParsePat() {
-        System.out.println("parsePat");
-        Pat expResult = null;
+        System.out.println("Testing parseAPat");
+        Pat expResult = new PatConst(new Token(Symbol.toSymbol("5"), "5", new Place("testParseAPat", 0, 1), TokenType.numberToken));
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("5"), "5", new Place("testParseAPat", 0, 1), TokenType.numberToken));
+        Parser.setToks(tokens);
         Pat result = Parser.parsePat();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        compareParsedObjects(expResult, result);
+    }
+
+
+    //Why is this expecting a patConst???
+    @Test
+    public void testParsePat3() {
+        System.out.println("Testing parseAPat");
+        Pat expResult = new PatVar(new Token(Symbol.toSymbol("a"), "a", new Place("testParseAPat", 0, 1), TokenType.varToken));
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("a"), "a", new Place("testParseAPat", 0, 1), TokenType.varToken));
+        Parser.setToks(tokens);
+        Pat result = Parser.parsePat();
+        compareParsedObjects(expResult, result);
     }
 
     /**
@@ -354,5 +373,8 @@ public class ParserTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    
+    private void compareParsedObjects(ParsedObject expected, ParsedObject actual){
+        assertTrue(expected.compareTo(actual));
+    }
 }
