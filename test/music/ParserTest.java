@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author austin
+ * @author CIS412 Class
  */
 public class ParserTest {
 
@@ -19,6 +19,7 @@ public class ParserTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        music.Symbol.init();
     }
 
     @AfterClass
@@ -36,8 +37,7 @@ public class ParserTest {
      * Test of parseDecls method, of class Parser.
      */
     @Test
-    public void testParseDecls() {
-        music.Symbol.init();
+    public void testParseDecls() {        
         String program = "mm = 34.56+(33-7);\nbb = 34.56+(33+7);";
         String fname = "pTest3";
         ArrayList errors = Lexer.lexString(program, fname);
@@ -103,16 +103,41 @@ public class ParserTest {
     }
 
     /**
-     * Test of parselhs method, of class Parser.
+     * Test of parselhs method with program "x=5"
      */
     @Test
     public void testParselhs() {
         System.out.println("parselhs");
-        ArrayList<Pat> expResult = null;
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 1), TokenType.varToken));
+        tokens.addToken(new Token(Symbol.toSymbol("="), "=", new Place("testParsePat", 0, 2), TokenType.opToken));
+        tokens.addToken(new Token(Symbol.toSymbol("5"), "5", new Place("testParsePat", 0, 3), TokenType.numberToken));
+        Parser.setToks(tokens);
         ArrayList<Pat> result = Parser.parselhs();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Pat e = result.get(0);
+        compareParsedObjects(e, new PatVar(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 1), TokenType.varToken)));
+    }
+
+    /**
+     * Test of parselhs method with program "f x=x+1"
+     */
+    @Test
+    public void testParselhs2(){
+        System.out.println("parselhs2");
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("f"), "f", new Place("testParselhs", 0, 1), TokenType.varToken));
+        tokens.addToken(new Token(Symbol.toSymbol(" "), " ", new Place("testParslhs", 0, 2), TokenType.whiteToken));
+        tokens.addToken(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 3), TokenType.varToken));
+        tokens.addToken(new Token(Symbol.toSymbol("="), "=", new Place("testParsePat", 0, 4), TokenType.opToken));
+        tokens.addToken(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 5), TokenType.varToken));
+        tokens.addToken(new Token(Symbol.toSymbol("+"), "+", new Place("testParsePat", 0, 6), TokenType.opToken));
+        tokens.addToken(new Token(Symbol.toSymbol("1"), "1", new Place("testParsePat", 0, 7), TokenType.numberToken));
+        Parser.setToks(tokens);
+        ArrayList<Pat> result = Parser.parselhs();
+        Pat e = result.get(0);
+        compareParsedObjects(new PatVar(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat", 0, 1), TokenType.varToken)), e);
+        e = result.get(1);
+        compareParsedObjects(new PatVar(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 3), TokenType.varToken)), e);
     }
 
     /**
@@ -405,8 +430,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testRequirePunct() {
-        music.Symbol.init();
+    public void testRequirePunct() {        
         String program = "mm=34.56+33;";
         String fname = "ParserTest3";
         ArrayList errors = Lexer.lexString(program, fname);
