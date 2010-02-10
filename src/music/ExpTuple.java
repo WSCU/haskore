@@ -10,7 +10,10 @@ public class ExpTuple extends Exp {
 
     public ArrayList<Exp> body;
 
-    public ExpTuple(ArrayList<Exp> body) {
+    public ExpTuple(ArrayList<Exp> body){
+        if(body.size() > 2){
+            throw new ParseError("Tuple can only have two elements, use Exp list.",body.get(2).firstToken);
+        }
         this.body = body;
     }
 

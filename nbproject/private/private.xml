@@ -2,7 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/C:/Users/Adam/Documents/NetBeansProjects/trunk/src/music/Parser.java</file>
-        <file>file:/C:/Users/Adam/Documents/NetBeansProjects/trunk/src/music/Exp.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/DeclVal.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/ExpCall.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/ExpConst.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/Lexer.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/Lib.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/Parser.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/Prims.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/Symbol.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/src/music/Thunk.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/test/music/LexerTest.java</file>
+        <file>file:/home/austin/NetBeansProjects/trunk/test/music/ParserTest.java</file>
     </open-files>
 </project-private>

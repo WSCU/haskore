@@ -284,7 +284,7 @@ public class ParserTest {
         System.out.println(expResult.print());
         compareParsedObjects(expResult, result);
     }
-    //Test a list like (4,5)  
+    //Test a tuple like (4,5)
     @Test
     public void testParseAExp4(){
         System.out.println("parseAExp4");
@@ -297,13 +297,76 @@ public class ParserTest {
         tokens.addToken(t2);
         tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParseAExp", 0, 5), TokenType.puncToken));
         Parser.setToks(tokens);
-        Exp expResult = new ExpConst(t1);
+        Exp e1 = new ExpConst(t1);
+        Exp e2 = new ExpConst(t2);
+        ArrayList exp = new ArrayList(2);
+        exp.add(e1);
+        exp.add(e2);
+        Exp expResult = new ExpTuple(exp);
+        Exp result = Parser.parseAExp();
+        compareParsedObjects(expResult, result);
+    }
+     //Test a tuple like (4,variable)
+    @Test
+    public void testParseAExp4_cont(){
+        System.out.println("parseAExp4");
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.puncToken));
+        Token t1 = new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken);
+        tokens.addToken(t1);
+        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 3), TokenType.puncToken));
+        Token t2 = new Token(Symbol.toSymbol("f"), "f", new Place("testParseAExp", 0, 4), TokenType.varToken);
+        tokens.addToken(t2);
+        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParseAExp", 0, 5), TokenType.puncToken));
+        Parser.setToks(tokens);
+        Exp e1 = new ExpConst(t1);
+        Exp e2 = new ExpVar(t2);
+        ArrayList exp = new ArrayList(2);
+        exp.add(e1);
+        exp.add(e2);
+        Exp expResult = new ExpTuple(exp);
+        Exp result = Parser.parseAExp();
+        compareParsedObjects(expResult, result);
+    }
+    //Tests a list like [8,9,10,11,12,13]
+    @Test
+    public void testParseAExp5(){
+        System.out.println("parseAExp5");
+        TokenStream tokens = new TokenStream();
+        Token t1 = new Token(Symbol.toSymbol("9"), "9", new Place("testParseAExp", 0, 2), TokenType.numberToken);
+        Token t2 = new Token(Symbol.toSymbol("10"), "10", new Place("testParseAExp", 0, 4), TokenType.numberToken);
+        Token t3 = new Token(Symbol.toSymbol("11"), "11", new Place("testParseAExp", 0, 6), TokenType.numberToken);
+        Token t4 = new Token(Symbol.toSymbol("12"), "12", new Place("testParseAExp", 0, 8), TokenType.numberToken);
+        Token t5 = new Token(Symbol.toSymbol("13"), "13", new Place("testParseAExp", 0, 10), TokenType.numberToken);
+        tokens.addToken(new Token(Symbol.toSymbol("["), "[", new Place("testParseAExp", 0, 1), TokenType.puncToken));
+        tokens.addToken(t1);
+        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 3), TokenType.puncToken));
+        tokens.addToken(t2);
+        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 5), TokenType.puncToken));
+        tokens.addToken(t3);
+        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 7), TokenType.puncToken));
+        tokens.addToken(t4);
+        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 9), TokenType.puncToken));
+        tokens.addToken(t5);
+        tokens.addToken(new Token(Symbol.toSymbol("]"), "]", new Place("testParseAExp", 0, 11), TokenType.puncToken));
+        Parser.setToks(tokens);
+        Exp e1 = new ExpConst(t1);
+        Exp e2 = new ExpConst(t2);
+        Exp e3 = new ExpConst(t3);
+        Exp e4 = new ExpConst(t4);
+        Exp e5 = new ExpConst(t5);
+        ArrayList exp = new ArrayList();
+        exp.add(e1);
+        exp.add(e2);
+        exp.add(e3);
+        exp.add(e4);
+        exp.add(e5);
+        Exp expResult = new ExpList(exp);
         Exp result = Parser.parseAExp();
         System.out.println(result.print());
         System.out.println(expResult.print());
         compareParsedObjects(expResult, result);
     }
-
     /**
      * Test of prattReduce method, of class Parser.
      */

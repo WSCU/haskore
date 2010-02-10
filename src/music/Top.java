@@ -20,7 +20,7 @@ public class Top {
         Symbol.init();
 //        File musProg = new File("C:\\Documents and Settings\\Casey\\My Documents\\Western\\MusicLand\\musProg.txt");
 //        File musProg = new File("s:\\music\\musProg.txt");
-        String prog = "l = up 3 c3;";
+          String prog = "x = 1;\ny = 2;\nz = x + y;";
 //        String prog = "f x = up 3 x; \ng = f c3;\n";
 //        String prog = "m = if (1 == 2) c3 d3;";
 //        String prog = "l = up (3 + 2) c3;";
@@ -60,11 +60,13 @@ public class Top {
             for (Decl d : binds) {
                 Value result = userEnv.eval(d.LHS.asVar());
                 // if result is valMusic write a midi file other wise skip over
+                
                 if (result.isMusic()) {
                     //file name should be the same as the variable name in the ENV preformer
                     ValMusic temp = ((ValMusic) result);
+                   
                     Performance performer = temp.val.perform(0, new Modifier());
-                    performer.writeToFile("c:\\jcp\\music\\" + d.LHS.asVar().getBody() + ".midi");
+                    performer.writeToFile( d.LHS.asVar().getBody() + ".midi");
                     System.out.println("Music: " + d.LHS.asVar().getBody() + "\n " + temp.val.prettyPrint());
 //                  performer.writeToFile("c:\\" + d.LHS.asVar().getBody() + ".midi");
                 } else {
