@@ -32,17 +32,36 @@ public class ParserTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of setToks method, of class Parser.
-     */
     /**
      * Test of parseDecls method, of class Parser.
      */
     @Test
     public void testParseDecls() {
         music.Symbol.init();
-        String program = "mm = 34.56+33;";
+        String program = "mm = 34.56+(33-7);\nbb = 34.56+(33+7);";
+        String fname = "pTest3";
+        ArrayList errors = Lexer.lexString(program, fname);
+//        System.out.println(Lexer.tokens);
+//        System.out.println(errors);
+        TokenStream t = Lexer.tokens;
+        
+        ArrayList<Decl> expResult = null;
+        ArrayList<Decl> result = Parser.parseDecls(t);
+        
+        for (Decl i : result) {
+            System.out.println(i.LHS.print());
+            System.out.println(i.RHS.print());
+        }
+        
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testParseDecls2() {
+        music.Symbol.init();
+        String program = "mm = c3!c3&c4&(c2!c4);";
         String fname = "pTest3";
         ArrayList errors = Lexer.lexString(program, fname);
         System.out.println(Lexer.tokens);
@@ -50,7 +69,8 @@ public class ParserTest {
         TokenStream t = Lexer.tokens;
         ArrayList<Decl> expResult = null;
         ArrayList<Decl> result = Parser.parseDecls(t);
-        for (Decl i : result) {
+        for(Decl i : result)
+        {
             System.out.println(i.print());
         }
 
@@ -65,8 +85,18 @@ public class ParserTest {
     @Test
     public void testParseDecl() {
         System.out.println("parseDecl");
+        music.Symbol.init();
+        String program = "mm = 34.56+(33-7);\nbb = 34.56+(33+7);";
+        String fname = "pTest3";
+        ArrayList errors = Lexer.lexString(program, fname);
+//        System.out.println(Lexer.tokens);
+//        System.out.println(errors);
+        Parser.setToks(Lexer.tokens);
+
         Decl expResult = null;
         Decl result = Parser.parseDecl();
+
+        System.out.println(result.print());
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -205,7 +235,7 @@ public class ParserTest {
         tokens.addToken(new Token(Symbol.toSymbol("4"), "4", new Place("testParsePat7", 0, 4), TokenType.numberToken));
         tokens.addToken(new Token(Symbol.toSymbol("]"), "]", new Place("testParsePat7", 0, 5), TokenType.puncToken));
         Parser.setToks(tokens);
-        Pat result = Parser.parsePat();
+        Pat result = Parser.parsePat();Token t1 = new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.varToken);
         compareParsedObjects(expResult, result);
     }
 
@@ -238,6 +268,41 @@ public class ParserTest {
         Exp result = Parser.parseAExp();
         compareParsedObjects(expResult, result);
     }
+    //Tests a stream like (4), should get just a 4 Token.
+    @Test
+    public void testParseAExp3(){
+        System.out.println("parseAExp3");
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.puncToken));
+        Token t1 = new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken);
+        tokens.addToken(t1);
+        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParseAExp", 0, 3), TokenType.puncToken));
+        Parser.setToks(tokens);
+        Exp expResult = new ExpConst(t1);
+        Exp result = Parser.parseAExp();
+        System.out.println(result.print());
+        System.out.println(expResult.print());
+        compareParsedObjects(expResult, result);
+    }
+    //Test a list like (4,5)  
+    @Test
+    public void testParseAExp4(){
+        System.out.println("parseAExp4");
+        TokenStream tokens = new TokenStream();
+        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.puncToken));
+        Token t1 = new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken);
+        tokens.addToken(t1);
+        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 3), TokenType.puncToken));
+        Token t2 = new Token(Symbol.toSymbol("5"), "5", new Place("testParseAExp", 0, 4), TokenType.numberToken);
+        tokens.addToken(t2);
+        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParseAExp", 0, 5), TokenType.puncToken));
+        Parser.setToks(tokens);
+        Exp expResult = new ExpConst(t1);
+        Exp result = Parser.parseAExp();
+        System.out.println(result.print());
+        System.out.println(expResult.print());
+        compareParsedObjects(expResult, result);
+    }
 
     /**
      * Test of prattReduce method, of class Parser.
@@ -266,9 +331,6 @@ public class ParserTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of parseAExp method, of class Parser.
-     */
     @Test
     public void testParseExp() {
         System.out.println("parseExp");
@@ -279,29 +341,20 @@ public class ParserTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of requirePunct method, of class Parser.
-     */
     @Test
     public void testRequirePunct() {
         music.Symbol.init();
         String program = "mm=34.56+33;";
-        String fname = "LexerTest3";
+        String fname = "ParserTest3";
         ArrayList errors = Lexer.lexString(program, fname);
         Symbol s = Symbol.equals;
         Parser.setToks(Lexer.tokens);
-
         System.out.println(Parser.toks.next());
         System.out.println(Parser.toks.next());
-
         Parser.requirePunct(s);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getPrec method, of class Parser.
-     */
+
     @Test
     public void testGetPrec() {
         System.out.println("getPrec");
