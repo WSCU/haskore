@@ -100,7 +100,20 @@ public class EnvTest {
         Env top = Prims.topEnv();
         EnvHash userEnv = new EnvHash(4000, top);
         TokenStream t = new TokenStream();
-        String prog = "f 0 0 = 1;\nf x y = x+y;\nz = f 0 0;";
+        String prog = "f 0 = 0;\nf x = x-1;\nz = f 0;";
+        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        printParse(binds);
+        Value expVal = new ValNum(1.0);
+        Value resVal = eval(binds,userEnv);
+        assertEquals(expVal.toString(),resVal.toString());
+    }
+    @Test
+    public void testEval5if() {
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        TokenStream t = new TokenStream();
+        String prog = "f x = if(x==0) 0 x-1;\nz = f 2;";
         ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
         ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
         printParse(binds);
