@@ -38,7 +38,7 @@ public class ParserTest {
      */
     @Test
     public void testParseDecls() {        
-        String program = "mm = 34.56+(33-7);\nbb = 34.56+(33+7);";
+        String program = "f 0 = 0;f x = x-1;";
         String fname = "pTest3";
         ArrayList errors = Lexer.lexString(program, fname);
 //        System.out.println(Lexer.tokens);
