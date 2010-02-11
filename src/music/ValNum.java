@@ -23,6 +23,6 @@ public class ValNum extends Value {
 
     @Override
     public String toString() {
-        return ("VN: " + val);
+        return "" + val;
     }
 }

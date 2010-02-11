@@ -12,6 +12,32 @@ public class Top {
     //TODO
     //RE DO PRIMS
     //CHECK FOR LEXER ERRORS - LOWER DOWN
+    /**
+     * Runs a program and returns an ArrayList of Pair(variable name, value)
+     * @param program
+     * @return
+     */
+    public static ArrayList<Pair<String, String>> evaluateProgram(String program) {
+        StringReader converter = new StringReader(program);
+        ArrayList<Pair<String, String>> results = new ArrayList<Pair<String, String>>();
+        BufferedReader in = new BufferedReader(converter);
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        ArrayList<LexerError> errs = Lexer.lexString(program, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        for (Decl d : binds) {
+            userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
+        }
+        try {
+            for (Decl d : binds) {
+                Value result = userEnv.eval(d.LHS.asVar());
+                results.add(new Pair(d.LHS.asVar().getBody(), result.toString()));
+            }
+        } catch (ExecutionError e) {
+            System.out.println("Execution Error: " + e.msg);
+        }
+        return results;
+    }
 
     /**
      * @param args the command line arguments
@@ -40,10 +66,10 @@ public class Top {
         //used for single line tesxting
         ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
         // Check errs and continue if empty
-        
+
         ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
 
-        for ( Decl d : binds){
+        for (Decl d : binds) {
             System.out.println(d.LHS.asVar().getBody() + " = " + d.RHS.print());
         }
         // Catch parse errors
@@ -59,14 +85,16 @@ public class Top {
         try {
             for (Decl d : binds) {
                 Value result = userEnv.eval(d.LHS.asVar());
+                System.out.println("Value result:" + result.toString());
+
                 // if result is valMusic write a midi file other wise skip over
-                
+
                 if (result.isMusic()) {
                     //file name should be the same as the variable name in the ENV preformer
                     ValMusic temp = ((ValMusic) result);
-                   
+
                     Performance performer = temp.val.perform(0, new Modifier());
-                    performer.writeToFile( d.LHS.asVar().getBody() + ".midi");
+                    performer.writeToFile(d.LHS.asVar().getBody() + ".midi");
                     System.out.println("Music: " + d.LHS.asVar().getBody() + "\n " + temp.val.prettyPrint());
 //                  performer.writeToFile("c:\\" + d.LHS.asVar().getBody() + ".midi");
                 } else {
