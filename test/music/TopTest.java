@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author denny
+ * @author denny blankenbueler
  */
 public class TopTest {
 
