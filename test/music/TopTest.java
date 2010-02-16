@@ -236,6 +236,59 @@ public class TopTest {
         Value resVal = eval(binds,userEnv);
         assertEquals(expVal.toString(),resVal.toString());
     }
+     @Test
+    public void testEvalmul() {
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        TokenStream t = new TokenStream();
+        String prog = "x = 1;\ny = 2;\nz = x * y;";
+        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        printParse(binds);
+        Value expVal = new ValNum(2.0);
+        Value resVal = eval(binds,userEnv);
+        assertEquals(expVal.toString(),resVal.toString());
+    }
+     @Test
+    public void testEvaldiv() {
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        TokenStream t = new TokenStream();
+        String prog = "x = 4;\ny = 2;\nz = x / y;";
+        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        printParse(binds);
+        Value expVal = new ValNum(2.0);
+        Value resVal = eval(binds,userEnv);
+        assertEquals(expVal.toString(),resVal.toString());
+    }
+      @Test
+    public void testEvalpow() {
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        TokenStream t = new TokenStream();
+        String prog = "x = 6;\ny = 2;\nz = x ^ y;";
+        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        printParse(binds);
+        Value expVal = new ValNum(36.0);
+        Value resVal = eval(binds,userEnv);
+        assertEquals(expVal.toString(),resVal.toString());
+    }
+
+        @Test
+    public void testEvalmod() {
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        TokenStream t = new TokenStream();
+        String prog = "x = 3;\ny = 2;\nz = x % y;";
+        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        printParse(binds);
+        Value expVal = new ValNum(1.0);
+        Value resVal = eval(binds,userEnv);
+        assertEquals(expVal.toString(),resVal.toString());
+    }
 
     public void printParse(ArrayList<Decl> li)
     {

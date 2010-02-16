@@ -66,6 +66,43 @@ result.add(Symbol.toSymbol("+"), new Thunk(new ValFuncPrim(2,plusfn)));
        };
 result.add(Symbol.toSymbol("-"), new Thunk(new ValFuncPrim(2,minusfn)));
 
+
+  Prim multiplyfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+                ValNum arg0 = args.get(0).asNum();
+                ValNum arg1 = args.get(1).asNum();
+                return new ValNum(Lib.multiply(arg0.val, arg1.val));
+            }
+       };
+result.add(Symbol.toSymbol("*"), new Thunk(new ValFuncPrim(2,multiplyfn)));
+
+Prim dividefn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+                ValNum arg0 = args.get(0).asNum();
+                ValNum arg1 = args.get(1).asNum();
+                return new ValNum(Lib.divide(arg0.val, arg1.val));
+            }
+       };
+result.add(Symbol.toSymbol("/"), new Thunk(new ValFuncPrim(2,dividefn)));
+
+Prim powerfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+                ValNum arg0 = args.get(0).asNum();
+                ValNum arg1 = args.get(1).asNum();
+                return new ValNum(Lib.power(arg0.val, arg1.val));
+            }
+       };
+result.add(Symbol.toSymbol("^"), new Thunk(new ValFuncPrim(2,powerfn)));
+
+Prim modfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+                ValNum arg0 = args.get(0).asNum();
+                ValNum arg1 = args.get(1).asNum();
+                return new ValNum(Lib.mod(arg0.val, arg1.val));
+            }
+       };
+result.add(Symbol.toSymbol("%"), new Thunk(new ValFuncPrim(2,modfn)));
+
   Prim EqualsEqualsfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
                 ValNum arg0 = args.get(0).asNum();
@@ -86,7 +123,7 @@ result.add(Symbol.toSymbol("empty"), new Thunk(new ValFuncPrim(0,emptyfn)));
 
         //END
 
-        result.add(Symbol.toSymbol("up"), new Thunk(new ValFuncPrim(2,upfn)));
+        
         String[] letters = {"c","d","e","f","g","a","b"};
         for (int i = 0; i < letters.length; i++) {
             for (int j = 1; j <= 9; j++) {
