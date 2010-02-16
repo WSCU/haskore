@@ -290,6 +290,21 @@ public class TopTest {
         assertEquals(expVal.toString(),resVal.toString());
     }
 
+
+        @Test
+    public void testEvalPrec() {
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        TokenStream t = new TokenStream();
+        String prog = "x = 3;\ny = 2;z = 4; a = 8;\nb = a^2*x+z/y;";
+        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        printParse(binds);
+        Value expVal = new ValNum(194.0);
+        Value resVal = eval(binds,userEnv);
+        
+        assertEquals(expVal.toString(),resVal.toString());
+    }
     public void printParse(ArrayList<Decl> li)
     {
         for ( Decl d : li){
