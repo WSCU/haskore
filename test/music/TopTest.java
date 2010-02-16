@@ -42,54 +42,62 @@ public class TopTest {
     @Test
     public void testEvaluateProgram() {
         String program = "x = 1;\ny = 2;\nz = x + y;";
-        System.out.println("\nTesting Program1(" + program + ")");
-        ArrayList<Pair<String, String>> expResult = new ArrayList<Pair<String, String>>();
-        expResult.add(new Pair("x", "1.0"));
-        expResult.add(new Pair("y", "2.0"));
-        expResult.add(new Pair("z", "3.0"));
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");        
         ArrayList result = Top.evaluateProgram(program);
-        comparePairLists(expResult, result);
+        testExpectedValues(result, "x", "1");
+        testExpectedValues(result, "y", "2");
+        testExpectedValues(result, "z", "3");
     }
 
     @Test
     public void testEvaluateProgram2() {
         String program = "a = 10; b = 2; c = a - b;";
-        System.out.println("\nTesting Program2(" + program + ")");
-        ArrayList<Pair<String, String>> expResult = new ArrayList<Pair<String, String>>();
-        expResult.add(new Pair("a", "10.0"));
-        expResult.add(new Pair("b", "2.0"));
-        expResult.add(new Pair("c", "8.0"));
+        System.out.println("\nTesting evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
-        comparePairLists(expResult, result);
+        testExpectedValues(result, "a", "10");
+        testExpectedValues(result, "b", "2");
+        testExpectedValues(result, "c", "8");
     }
 
     @Test
     public void testEvaluateProgram3() {
         String program = "a = 10; b = 2; c = a - b; d = (c + a) - b; e = a - d;";
-        System.out.println("\nTesting Program3(" + program + ")");
-        ArrayList<Pair<String, String>> expResult = new ArrayList<Pair<String, String>>();
-        expResult.add(new Pair("a", "10.0"));
-        expResult.add(new Pair("b", "2.0"));
-        expResult.add(new Pair("c", "8.0"));
-        expResult.add(new Pair("d", "16.0"));
-        expResult.add(new Pair("e", "-6.0"));
+        System.out.println("\nTesting evaluateProgram(" + program + ")");                
         ArrayList result = Top.evaluateProgram(program);
-        comparePairLists(expResult, result);
+        testExpectedValues(result, "a", "10");
+        testExpectedValues(result, "b", "2");
+        testExpectedValues(result, "c", "8");
+        testExpectedValues(result, "d", "16");
+        testExpectedValues(result, "e", "-6");
     }
-    //Comparing the lists of pairs, by value in arbtrary order.
-    private void comparePairLists(ArrayList<Pair<String, String>> expected, ArrayList<Pair<String, String>> actual) {
-        for (Pair p1 : expected) {
-            boolean p1Found = false;
-            for (Pair p2 : actual) {
-                if (p1.first.equals(p2.first)) {
-                    System.out.println("Exp(" + p1.first + " = " + p1.second + ")   Act(" + p2.first + " = " + p2.second + ")");
-                    assertTrue(p1.second.equals(p2.second));
-                    p1Found = true;
-                }
+
+    @Test
+    public void testEvaluateProgram4() {
+        //String program = "f x = if(x==0) 0 x-1;\nz = f 0;";
+        String program = "abcd1234 = 3";
+        System.out.println("\nTesting evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        //testExpectedValues(result, "a", "0");
+        testExpectedValues(result, "abcd1234", "3");
+    }
+
+    /**
+     * Searches through the list for the presenve
+     * @param list This is a list of (key, value) pairs to search through
+     * @param variable This is the variable to test the value of
+     * @param expectedValue The expected value. The strings 1 and 1.0 are the same.
+     */
+    private void testExpectedValues(ArrayList<Pair<String, String>> list,  String variable, String expectedValue){
+        boolean varFound = false;
+        for (Pair p1 : list) {
+            if(p1.first.equals(variable)){
+                varFound = true;
+                System.out.println("Expected(" + variable + " = " +expectedValue + ")   Actual(" + variable + " = " + p1.second + ")");
+                assertEquals(Double.parseDouble(expectedValue), Double.parseDouble(p1.second.toString()));
             }
-            if (!p1Found) {
-                fail("A value for " + p1.first + " was expected but not found");
-            }
+        }
+        if(!varFound){
+            fail(variable + "was not found in " + list );
         }
     }
 
@@ -171,6 +179,20 @@ public class TopTest {
         Value resVal = eval(binds,userEnv);
         assertEquals(expVal.toString(),resVal.toString());
     }
+    @Test
+    public void testEval5if2() {
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        TokenStream t = new TokenStream();
+        String prog = "f x = if(x==0) 0 x-1;\nz = f 0;";
+        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        printParse(binds);
+        Value expVal = new ValNum(0.0);
+        Value resVal = eval(binds,userEnv);
+        assertEquals(expVal.toString(),resVal.toString());
+    }
+
     @Test
     public void testEval6() {
         Env top = Prims.topEnv();

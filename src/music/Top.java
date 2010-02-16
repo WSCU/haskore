@@ -15,7 +15,7 @@ public class Top {
     /**
      * Runs a program and returns an ArrayList of Pair(variable name, value)
      * @param program
-     * @return
+     * @return List of definition names and their evaluated
      */
     public static ArrayList<Pair<String, String>> evaluateProgram(String program) {
         StringReader converter = new StringReader(program);
