@@ -16,11 +16,12 @@ public class ExpIf extends Exp {
      * @param elseExp assigns the expression to test should the initial expression fail
      */
     public ExpIf(Exp testExp, Exp thenExp, Exp elseExp) {
-        this.testExp = testExp;
+        this.testExp = testExp; // this is technically an if expression.
         this.elseExp = elseExp;
         this.thenExp = thenExp;
     }
 
+    @Override // added the @override because the compiler wanted it.
     public boolean isIf() {
         return true;
     }
