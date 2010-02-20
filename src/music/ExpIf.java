@@ -9,7 +9,12 @@ public class ExpIf extends Exp {
     public Exp testExp;
     public Exp elseExp;
     public Exp thenExp;
-//commit test
+
+    /**
+     * @param testExp assigns the initial expression to test
+     * @param thenExp assigns the expression to execute
+     * @param elseExp assigns the expression to test should the initial expression fail
+     */
     public ExpIf(Exp testExp, Exp thenExp, Exp elseExp) {
         this.testExp = testExp;
         this.elseExp = elseExp;
@@ -20,6 +25,10 @@ public class ExpIf extends Exp {
         return true;
     }
 
+    /**
+     * @param p compares the given ParsedObject to see if it is an if expression
+     * @return gives results of the test, returns true if the Expressions are equal, false if it is not.
+     */
     public boolean compareTo(ParsedObject p) {
         if (!p.isExp()) {
             return false;
