@@ -1,5 +1,8 @@
 package music;
 
+
+
+import music.*;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -38,13 +41,17 @@ public class ParserTest {
      */
     @Test
     public void testParseDecls() {        
-        String program = "f 0 = 0;f x = x-1;";
+        String program = "x = 1/3 + 2/3;";
         String fname = "pTest3";
         ArrayList errors = Lexer.lexString(program, fname);
 //        System.out.println(Lexer.tokens);
 //        System.out.println(errors);
         TokenStream t = Lexer.tokens;
-        
+
+        for (Token i : t.tokens)
+        {
+            System.out.println(i+" "+ i.type);
+        }
         ArrayList<Decl> expResult = null;
         ArrayList<Decl> result = Parser.parseDecls(t);
         
@@ -409,25 +416,25 @@ public class ParserTest {
     /**
      * Test of parseFexp method, of class Parser.
      */
-    @Test
-    public void testParseFexp() {
-        System.out.println("parseFexp");
-        Exp expResult = null;
-        Exp result = Parser.parseFexp();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testParseExp() {
-        System.out.println("parseExp");
-        Exp expResult = null;
-        Exp result = Parser.parseExp();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testParseFexp() {
+//        System.out.println("parseFexp");
+//        Exp expResult = null;
+//        Exp result = Parser.parseFexp();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    @Test
+//    public void testParseExp() {
+//        System.out.println("parseExp");
+//        Exp expResult = null;
+//        Exp result = Parser.parseExp();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     @Test
     public void testRequirePunct() {        

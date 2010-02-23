@@ -1,10 +1,13 @@
+package music;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
-package music;
 
+
+import music.*;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -103,7 +106,6 @@ public class LexerTest {
         expResult.addToken(new Token(Symbol.toSymbol("3.1"), "3.1", new Place(fname, 0, 0), TokenType.numberToken));
         expResult.addToken(Token.eof);
         ArrayList errors = Lexer.lexString(program, fname);
-       
         assertEquals(new ArrayList(), errors);
         compareTokenStreams(expResult, Lexer.tokens);
     }

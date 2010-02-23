@@ -1,5 +1,8 @@
 package music;
 
+
+
+import music.*;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -66,7 +69,7 @@ public class TopTest {
 
     @Test
     public void testEvaluateProgram() {
-        String program = "x = 1;\ny = 2;\nz = x + y;";
+        String program = "x = 1/3;\ny = 2/3;\nz = x + y;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "x", "1");
@@ -76,7 +79,7 @@ public class TopTest {
 
     @Test
     public void testEvaluateProgram2() {
-        String program = "a = 10; b = 2; c = a - b;";
+        String program = "a = 1.5; b = 1/2; c = a - b;";
         System.out.println("\nTesting evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "10");
