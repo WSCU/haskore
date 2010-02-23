@@ -52,7 +52,11 @@ public class TopTest {
             if (p1.first.equals(LHS)) {
                 varFound = true;
                 System.out.println("Expected(" + LHS + " = " + RHS + ")   Actual(" + LHS + " = " + p1.second + ")");
-                assertEquals(Double.parseDouble(RHS), Double.parseDouble(p1.second.toString()));
+                try {
+                    assertEquals(Double.parseDouble(RHS), Double.parseDouble(p1.second.toString()));
+                } catch (NumberFormatException e) {
+                    assertEquals(RHS.toString(), p1.second.toString());
+                }
             }
         }
         if (!varFound) {
@@ -91,13 +95,13 @@ public class TopTest {
         testEvaluatedDecls(result, "d", "16");
         testEvaluatedDecls(result, "e", "-6");
     }
-   
+
     @Test
     public void testEval() {
         String program = "x = 1;\ny = 2;\nz = x + y;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "x", "3");
+        testEvaluatedDecls(result, "z", "3");
     }
 
     @Test
@@ -127,7 +131,7 @@ public class TopTest {
 // Factorial function
     @Test
     public void testEval5() {
-        String program = "f 0 = 0;\nf x = x + f (x-1);\nz = f 3;";
+        String program = "f 0 = 0;\nf x = x + (f (x-1));\nz = f 3;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "z", "6");
@@ -144,13 +148,12 @@ public class TopTest {
     }
 
     @Test
-    public void testEval5if2(){
-    String program = "f x = if(x==0) (x-1) 0; z = f 3;";
+    public void testEval5if2() {
+        String program = "f x = if(x==0) (x-1) 0; z = f 3;";
         System.out.println("\nTesting evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "z", "0");
     }
-
 
     @Test
     public void testEval6() {
@@ -174,7 +177,7 @@ public class TopTest {
 
     @Test
     public void testEval7() {
-        String program = "f 0 = 1;\nf x y = x+y;\nz = f 0;\ny = f z -3";
+        String program = "f 0 = 1;\nf x y = x+y;\nz = f 0;\ny = (f z) -3;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "z", "1");
@@ -234,5 +237,33 @@ public class TopTest {
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "b", "194");
-    }    
+    }
+
+    @Test
+    public void testBools1() {
+        String program = "t = true; f = false; a = if(f == f) 0 5;";
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        testEvaluatedDecls(result, "a", "0");
+        testEvaluatedDecls(result, "f", "false");
+        testEvaluatedDecls(result, "t", "true");
+    }
+
+    @Test
+    public void testBools2() {
+        String program = "t = true; f = false; a = if(f == f) 0 5; b = if(t == f) 0 5;";
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        testEvaluatedDecls(result, "a", "0");
+        testEvaluatedDecls(result, "b", "5");
+    }
+
+    @Test
+    public void testBools3() {
+        String program = "a = if(true == true) 0 5; b = if(true == false) 0 5;";
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        testEvaluatedDecls(result, "a", "0");
+        testEvaluatedDecls(result, "b", "5");
+    }
 }
