@@ -34,4 +34,5 @@ public enum TokenType {
      * Indicates dummy semicolon
      */
     semiToken;
+
 }
