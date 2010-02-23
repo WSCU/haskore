@@ -12,7 +12,7 @@ public class Lib {
 //0 = false
 
     public static Value ifMusic(ValNum test, Thunk t, Thunk e) {
-        if (test.val != 0) {
+        if (!test.val.isZero()) {
             return t.eval();
         } else {
             return e.eval();
@@ -51,4 +51,39 @@ public class Lib {
             return 1;
         }
     }
+
+    public static BigRational plus(BigRational x, BigRational y) {
+        return x.plus(y);
+    }
+
+    public static BigRational minus(BigRational x, BigRational y) {
+        return x.minus(y);
+    }
+
+    public static BigRational multiply(BigRational x, BigRational y) {
+        return x.times(y);
+    }
+
+    public static BigRational divide(BigRational x, BigRational y) {
+        return x.divides(y);
+    }
+
+   public static BigRational mod(BigRational x, BigRational y) {
+       return x;
+    }
+
+    public static BigRational power(BigRational x, BigRational y) {
+        return x.power(y);
+    }
+
+
+    public static int compare(BigRational x, BigRational y) {
+        if (x.equals(y)) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    
 }

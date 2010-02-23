@@ -4,6 +4,7 @@
  */
 package music;
 
+
 /*************************************************************************
  *  Compilation:  javac Rational.java
  *  Execution:    java Rational

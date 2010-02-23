@@ -12,7 +12,7 @@ public class ExpConst extends Exp {
 
     public ExpConst(Token body) {
         this.body = body;
-        this.value = new ValNum(Double.parseDouble(body.body));
+        this.value = new ValNum(body.body);
     }
 
     @Override

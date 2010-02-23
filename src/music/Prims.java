@@ -13,7 +13,7 @@ public class Prims {
             public Value call(ArrayList<Thunk> args) {
                 ValNum arg1 = args.get(0).asNum();
                 ValMusic arg2 = args.get(1).asMusic();
-                return new ValMusic(Music.up(arg2.val, (int)arg1.val));
+                return new ValMusic(Music.up(arg2.val, (int)arg1.val.toDouble()));
             }
         };
 
@@ -24,7 +24,7 @@ public class Prims {
             public Value call(ArrayList<Thunk> args) {
                 ValMusic arg0 = args.get(0).asMusic();
                 ValNum arg1 = args.get(1).asNum();
-                return new ValMusic(Music.down(arg0.val, arg1.val));
+                return new ValMusic(Music.down(arg0.val, arg1.val.toDouble()));
             }
        };
 result.add(Symbol.toSymbol("down"), new Thunk(new ValFuncPrim(2,downfn)));
@@ -33,7 +33,7 @@ result.add(Symbol.toSymbol("down"), new Thunk(new ValFuncPrim(2,downfn)));
             public Value call(ArrayList<Thunk> args) {
                 ValMusic arg0 = args.get(0).asMusic();
                 ValNum arg1 = args.get(1).asNum();
-                return new ValMusic(Music.withVelocity(arg0.val, arg1.val));
+                return new ValMusic(Music.withVelocity(arg0.val, arg1.val.toDouble()));
             }
        };
 result.add(Symbol.toSymbol("volume"), new Thunk(new ValFuncPrim(2,volumefn)));

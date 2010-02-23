@@ -6,14 +6,27 @@ package music;
  */
 public class ValNum extends Value {
 
-    public double val;
+    public BigRational val;
 
     public ValNum(double d) {   // Replace this if representation changes!
-        val = d;
+        val = new BigRational(d);
     }
 
+    public ValNum(BigRational d) {   // Replace this if representation changes!
+        this.val = d;//could cause aliasing errors
+        //this.val = new BigRational(d);
+    }
+    public ValNum(String d) {   // Replace this if representation changes!
+        //could cause aliasing errors
+        this.val = new BigRational(d);
+    }
+
+    
+
+
+
     public ValNum(int num, int denom) {
-        val = ((double) num) / ((double) denom);
+        val = new BigRational(num,denom);
     }
 
     @Override
@@ -23,6 +36,6 @@ public class ValNum extends Value {
 
     @Override
     public String toString() {
-        return "" + val;
+        return val.toString();
     }
 }
