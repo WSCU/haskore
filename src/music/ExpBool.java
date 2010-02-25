@@ -1,18 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package music;
 
 /**
  *
- * @author chief
+ * @author CIS412 Class
  */
 public class ExpBool extends Exp{
     public Token body;
-    public ValBool value;  // Should be
-    //potential second instance variable: actual value
+    public ValBool value;
 
     public ExpBool(Token body) {
         this.body = body;

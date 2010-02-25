@@ -56,7 +56,7 @@ public class TopTest {
                 varFound = true;
                 System.out.println("Expected(" + LHS + " = " + RHS + ")   Actual(" + LHS + " = " + p1.second + ")");
                 try {
-                    assertEquals(Double.parseDouble(RHS), Double.parseDouble(p1.second.toString()));
+                    assertEquals(Double.parseDouble(RHS), Double.parseDouble(p1.second.toString()), .001);
                 } catch (NumberFormatException e) {
                     assertEquals(RHS.toString(), p1.second.toString());
                 }
@@ -243,8 +243,18 @@ public class TopTest {
     }
 
     @Test
+    public void testBools0() {
+        String program = "t = True; f = False;";
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        testEvaluatedDecls(result, "t", "true");
+        testEvaluatedDecls(result, "f", "false");
+
+    }
+
+    @Test
     public void testBools1() {
-        String program = "t = true; f = false; a = if(f == f) 0 5;";
+        String program = "t = True; f = False; a = if(f == f) 0 5;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "0");
@@ -254,7 +264,7 @@ public class TopTest {
 
     @Test
     public void testBools2() {
-        String program = "t = true; f = false; a = if(f == f) 0 5; b = if(t == f) 0 5;";
+        String program = "t = True; f = False; a = if(f == f) 0 5; b = if(t == f) 0 5;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "0");
@@ -263,7 +273,7 @@ public class TopTest {
 
     @Test
     public void testBools3() {
-        String program = "a = if(true == true) 0 5; b = if(true == false) 0 5;";
+        String program = "a = if(True == True) 0 5; b = if(True == False) 0 5;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "0");

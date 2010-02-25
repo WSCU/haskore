@@ -34,7 +34,7 @@ public class ValBool extends Value {
             val = false;
         } else val = true;
     }
-    
+   
     public static ValNum convertToNum(ValBool v){
         if(v.val){
             return new ValNum(1);
