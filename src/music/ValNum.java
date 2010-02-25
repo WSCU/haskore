@@ -8,9 +8,7 @@ public class ValNum extends Value {
 
     public BigRational val;
 
-    public ValNum(double d) {   // Replace this if representation changes!
-        val = new BigRational(d);
-    }
+    
 
     public ValNum(BigRational d) {   // Replace this if representation changes!
         this.val = d;//could cause aliasing errors

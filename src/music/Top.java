@@ -95,7 +95,7 @@ public class Top {
                     //file name should be the same as the variable name in the ENV preformer
                     ValMusic temp = ((ValMusic) result);
 
-                    Performance performer = temp.val.perform(0, new Modifier());
+                    Performance performer = temp.val.perform(new BigRational("0"), new Modifier());
                     performer.writeToFile(d.LHS.asVar().getBody() + ".midi");
                     System.out.println("Music: " + d.LHS.asVar().getBody() + "\n " + temp.val.prettyPrint());
 //                  performer.writeToFile("c:\\" + d.LHS.asVar().getBody() + ".midi");

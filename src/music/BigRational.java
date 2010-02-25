@@ -1,6 +1,8 @@
 package music;
 
 /*************************************************************************
+ *  GoodStudentPloy makepetersonhappy = url of code;
+ *
  *  Compilation:  javac BigRational.java
  *  Execution:    java BigRational
  *
@@ -27,6 +29,7 @@ package music;
  *************************************************************************/
 
 import java.math.BigInteger;
+import java.util.regex.*;
 
 public class BigRational implements Comparable<BigRational> {
 
@@ -61,8 +64,36 @@ public class BigRational implements Comparable<BigRational> {
      * @param double numeratorunded
      */
 
-    public BigRational(double numerator) {
-        takeDouble(numerator);//differs to the takeDouble
+    
+
+    //Turns a double (3.55) into 355/100 then reduces with init(*,*)
+    private void takeDoubleString(String numerator)
+    {
+        System.out.println(numerator);
+        String[] dubstr = numerator.split("\\.");
+        String  back = dubstr[1];
+            //Making the denominator
+            int l = back.length();
+            String denoms = "1";
+            while(l>0)
+            {
+                l--;
+                denoms+="0";
+            }
+            //Setting up our big rational to use BigInts
+            BigInteger n =new BigInteger(back);
+            BigInteger d = new BigInteger(denoms);
+        //Get the whole number in front of the .
+        if(dubstr[0].isEmpty())
+        {     
+            init(n,d);
+        }
+        else
+        {
+            BigInteger front = new BigInteger(dubstr[0]);
+            n = front.multiply(d).add(n);
+            init(n,d);
+        }
     }
 
     // create and initialize a new BigRational object from a string, e.g., "-343/1273"
@@ -73,7 +104,7 @@ public class BigRational implements Comparable<BigRational> {
         else if (tokens.length == 1)
         {
             if(s.contains("."))
-                takeDouble(Double.parseDouble(s));
+                takeDoubleString(s);
             else
                 init(new BigInteger(tokens[0]), BigInteger.ONE);
         }
@@ -95,30 +126,7 @@ public class BigRational implements Comparable<BigRational> {
         init(numerator, denominator);
     }
 
-    //Turns a double (3.55) into 355/100 then reduces with init(*,*)
-    private void takeDouble(double numerator)
-    {
-        String dubstr = numerator+"";
-        //Get the whole number in front of the .
-        BigInteger front = new BigInteger(""+(int)Math.floor(numerator));
-        //Get from the . on to the end
-        String  back = dubstr.substring(dubstr.indexOf("."), dubstr.length()).replace(".", "");
-        //Making the denominator
-        int l = back.length();
-        String denoms = "1";
-        while(l>0)
-        {
-            l--;
-            denoms+="0";
-        }
-        //Setting up our big rational to use BigInts
-        BigInteger n =new BigInteger(back);
-        BigInteger d = new BigInteger(denoms);
-        //Multiply the whole number * the denominator then add to the numerator
-        n = front.multiply(d).add(n);
-        //init does reducing for us
-        init(n,d);
-    }
+    
 
     private void init(BigInteger numerator, BigInteger denominator) {
 
@@ -160,6 +168,11 @@ public class BigRational implements Comparable<BigRational> {
         return this.den.divide(this.num).doubleValue();
     }
 
+    public int toInt()
+    {
+        return (int)this.den.divide(this.num).doubleValue();
+    }
+
     // is this Rational object equal to y?
     public boolean equals(Object y) {
         if (y == this) return true;
@@ -188,7 +201,7 @@ public class BigRational implements Comparable<BigRational> {
         System.out.println(a.toDouble());
         System.out.println(b.toDouble());
         System.out.println(Math.pow(a.toDouble(),b.toDouble()));
-        return new BigRational(Math.pow(a.toDouble(),b.toDouble()));
+        return new BigRational("k");
     }
 
     // return a + b
@@ -222,16 +235,21 @@ public class BigRational implements Comparable<BigRational> {
     }
 
     public static void main(String[] args) {
-        BigRational x, y, z ,c;
+        BigRational x, y, z ,c,cd,fg;
 
         // 1/2 + 1/3 = 5/6
-        x = new BigRational(3.14);
+        x = new BigRational("3.14");
         System.out.println(x);
-        y = new BigRational(2.2);
+        y = new BigRational("2.2");
         System.out.println(y);
         c = new BigRational(1, 3);
         z = x.plus(y).plus(c);
         System.out.println(z);
+         cd = new BigRational("1/3");
+        System.out.println(x);
+        fg = new BigRational("2/3");
+        fg = cd.plus(fg);
+         System.out.println(fg);
 
         // 8/9 + 1/9 = 1
         x = new BigRational(8, 9);

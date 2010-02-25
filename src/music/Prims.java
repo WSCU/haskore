@@ -3,7 +3,7 @@ package music;
 import java.util.ArrayList;
 
 public class Prims {
-    private static final double WHOLE = 1.0;
+    private static final BigRational WHOLE = new BigRational("1");
     public static Env topEnv() {
         EnvHash result = new EnvHash(1000, null);
         // 1st argument should be roughly four times the number of
@@ -24,7 +24,7 @@ public class Prims {
             public Value call(ArrayList<Thunk> args) {
                 ValMusic arg0 = args.get(0).asMusic();
                 ValNum arg1 = args.get(1).asNum();
-                return new ValMusic(Music.down(arg0.val, arg1.val.toDouble()));
+                return new ValMusic(Music.down(arg0.val, arg1.val.toInt()));
             }
        };
 result.add(Symbol.toSymbol("down"), new Thunk(new ValFuncPrim(2,downfn)));
@@ -33,7 +33,7 @@ result.add(Symbol.toSymbol("down"), new Thunk(new ValFuncPrim(2,downfn)));
             public Value call(ArrayList<Thunk> args) {
                 ValMusic arg0 = args.get(0).asMusic();
                 ValNum arg1 = args.get(1).asNum();
-                return new ValMusic(Music.withVelocity(arg0.val, arg1.val.toDouble()));
+                return new ValMusic(Music.withVelocity(arg0.val, arg1.val.toInt()));
             }
        };
 result.add(Symbol.toSymbol("volume"), new Thunk(new ValFuncPrim(2,volumefn)));
@@ -105,9 +105,16 @@ result.add(Symbol.toSymbol("%"), new Thunk(new ValFuncPrim(2,modfn)));
 
   Prim EqualsEqualsfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
-                ValNum arg0 = args.get(0).asNum();
-                ValNum arg1 = args.get(1).asNum();
-                return new ValNum(Lib.compare(arg0.val, arg1.val));
+                //This is way to thunky for brett and I.
+                Thunk arg0 = args.get(0);
+                Thunk arg1 = args.get(1);
+                if(arg0.v.isBool() && arg1.v.isBool())
+                    return new ValBool(Lib.compare(args.get(0).asBool()
+                            , args.get(1).asBool()));
+                else if(arg0.v.isNum() && arg1.v.isNum())
+                    return new ValBool(Lib.compare(arg0.asNum().val
+                            , arg1.asNum().val));
+                else throw new ExecutionError("Use bools or num, never mix them.");
             }
        };
 result.add(Symbol.toSymbol("=="), new Thunk(new ValFuncPrim(2,EqualsEqualsfn)));

@@ -35,12 +35,12 @@ public class ValBool extends Value {
         } else val = true;
     }
    
-    public static ValNum convertToNum(ValBool v){
-        if(v.val){
-            return new ValNum(1);
-        }
-        return new ValNum(0);
-    }
+//    public static ValNum convertToNum(ValBool v){
+//        if(v.val){
+//            return new ValNum(1);
+//        }
+//        return new ValNum(0);
+//    }
 
     @Override
     public String toString() {

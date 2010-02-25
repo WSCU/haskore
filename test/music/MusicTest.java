@@ -46,8 +46,8 @@ public class MusicTest {
     @Test
     public void testUp() {
         System.out.println("up");
-        MusNote testNote = new MusNote(5,2,5,"Piano");
-        MusNote expectedNote = new MusNote(7,2,5,"Piano");
+        MusNote testNote = new MusNote(5,5,"Piano",4);
+        MusNote expectedNote = new MusNote(7,5,"Piano",4);
         Music music = testNote;
         double n = 2.0;
         Music expResult = expectedNote;

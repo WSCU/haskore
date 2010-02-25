@@ -56,7 +56,7 @@ public class TopTest {
                 varFound = true;
                 System.out.println("Expected(" + LHS + " = " + RHS + ")   Actual(" + LHS + " = " + p1.second + ")");
                 try {
-                    assertEquals(Double.parseDouble(RHS), Double.parseDouble(p1.second.toString()), .001);
+                    assertEquals(RHS, p1.second.toString());
                 } catch (NumberFormatException e) {
                     assertEquals(RHS.toString(), p1.second.toString());
                 }
@@ -69,17 +69,17 @@ public class TopTest {
 
     @Test
     public void testEvaluateProgram() {
-        String program = "x = 1/3;\ny = 2/3;\nz = x + y;";
+        String program = "x = 1/2;\ny = 1.5;\nz = y-x;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "x", "1");
-        testEvaluatedDecls(result, "y", "2");
-        testEvaluatedDecls(result, "z", "3");
+        testEvaluatedDecls(result, "x", "1/2");
+        testEvaluatedDecls(result, "y", "3/2");
+        testEvaluatedDecls(result, "z", "1");
     }
 
     @Test
     public void testEvaluateProgram2() {
-        String program = "a = 1.5; b = 1/2; c = a - b;";
+        String program = "a = 10; b = 2; c = a - b;";
         System.out.println("\nTesting evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "10");

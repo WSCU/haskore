@@ -77,12 +77,12 @@ public class Lib {
     }
 
 
-    public static int compare(BigRational x, BigRational y) {
-        if (x.equals(y)) {
-            return 0;
-        } else {
-            return 1;
-        }
+    public static boolean compare(BigRational x, BigRational y) {
+        return x.equals(y);
+    }
+
+    public static boolean compare(ValBool x, ValBool y) {
+        return x.val==y.val;
     }
 
     
