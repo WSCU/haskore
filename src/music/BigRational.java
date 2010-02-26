@@ -1,7 +1,7 @@
 package music;
 
 /*************************************************************************
- *  GoodStudentPloy makepetersonhappy = url of code;
+ *  http://www.cs.princeton.edu/introcs/92symbolic/BigRational.java.html
  *
  *  Compilation:  javac BigRational.java
  *  Execution:    java BigRational
@@ -34,6 +34,8 @@ import java.util.regex.*;
 public class BigRational implements Comparable<BigRational> {
 
     public final static BigRational ZERO = new BigRational(0);
+    public final static BigRational ONE = new BigRational(1);
+     public final static BigRational TWO = new BigRational(2);
 
     private BigInteger num;   // the numerator
     private BigInteger den;   // the denominator
