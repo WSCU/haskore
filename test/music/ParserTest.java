@@ -1,7 +1,5 @@
 package music;
 
-
-
 import music.*;
 import java.util.ArrayList;
 import org.junit.After;
@@ -36,90 +34,85 @@ public class ParserTest {
     @After
     public void tearDown() {
     }
-    /**
-     * Test of parseDecls method, of class Parser.
-     */
-    @Test
-    public void testParseDecls() {        
-        String program = "x = 1/3 + 2/3;";
-        String fname = "pTest3";
-        ArrayList errors = Lexer.lexString(program, fname);
+
+//    /**
+//     * Test of parseDecls method, of class Parser.
+//     */
+//    @Test
+//    public void testParseDecls() {
+//        String program = "x = 1/3 + 2/3;";
+//        String fname = "pTest3";
+//        ArrayList errors = Lexer.lexString(program, fname);
+////        System.out.println(Lexer.tokens);
+////        System.out.println(errors);
+//        TokenStream t = Lexer.tokens;
+//
+//        for (Token i : t.tokens) {
+//            System.out.println(i + " " + i.type);
+//        }
+//        ArrayList<Decl> expResult = null;
+//        ArrayList<Decl> result = Parser.parseDecls(t);
+//
+//        for (Decl i : result) {
+//            System.out.println(i.LHS.print());
+//            System.out.println(i.RHS.print());
+//        }
+//
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    @Test
+//    public void testParseDecls2() {
+//        music.Symbol.init();
+//        String program = "mm = c3!c3&c4&(c2!c4);";
+//        String fname = "pTest3";
+//        ArrayList errors = Lexer.lexString(program, fname);
 //        System.out.println(Lexer.tokens);
 //        System.out.println(errors);
-        TokenStream t = Lexer.tokens;
-
-        for (Token i : t.tokens)
-        {
-            System.out.println(i+" "+ i.type);
-        }
-        ArrayList<Decl> expResult = null;
-        ArrayList<Decl> result = Parser.parseDecls(t);
-        
-        for (Decl i : result) {
-            System.out.println(i.LHS.print());
-            System.out.println(i.RHS.print());
-        }
-        
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
-    @Test
-    public void testParseDecls2() {
-        music.Symbol.init();
-        String program = "mm = c3!c3&c4&(c2!c4);";
-        String fname = "pTest3";
-        ArrayList errors = Lexer.lexString(program, fname);
-        System.out.println(Lexer.tokens);
-        System.out.println(errors);
-        TokenStream t = Lexer.tokens;
-        ArrayList<Decl> expResult = null;
-        ArrayList<Decl> result = Parser.parseDecls(t);
-        for(Decl i : result)
-        {
-            System.out.println(i.print());
-        }
-
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseDecl method, of class Parser.
-     */
-    @Test
-    public void testParseDecl() {
-        System.out.println("parseDecl");
-        music.Symbol.init();
-        String program = "mm = 34.56+(33-7);\nbb = 34.56+(33+7);";
-        String fname = "pTest3";
-        ArrayList errors = Lexer.lexString(program, fname);
-//        System.out.println(Lexer.tokens);
-//        System.out.println(errors);
-        Parser.setToks(Lexer.tokens);
-
-        Decl expResult = null;
-        Decl result = Parser.parseDecl();
-
-        System.out.println(result.print());
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+//        TokenStream t = Lexer.tokens;
+//        ArrayList<Decl> expResult = null;
+//        ArrayList<Decl> result = Parser.parseDecls(t);
+//        for (Decl i : result) {
+//            System.out.println(i.print());
+//        }
+//
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of parseDecl method, of class Parser.
+//     */
+//    @Test
+//    public void testParseDecl() {
+//        System.out.println("parseDecl");
+//        music.Symbol.init();
+//        String program = "mm = 34.56+(33-7);\nbb = 34.56+(33+7);";
+//        String fname = "pTest3";
+//        ArrayList errors = Lexer.lexString(program, fname);
+////        System.out.println(Lexer.tokens);
+////        System.out.println(errors);
+//        Parser.setToks(Lexer.tokens);
+//
+//        Decl expResult = null;
+//        Decl result = Parser.parseDecl();
+//
+//        System.out.println(result.print());
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
     /**
      * Test of parselhs method with program "x=5"
      */
     @Test
     public void testParselhs() {
         System.out.println("parselhs");
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 1), TokenType.varToken));
-        tokens.addToken(new Token(Symbol.toSymbol("="), "=", new Place("testParsePat", 0, 2), TokenType.opToken));
-        tokens.addToken(new Token(Symbol.toSymbol("5"), "5", new Place("testParsePat", 0, 3), TokenType.numberToken));
-        Parser.setToks(tokens);
+        String program = "x=5";
+        lexProgram(program);
         ArrayList<Pat> result = Parser.parselhs();
         Pat e = result.get(0);
         compareParsedObjects(e, new PatVar(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 1), TokenType.varToken)));
@@ -129,17 +122,10 @@ public class ParserTest {
      * Test of parselhs method with program "f x=x+1"
      */
     @Test
-    public void testParselhs2(){
+    public void testParselhs2() {
         System.out.println("parselhs2");
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("f"), "f", new Place("testParselhs", 0, 1), TokenType.varToken));
-        tokens.addToken(new Token(Symbol.toSymbol(" "), " ", new Place("testParslhs", 0, 2), TokenType.whiteToken));
-        tokens.addToken(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 3), TokenType.varToken));
-        tokens.addToken(new Token(Symbol.toSymbol("="), "=", new Place("testParsePat", 0, 4), TokenType.opToken));
-        tokens.addToken(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 5), TokenType.varToken));
-        tokens.addToken(new Token(Symbol.toSymbol("+"), "+", new Place("testParsePat", 0, 6), TokenType.opToken));
-        tokens.addToken(new Token(Symbol.toSymbol("1"), "1", new Place("testParsePat", 0, 7), TokenType.numberToken));
-        Parser.setToks(tokens);
+        String program = "f x=x+1";
+        lexProgram(program);
         ArrayList<Pat> result = Parser.parselhs();
         Pat e = result.get(0);
         compareParsedObjects(new PatVar(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat", 0, 1), TokenType.varToken)), e);
@@ -174,10 +160,9 @@ public class ParserTest {
         TokenStream tokens = new TokenStream();
         tokens.addToken(new Token(Symbol.toSymbol("5"), "5", new Place("testParsePat", 0, 0), TokenType.numberToken));
         Parser.setToks(tokens);
-        try{
+        try {
             Parser.parseAPat();
-        }
-        catch (ParseError e){
+        } catch (ParseError e) {
             return;
         }
         fail("The program should have generated an exception");
@@ -219,12 +204,9 @@ public class ParserTest {
     @Test
     public void testParsePat5() {
         System.out.println("Testing parsePat5");
+        String program = " (f)";
         Pat expResult = new PatVar(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat", 0, 2), TokenType.varToken));
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParsePat5", 0, 1), TokenType.puncToken));
-        tokens.addToken(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat5", 0, 2), TokenType.varToken));
-        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParsePat5", 0, 3), TokenType.puncToken));
-        Parser.setToks(tokens);
+        lexProgram(program);
         Pat result = Parser.parsePat();
         compareParsedObjects(expResult, result);
     }
@@ -239,13 +221,8 @@ public class ParserTest {
         expPats.add(new PatVar(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat6", 0, 2), TokenType.varToken)));
         expPats.add(new PatConst(new Token(Symbol.toSymbol("4"), "4", new Place("testParsePat6", 0, 4), TokenType.numberToken)));
         PatTuple expResult = new PatTuple(expPats);
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParsePat6", 0, 1), TokenType.puncToken));
-        tokens.addToken(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat6", 0, 2), TokenType.varToken));
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParsePat6", 0, 3), TokenType.puncToken));
-        tokens.addToken(new Token(Symbol.toSymbol("4"), "4", new Place("testParsePat6", 0, 4), TokenType.numberToken));
-        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParsePat6", 0, 5), TokenType.puncToken));
-        Parser.setToks(tokens);
+        String program = " (f,4);";
+        lexProgram(program);
         Pat result = Parser.parsePat();
         compareParsedObjects(expResult, result);
     }
@@ -260,14 +237,9 @@ public class ParserTest {
         expPats.add(new PatVar(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat7", 0, 2), TokenType.varToken)));
         expPats.add(new PatConst(new Token(Symbol.toSymbol("4"), "4", new Place("testParsePat7", 0, 4), TokenType.numberToken)));
         PatList expResult = new PatList(expPats);
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("["), "[", new Place("testParsePat7", 0, 1), TokenType.puncToken));
-        tokens.addToken(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat7", 0, 2), TokenType.varToken));
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParsePat7", 0, 3), TokenType.puncToken));
-        tokens.addToken(new Token(Symbol.toSymbol("4"), "4", new Place("testParsePat7", 0, 4), TokenType.numberToken));
-        tokens.addToken(new Token(Symbol.toSymbol("]"), "]", new Place("testParsePat7", 0, 5), TokenType.puncToken));
-        Parser.setToks(tokens);
-        Pat result = Parser.parsePat();Token t1 = new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.varToken);
+        String program = " [f,4]";
+        lexProgram(program);
+        Pat result = Parser.parsePat();
         compareParsedObjects(expResult, result);
     }
 
@@ -277,11 +249,9 @@ public class ParserTest {
     @Test
     public void testParseAExp() {
         System.out.println("parseAExp");
-        Token t1 = new Token(Symbol.toSymbol("42"), "42", new Place("testParseAExp", 0, 1), TokenType.numberToken);
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(t1);
-        Parser.setToks(tokens);
-        Exp expResult = new ExpConst(t1);
+        String program = " 42";
+        lexProgram(program);
+        Exp expResult = new ExpConst(Lexer.tokens.tokens.get(1));
         Exp result = Parser.parseAExp();
         compareParsedObjects(expResult, result);
     }
@@ -290,47 +260,36 @@ public class ParserTest {
      * Tests parseAExp method with a varToken
      */
     @Test
-    public void testParseAExp2(){
+    public void testParseAExp2() {
         System.out.println("parseAExp2");
-        Token t1 = new Token(Symbol.toSymbol("asdf"), "asdf", new Place("testParseAExp", 0, 1), TokenType.varToken);
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(t1);
-        Parser.setToks(tokens);
-        Exp expResult = new ExpVar(t1);
+        String program = " asdf";
+        lexProgram(program);
+        Exp expResult = new ExpVar(Lexer.tokens.tokens.get(1));
         Exp result = Parser.parseAExp();
         compareParsedObjects(expResult, result);
     }
+
     //Tests a stream like (4), should get just a 4 Token.
     @Test
-    public void testParseAExp3(){
+    public void testParseAExp3() {
         System.out.println("parseAExp3");
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.puncToken));
-        Token t1 = new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken);
-        tokens.addToken(t1);
-        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParseAExp", 0, 3), TokenType.puncToken));
-        Parser.setToks(tokens);
-        Exp expResult = new ExpConst(t1);
+        String program = " (4)";
+        lexProgram(program);
+        Exp expResult = new ExpConst(new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken));
         Exp result = Parser.parseAExp();
         System.out.println(result.print());
         System.out.println(expResult.print());
         compareParsedObjects(expResult, result);
     }
     //Test a tuple like (4,5)
+
     @Test
-    public void testParseAExp4(){
+    public void testParseAExp4() {
         System.out.println("parseAExp4");
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.puncToken));
-        Token t1 = new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken);
-        tokens.addToken(t1);
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 3), TokenType.puncToken));
-        Token t2 = new Token(Symbol.toSymbol("5"), "5", new Place("testParseAExp", 0, 4), TokenType.numberToken);
-        tokens.addToken(t2);
-        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParseAExp", 0, 5), TokenType.puncToken));
-        Parser.setToks(tokens);
-        Exp e1 = new ExpConst(t1);
-        Exp e2 = new ExpConst(t2);
+        String program = " (4,5)";
+        lexProgram(program);
+        Exp e1 = new ExpConst(new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken));
+        Exp e2 = new ExpConst(new Token(Symbol.toSymbol("5"), "5", new Place("testParseAExp", 0, 4), TokenType.numberToken));
         ArrayList exp = new ArrayList(2);
         exp.add(e1);
         exp.add(e2);
@@ -338,106 +297,65 @@ public class ParserTest {
         Exp result = Parser.parseAExp();
         compareParsedObjects(expResult, result);
     }
-     //Test a tuple like (4,variable)
+    //Test a tuple like (4,variable)
+
     @Test
-    public void testParseAExp4_cont(){
-        System.out.println("parseAExp4");
-        TokenStream tokens = new TokenStream();
-        tokens.addToken(new Token(Symbol.toSymbol("("), "(", new Place("testParseAExp", 0, 1), TokenType.puncToken));
-        Token t1 = new Token(Symbol.toSymbol("4"), "4", new Place("testParseAExp", 0, 2), TokenType.numberToken);
-        tokens.addToken(t1);
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 3), TokenType.puncToken));
-        Token t2 = new Token(Symbol.toSymbol("f"), "f", new Place("testParseAExp", 0, 4), TokenType.varToken);
-        tokens.addToken(t2);
-        tokens.addToken(new Token(Symbol.toSymbol(")"), ")", new Place("testParseAExp", 0, 5), TokenType.puncToken));
-        Parser.setToks(tokens);
-        Exp e1 = new ExpConst(t1);
-        Exp e2 = new ExpVar(t2);
+    public void testParseAExp4_cont() {
+        System.out.println("parseAExp4_cont");
+        String program = " (4,f)";
+        lexProgram(program);
         ArrayList exp = new ArrayList(2);
-        exp.add(e1);
-        exp.add(e2);
+        exp.add(new ExpConst(Lexer.tokens.tokens.get(2)));
+        exp.add(new ExpConst(Lexer.tokens.tokens.get(4)));
         Exp expResult = new ExpTuple(exp);
         Exp result = Parser.parseAExp();
         compareParsedObjects(expResult, result);
     }
     //Tests a list like [8,9,10,11,12,13]
+
     @Test
-    public void testParseAExp5(){
+    public void testParseAExp5() {
         System.out.println("parseAExp5");
-        TokenStream tokens = new TokenStream();
-        Token t1 = new Token(Symbol.toSymbol("9"), "9", new Place("testParseAExp", 0, 2), TokenType.numberToken);
-        Token t2 = new Token(Symbol.toSymbol("10"), "10", new Place("testParseAExp", 0, 4), TokenType.numberToken);
-        Token t3 = new Token(Symbol.toSymbol("11"), "11", new Place("testParseAExp", 0, 6), TokenType.numberToken);
-        Token t4 = new Token(Symbol.toSymbol("12"), "12", new Place("testParseAExp", 0, 8), TokenType.numberToken);
-        Token t5 = new Token(Symbol.toSymbol("13"), "13", new Place("testParseAExp", 0, 10), TokenType.numberToken);
-        tokens.addToken(new Token(Symbol.toSymbol("["), "[", new Place("testParseAExp", 0, 1), TokenType.puncToken));
-        tokens.addToken(t1);
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 3), TokenType.puncToken));
-        tokens.addToken(t2);
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 5), TokenType.puncToken));
-        tokens.addToken(t3);
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 7), TokenType.puncToken));
-        tokens.addToken(t4);
-        tokens.addToken(new Token(Symbol.toSymbol(","), ",", new Place("testParseAExp", 0, 9), TokenType.puncToken));
-        tokens.addToken(t5);
-        tokens.addToken(new Token(Symbol.toSymbol("]"), "]", new Place("testParseAExp", 0, 11), TokenType.puncToken));
-        Parser.setToks(tokens);
-        Exp e1 = new ExpConst(t1);
-        Exp e2 = new ExpConst(t2);
-        Exp e3 = new ExpConst(t3);
-        Exp e4 = new ExpConst(t4);
-        Exp e5 = new ExpConst(t5);
+        String program = " [9,10,11,12,13]";
+        lexProgram(program);
         ArrayList exp = new ArrayList();
-        exp.add(e1);
-        exp.add(e2);
-        exp.add(e3);
-        exp.add(e4);
-        exp.add(e5);
+        exp.add(new ExpConst(Lexer.tokens.tokens.get(2)));
+        exp.add(new ExpConst(Lexer.tokens.tokens.get(4)));
+        exp.add(new ExpConst(Lexer.tokens.tokens.get(6)));
+        exp.add(new ExpConst(Lexer.tokens.tokens.get(8)));
+        exp.add(new ExpConst(Lexer.tokens.tokens.get(10)));
         Exp expResult = new ExpList(exp);
         Exp result = Parser.parseAExp();
-        System.out.println(result.print());
-        System.out.println(expResult.print());
+        System.out.println("Expected: " + expResult.print());
+        System.out.println("Actual: " + result.print());
         compareParsedObjects(expResult, result);
-    }
-    /**
-     * Test of prattReduce method, of class Parser.
-     */
-    @Test
-    public void testPrattReduce() {
-        System.out.println("prattReduce");
-        ArrayList<Exp> exps = null;
-        ArrayList<Token> ops = null;
-        Token op = null;
-        Parser.prattReduce(exps, ops, op);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of parseFexp method, of class Parser.
      */
-//    @Test
-//    public void testParseFexp() {
-//        System.out.println("parseFexp");
-//        Exp expResult = null;
-//        Exp result = Parser.parseFexp();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testParseExp() {
-//        System.out.println("parseExp");
-//        Exp expResult = null;
-//        Exp result = Parser.parseExp();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testParseFexp() {
+        System.out.println("parseFexp");
+        String program = " f x = x+3;";
+        lexProgram(program);
+        Exp result = Parser.parseFexp();
+        ExpCall expResult = new ExpCall(new ExpVar(Parser.toks.tokens.get(1)), new ExpVar(Parser.toks.tokens.get(3)));
+        compareParsedObjects(expResult, result);
+    }
 
     @Test
-    public void testRequirePunct() {        
+    public void testParseFexp2() {
+        System.out.println("parseFexp2");
+        String program = " x = 5;";
+        lexProgram(program);
+        Exp result = Parser.parseFexp();
+        ExpVar expResult = new ExpVar(Parser.toks.tokens.get(1));
+        compareParsedObjects(expResult, result);
+    }
+
+    @Test
+    public void testRequirePunct() {
         String program = "mm=34.56+33;";
         String fname = "ParserTest3";
         ArrayList errors = Lexer.lexString(program, fname);
@@ -448,164 +366,77 @@ public class ParserTest {
         Parser.requirePunct(s);
     }
 
-
-    @Test
-    public void testGetPrec() {
-        System.out.println("getPrec");
-        Symbol op = null;
-        String expResult = "";
-        String result = Parser.getPrec(op);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setToks method, of class Parser.
-     */
-    @Test
-    public void testSetToks_TokenStream() {
-        System.out.println("setToks");
-        TokenStream t = null;
-        Parser.setToks(t);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseDecls method, of class Parser.
-     */
-    @Test
-    public void testParseDecls_TokenStream() {
-        System.out.println("parseDecls");
-        TokenStream t = null;
-        ArrayList<Decl> expResult = null;
-        ArrayList<Decl> result = Parser.parseDecls(t);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseDecl method, of class Parser.
-     */
-    @Test
-    public void testParseDecl1() {
-        System.out.println("parseDecl");
-        Decl expResult = null;
-        Decl result = Parser.parseDecl();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parselhs method, of class Parser.
-     */
-    @Test
-    public void testParselhs1() {
-        System.out.println("parselhs");
-        ArrayList<Pat> expResult = null;
-        ArrayList<Pat> result = Parser.parselhs();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseAPat method, of class Parser.
-     */
-    @Test
-    public void testParseAPat1() {
-        System.out.println("parseAPat");
-        Pat expResult = null;
-        Pat result = Parser.parseAPat();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseExp method, of class Parser.
-     */
-    @Test
-    public void testParseExp1() {
-        System.out.println("parseExp");
-        Exp expResult = null;
-        Exp result = Parser.parseExp();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of prattReduce method, of class Parser.
-     */
-    @Test
-    public void testPrattReduce_3args() {
-        System.out.println("prattReduce");
-        ArrayList<Exp> exps = null;
-        ArrayList<Token> ops = null;
-        Token op = null;
-        Parser.prattReduce(exps, ops, op);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseFexp method, of class Parser.
-     */
-    @Test
-    public void testParseFexp1() {
-        System.out.println("parseFexp");
-        Exp expResult = null;
-        Exp result = Parser.parseFexp();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of parseAExp method, of class Parser.
-     */
-    @Test
-    public void testParseAExp1() {
-        System.out.println("parseAExp");
-        Exp expResult = null;
-        Exp result = Parser.parseAExp();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of requirePunct method, of class Parser.
-     */
-    @Test
-    public void testRequirePunct_Symbol() {
-        System.out.println("requirePunct");
-        Symbol s = null;
-        Parser.requirePunct(s);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPrec method, of class Parser.
-     */
-    @Test
-    public void testGetPrec_Symbol() {
-        System.out.println("getPrec");
-        Symbol op = null;
-        String expResult = "";
-        String result = Parser.getPrec(op);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     private void compareParsedObjects(ParsedObject expected, ParsedObject actual) {
         assertTrue(expected.compareTo(actual));
     }
+
+    private void lexProgram(String program) {
+        ArrayList<LexerError> errs = Lexer.lexString(program, "ParserTest.java");
+        if (errs.size() > 0) {
+            System.out.println(errs.size() + " errors while lexing " + program);
+            for (LexerError e : errs) {
+                System.out.println("Expected: " + e.expected + "\nRecieved: " + e.recieved);
+            }
+        }
+        Parser.setToks(Lexer.tokens);
+    }
+//    @Test
+//    public void testParseExp() {
+//        System.out.println("parseExp");
+//        Exp expResult = null;
+//        Exp result = Parser.parseExp();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//    /**
+//     * Test of prattReduce method, of class Parser.
+//     */
+//    @Test
+//    public void testPrattReduce() {
+//        System.out.println("prattReduce");
+//        ArrayList<Exp> exps = null;
+//        ArrayList<Token> ops = null;
+//        Token op = null;
+//        Parser.prattReduce(exps, ops, op);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }    
+//    @Test
+//    public void testGetPrec() {
+//        System.out.println("getPrec");
+//        Symbol op = null;
+//        String expResult = "";
+//        String result = Parser.getPrec(op);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+    /**
+     * Test of parseDecls method, of class Parser.
+     */
+//    @Test
+//    public void testParseDecls_TokenStream() {
+//        System.out.println("parseDecls");
+//        TokenStream t = null;
+//        ArrayList<Decl> expResult = null;
+//        ArrayList<Decl> result = Parser.parseDecls(t);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//    /**
+//     * Test of getPrec method, of class Parser.
+//     */
+//    @Test
+//    public void testGetPrec_Symbol() {
+//        System.out.println("getPrec");
+//        Symbol op = null;
+//        String expResult = "";
+//        String result = Parser.getPrec(op);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 }
 
