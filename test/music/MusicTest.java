@@ -48,11 +48,12 @@ public class MusicTest {
         System.out.println("up");
         MusNote testNote = new MusNote(5,5,"Piano",4);
         MusNote expectedNote = new MusNote(7,5,"Piano",4);
-        Music music = testNote;
+        Music testmusic = testNote;
         double n = 2.0;
         Music expResult = expectedNote;
         //Music result = Music.up(music, n);
        // assertEquals(expResult, result);
+
         // TODO review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");
     }
