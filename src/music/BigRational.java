@@ -167,12 +167,13 @@ public class BigRational implements Comparable<BigRational> {
     public boolean isNegative() { return compareTo(ZERO)  < 0; }
     public double toDouble()
     {
+        if(this.isZero())return 0;
         return this.den.divide(this.num).doubleValue();
     }
 
     public int toInt()
     {
-        return (int)this.den.divide(this.num).doubleValue();
+        return (int)toDouble();
     }
 
     // is this Rational object equal to y?
