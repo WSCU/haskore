@@ -46,16 +46,24 @@ public class MusicTest {
     @Test
     public void testUp() {
         System.out.println("up");
-        MusNote testNote = new MusNote(5,5,"Piano",4);
-        MusNote expectedNote = new MusNote(7,5,"Piano",4);
-        Music testmusic = testNote;
-        double n = 2.0;
+        MusNote testNote = new MusNote(5,5,"Piano",new BigRational(4));
+        Modifier newMod = new Modifier(2,BigRational.ZERO,BigRational.TWO,"Piano");
+        testNote.perform(BigRational.ZERO, newMod);
+        Performance.perform(testNote);
+
+        MusNote expectedNote = new MusNote(7,5,"Piano",new BigRational(4));
+        assertTrue(Performance.notes.get(0).pitch == 7);
+        fail("The pitch did not go up");
+/*        Music testmusic = testNote;
+        testNote.perform(BigRational.ZERO,Modifier.defaultMod );
+        expectedNote.perform(5, Modifier.defaultMod);
+        double n = 2;
         Music expResult = expectedNote;
         //Music result = Music.up(music, n);
        // assertEquals(expResult, result);
 
         // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");*/
     }
 
     /**
