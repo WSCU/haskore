@@ -14,22 +14,26 @@ import javax.sound.midi.*;
  */
 public class Performance {
 
-    public static ArrayList<MusNote> notes;
+    public static ArrayList<MusNote> notes = new ArrayList<MusNote>();
     //public BigRational absoluteTime;
     //Not to be confused with the instrument ArrayList in the MusNote class,
     //this one refers to the midi-numbers for instruments, not strings.
-    public ArrayList<Integer> instruments;
+    public ArrayList<Integer> instruments = new ArrayList<Integer>();
 
     /*public Performance() {
         notes = new ArrayList<MusNote>();
         instruments = new ArrayList<Integer>();
     }
-
+/*
     public Performance(ArrayList<MusNote> notes, BigRational time) {
         this.notes = notes;
 //        absoluteTime = time;
         instruments = new ArrayList<Integer>();
     }*/
+    public static void perform()
+    {
+        notes = new ArrayList<MusNote>();
+    }
     public static void perform(Music myMusic)
     {
         notes = new ArrayList<MusNote>();
