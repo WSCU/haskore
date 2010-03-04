@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.sound.midi.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The Functional Music project
@@ -18,24 +20,23 @@ public class Performance {
     //public BigRational absoluteTime;
     //Not to be confused with the instrument ArrayList in the MusNote class,
     //this one refers to the midi-numbers for instruments, not strings.
-    public ArrayList<Integer> instruments = new ArrayList<Integer>();
+    public static ArrayList<Integer> instruments = new ArrayList<Integer>();
 
     /*public Performance() {
-        notes = new ArrayList<MusNote>();
-        instruments = new ArrayList<Integer>();
+    notes = new ArrayList<MusNote>();
+    instruments = new ArrayList<Integer>();
     }
-/*
+    /*
     public Performance(ArrayList<MusNote> notes, BigRational time) {
-        this.notes = notes;
-//        absoluteTime = time;
-        instruments = new ArrayList<Integer>();
+    this.notes = notes;
+    //        absoluteTime = time;
+    instruments = new ArrayList<Integer>();
     }*/
-    public static void perform()
-    {
+    public static void perform() {
         notes = new ArrayList<MusNote>();
     }
-    public static void perform(Music myMusic)
-    {
+
+    public static void perform(Music myMusic) {
         notes = new ArrayList<MusNote>();
     }
 
@@ -60,7 +61,7 @@ public class Performance {
     }
 
     public void add(MusNote note) {
- //       note.absolute = absoluteTime;
+        //       note.absolute = absoluteTime;
         notes.add(note);
     }
 
@@ -264,11 +265,139 @@ public class Performance {
             stopMessage.setMessage(ShortMessage.NOTE_OFF, channel, note.pitch, note.velocity);
             //Short messages are then enxapsulated in MidiEvents and stuffed 
             //into an ArrayList<MidiEvent>.  These are usually sorted afterwards.
-            result.add(new MidiEvent(startMessage,(Music.timeSignature.times(note.absolute)).toInt()));
+            result.add(new MidiEvent(startMessage, (Music.timeSignature.times(note.absolute)).toInt()));
             result.add(new MidiEvent(stopMessage, ((note.absolute.plus(note.duration).times(Music.timeSignature))).toInt()));
         } catch (InvalidMidiDataException ex) {
             throw new Error();
         }
         return result;
+    }
+
+    /** Plays a midi file provided on command line */
+    public static void playMidi(String f) throws IOException {
+        String file = f;
+        if (!file.endsWith(".mid")) {
+            throw new IOException();
+        }
+        File midiFile = new File(file);
+        if (!midiFile.exists() || midiFile.isDirectory() || !midiFile.canRead()) {
+            throw new IOException();
+        }
+        // Play once
+        try {
+            Sequencer sequencer = MidiSystem.getSequencer();
+            sequencer.setSequence(MidiSystem.getSequence(midiFile));
+            sequencer.open();
+            sequencer.start();
+            while (true) {
+                if (sequencer.isRunning()) {
+                    try {
+                        Thread.sleep(1000); // Check every second
+                    } catch (InterruptedException ignore) {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+            // Close the MidiDevice & free resources
+            sequencer.stop();
+            sequencer.close();
+        } catch (MidiUnavailableException mue) {
+            System.out.println("Midi device unavailable!");
+        } catch (InvalidMidiDataException imde) {
+            System.out.println("Invalid Midi data!");
+        } catch (IOException ioe) {
+            System.out.println("I/O Error!");
+        }
+
+    }
+
+    public static void main(String[] args) {
+        try {
+            MusNote.initInstruments();
+        } catch (InvalidMidiDataException ex) {
+            Logger.getLogger(MusNote.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MusNote.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        MusNote note1 = new MusNote(15, 5, "Piano", new BigRational("1"));
+        MusNote note2 = new MusNote(20, 5, "Piano", new BigRational("1"));
+        MusNote note3 = new MusNote(30, 5, "Piano", new BigRational("1"));
+        MusNote note4 = new MusNote(40, 5, "Piano", new BigRational("1"));
+        MusNote note5 = new MusNote(50, 5, "Piano", new BigRational("1"));
+        MusNote note6 = new MusNote(60, 50, "Piano", new BigRational("1"));
+        MusAfter tog0 = new MusAfter(note5, note6);
+        MusAfter tog1 = new MusAfter(note4, tog0);
+        MusAfter tog2 = new MusAfter(note3, tog1);
+        MusAfter tog3 = new MusAfter(note2, tog2);
+        MusAfter tog4 = new MusAfter(note1, tog3);
+        
+        MusMod mo = (MusMod)Music.up(tog4, 20);
+        Performance result = new Performance();
+        //result.perform(after);
+        BigRational finish = mo.perform(BigRational.ZERO, new Modifier());
+
+        File outputFile = new File("midop.mid");
+        Sequence sequence = null;
+        try {
+            sequence = new Sequence(Sequence.PPQ, 1);
+        } catch (InvalidMidiDataException e) {
+            e.printStackTrace();
+            System.out.println("Error in MidiFile Data");
+        }
+        Track track = sequence.createTrack();
+        for (MusNote n : notes) {
+            System.out.println(n.prettyPrint());
+            int du = n.duration.toInt();
+            int s = n.absolute.toInt();
+            track.add(createNoteOnEvent(n.pitch, s));
+            track.add(createNoteOffEvent(n.pitch, s + du));
+            System.out.println(" track.add(createNoteOnEvent(" + n.pitch + "," + s + ")\ntrack.add(createNoteOffEvent(" + n.pitch + "," + (s + du) + "));");
+
+        }
+
+        try {
+            MidiSystem.write(sequence, 0, outputFile);
+            playMidi(outputFile.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static MidiEvent createNoteOnEvent(int nKey, long lTick) {
+        return createNoteEvent(ShortMessage.NOTE_ON,
+                nKey,
+                70,
+                lTick);
+    }
+
+    private static MidiEvent createNoteOffEvent(int nKey, long lTick) {
+        return createNoteEvent(ShortMessage.NOTE_OFF,
+                nKey,
+                0,
+                lTick);
+    }
+
+    private static MidiEvent createNoteEvent(int nCommand,
+            int nKey,
+            int nVelocity,
+            long lTick) {
+        ShortMessage message = new ShortMessage();
+        try {
+            message.setMessage(nCommand,
+                    0, // always on channel 1
+                    nKey,
+                    nVelocity);
+
+        } catch (InvalidMidiDataException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        MidiEvent event = new MidiEvent(message,
+                lTick);
+
+        return event;
     }
 }

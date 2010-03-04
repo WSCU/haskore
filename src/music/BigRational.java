@@ -173,7 +173,13 @@ public class BigRational implements Comparable<BigRational> {
 
     public int toInt()
     {
-        return (int)toDouble();
+        //if(this.isZero())return 0;
+        int d = Integer.valueOf(this.den.toString());
+        int n = Integer.valueOf(this.num.toString());
+        
+        if(d == 1)return n;
+        double res = d/n;
+        return (int)Math.round(res);
     }
 
     // is this Rational object equal to y?
@@ -209,9 +215,9 @@ public class BigRational implements Comparable<BigRational> {
 
     // return a + b
     public BigRational plus(BigRational b) {
-        BigRational a = this;
-        BigInteger numerator   = a.num.multiply(b.den).add(b.num.multiply(a.den));
-        BigInteger denominator = a.den.multiply(b.den);
+
+        BigInteger numerator   = this.num.multiply(b.den).add(b.num.multiply(this.den));
+        BigInteger denominator = this.den.multiply(b.den);
         return new BigRational(numerator, denominator);
     }
 
@@ -242,6 +248,7 @@ public class BigRational implements Comparable<BigRational> {
 
         // 1/2 + 1/3 = 5/6
         x = new BigRational("3.14");
+
         System.out.println(x);
         y = new BigRational("2.2");
         System.out.println(y);
@@ -259,5 +266,9 @@ public class BigRational implements Comparable<BigRational> {
         y = new BigRational(1, 9);
         z = x.plus(y);
         System.out.println(z);
+         int x1 = new BigRational("1").toInt();
+         int x2 = new BigRational("6").toInt();
+         int x3 = new BigRational("3").toInt();
+         System.out.println(x1+" "+x2+" "+x3);
     }
 }
