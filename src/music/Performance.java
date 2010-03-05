@@ -321,17 +321,22 @@ public class Performance {
         } catch (IOException ex) {
             Logger.getLogger(MusNote.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MusNote note1 = new MusNote(15, 5, "Piano", new BigRational("1"));
-        MusNote note2 = new MusNote(20, 5, "Piano", new BigRational("1"));
-        MusNote note3 = new MusNote(30, 5, "Piano", new BigRational("1"));
-        MusNote note4 = new MusNote(40, 5, "Piano", new BigRational("1"));
-        MusNote note5 = new MusNote(50, 5, "Piano", new BigRational("1"));
-        MusNote note6 = new MusNote(60, 50, "Piano", new BigRational("1"));
+        MusNote note1 = new MusNote(15, 5, "Vibes", new BigRational("1"));
+        MusNote note2 = new MusNote(20, 5, "Vibes", new BigRational("1"));
+        MusNote note3 = new MusNote(30, 5, "Vibes", new BigRational("1"));
+        MusNote note4 = new MusNote(40, 5, "Vibes", new BigRational("1"));
+        MusNote note5 = new MusNote(50, 5, "Vibes", new BigRational("1"));
+        MusNote note6 = new MusNote(60, 50, "Vibes", new BigRational("1"));
         MusAfter tog0 = new MusAfter(note5, note6);
         MusAfter tog1 = new MusAfter(note4, tog0);
         MusAfter tog2 = new MusAfter(note3, tog1);
         MusAfter tog3 = new MusAfter(note2, tog2);
         MusAfter tog4 = new MusAfter(note1, tog3);
+
+        MusNote nbc1 = new MusNote(35, 5, "Vibes", new BigRational("1"));
+        MusNote nbc2 = new MusNote(22, 5, "Vibes", new BigRational("1"));
+        MusNote nbc3 = new MusNote(46, 50, "Vibes", new BigRational("1"));
+        
         
         MusMod mo = (MusMod)Music.up(tog4, 20);
         Performance result = new Performance();
@@ -386,7 +391,7 @@ public class Performance {
         ShortMessage message = new ShortMessage();
         try {
             message.setMessage(nCommand,
-                    0, // always on channel 1
+                    10, // always on channel 1
                     nKey,
                     nVelocity);
 
@@ -399,5 +404,6 @@ public class Performance {
                 lTick);
 
         return event;
+
     }
 }
