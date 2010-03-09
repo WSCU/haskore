@@ -68,17 +68,11 @@ public class Performance {
     public Sequence makeMusic() {
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
-            synth.open();
-            Instrument[] instr = synth.getLoadedInstruments();
             Instrument[] avail = synth.getAvailableInstruments();
             for(Instrument i : avail){
                 System.out.println(i.getName());
             }
-            MidiChannel[] chans = synth.getChannels();
-            System.out.println(chans.length + " inst> " + instr.length);
             Sequence sequence = new Sequence(Sequence.PPQ, 2);
-            
-            
             Track track = sequence.createTrack();
             String prev = "";
             for (MusNote n : notes) {
@@ -86,12 +80,11 @@ public class Performance {
                 int s = n.absolute.toInt();
                 int dInst = 0;
                 int chan = 0;
-                    //System.out.println(prev +"  "+n.instrument );
                     for (Instrument ti : avail) {
                         if (n.instrument.equals(ti.getName()) ) {
                             if(!(n.instrument.equals(prev)))dInst++;
                             if (dInst < 17) {
-                                synth.loadInstrument(ti);
+                                //synth.loadInstrument(ti);
                                 chan = dInst;
                                 track.add(createNoteEvent(ShortMessage.PROGRAM_CHANGE,
                                         chan,ti.getPatch().getProgram(),n.velocity,s));
@@ -106,8 +99,6 @@ public class Performance {
                     track.add(createNoteOnEvent(n.pitch, chan, s));
                     track.add(createNoteOffEvent(n.pitch, chan, s + du));
                 }
-            
-            synth.close();
             return sequence;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -223,7 +214,7 @@ public class Performance {
     public static void main(String[] args) {
         String inst1 ="Piano";
         String inst2 ="Pizzicato Strings";
-        String inst3 = "Ensemble Strings";
+        String inst3 = "Brass Ensemble";
         MusNote note1 = new MusNote(15, 5, inst2, new BigRational("4"));
         MusNote note2 = new MusNote(20, 5, inst1, new BigRational("1"));
         MusNote note3 = new MusNote(30, 5, inst1, new BigRational("1"));
@@ -245,9 +236,9 @@ public class Performance {
         Performance result = new Performance();
         //result.perform(after);
         BigRational finish = mo.perform(BigRational.ZERO, new Modifier());
-        for (int i = 0; i < 100; i++) {
-            int f = (int) Math.floor(Math.random() * 50)+5;
-            MusNote note8 = new MusNote(f, 50, inst3, new BigRational("4"));
+        for (int i = 0; i < 20; i++) {
+            int f = (int) Math.floor(Math.random() * 50)+20;
+            MusNote note8 = new MusNote(f, 50, inst3, new BigRational("1"));
             note8.perform(finish, new Modifier());
             finish = finish.plus(note8.duration);
         }
