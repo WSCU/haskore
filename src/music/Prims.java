@@ -126,7 +126,23 @@ result.add(Symbol.toSymbol("=="), new Thunk(new ValFuncPrim(2,EqualsEqualsfn)));
        };
 result.add(Symbol.toSymbol("empty"), new Thunk(new ValFuncPrim(0,emptyfn)));
 
+Prim musafter = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+                ValMusic arg1 = args.get(0).asMusic();
+                ValMusic arg2 = args.get(1).asMusic();
+                return new ValMusic(new MusAfter(arg1.val,arg2.val));
+            }
+       };
+result.add(Symbol.toSymbol("&"), new Thunk(new ValFuncPrim(2,musafter)));
 
+Prim mustogether = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+                ValMusic arg1 = args.get(0).asMusic();
+                ValMusic arg2 = args.get(1).asMusic();
+                return new ValMusic(new MusTogether(arg1.val,arg2.val));
+            }
+       };
+result.add(Symbol.toSymbol("!"), new Thunk(new ValFuncPrim(2,mustogether)));
 
         //END
 

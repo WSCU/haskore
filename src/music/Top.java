@@ -33,6 +33,14 @@ public class Top {
             //assumes that every left hand side is a sple variable.
             for (Decl d : binds) {
                 Value result = userEnv.eval(d.LHS.asVar());
+                
+                if (result.isMusic()) {
+
+                    ValMusic temp = ((ValMusic) result);
+                    Performance band = new Performance();
+                    BigRational fin = temp.val.perform(BigRational.ZERO,new Modifier());
+                    band.perform();
+                }
                 results.add(new Pair(d.LHS.asVar().getBody(), result.toString()));
             }
         } catch (ExecutionError e) {
@@ -92,13 +100,9 @@ public class Top {
                 // if result is valMusic write a midi file other wise skip over
 
                 if (result.isMusic()) {
-                    //file name should be the same as the variable name in the ENV preformer
-//                    ValMusic temp = ((ValMusic) result);
-//
-//                    BigRational performer = temp.val.perform(new BigRational("0"), new Modifier());
-//                    performer.writeToFile(d.LHS.asVar().getBody() + ".midi");
-//                    System.out.println("Music: " + d.LHS.asVar().getBody() + "\n " + temp.val.prettyPrint());
-//                  performer.writeToFile("c:\\" + d.LHS.asVar().getBody() + ".midi");
+                    
+                    ValMusic temp = ((ValMusic) result);
+                    BigRational fin = temp.val.perform(BigRational.ZERO,new Modifier());
                 } else {
                     //skip over to next piece of result
                     System.out.println(d.LHS.asVar().getBody() + " Not Music");

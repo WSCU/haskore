@@ -264,4 +264,13 @@ public class TopTest {
         testEvaluatedDecls(result, "a", "0");
         testEvaluatedDecls(result, "b", "5");
     }
+
+    @Test
+    public void testMusic() {
+        String program = "m = a3 ! a4 ! a5 &(d4 ! d5 !d6)& (e3 ! b4 !d7);";
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        
+        
+    }
 }
