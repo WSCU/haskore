@@ -36,7 +36,7 @@ public class Performance {
     }*/
     public void perform() {
         try {
-            Sequencer sequencer = MidiSystem.getSequencer();
+            Sequencer sequencer = MidiSystem.getSequencer();//testing commit
             sequencer.setSequence(makeMusic());
             sequencer.open();
             sequencer.start();
