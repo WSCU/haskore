@@ -46,4 +46,9 @@ public class ExpList extends Exp {
         }
         return content + "]";
     }
+
+    @Override
+    public Value eval(Env e) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

@@ -42,7 +42,5 @@ public abstract class Exp extends ParsedObject {
         return false;
     }
 
-    public Value eval(Env e) {
-        throw new ExecutionError("Missing eval method");
-    }
+    public abstract Value eval(Env e);
 }

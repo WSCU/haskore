@@ -43,4 +43,19 @@ public class ExpIf extends Exp {
     public String print() {
         return "if " + testExp.print() + " then " + thenExp.print() + " else " + elseExp.print();
     }
+
+    @Override
+    public Value eval(Env e)
+    {
+        Value result;
+        Value test = testExp.eval(e);
+        if(!test.isBool())
+            throw new ExecutionError("Expected an if statement, but didn't get one.");
+        ValBool b = (ValBool)test;
+        if(b.val)
+            result = thenExp.eval(e);
+        else
+            result = elseExp.eval(e);
+        return result;
+    }
 }
