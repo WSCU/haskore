@@ -37,9 +37,9 @@ public class Top {
                 if (result.isMusic()) {
 
                     ValMusic temp = ((ValMusic) result);
-                    Performance band = new Performance();
-                    BigRational fin = temp.val.perform(BigRational.ZERO,new Modifier());
-                    band.perform();
+                    
+                    //BigRational fin = temp.val.perform(BigRational.ZERO,new Modifier());
+                    
                 }
                 results.add(new Pair(d.LHS.asVar().getBody(), result.toString()));
             }
@@ -52,64 +52,5 @@ public class Top {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
-        Symbol.init();
-//        File musProg = new File("C:\\Documents and Settings\\Casey\\My Documents\\Western\\MusicLand\\musProg.txt");
-//        File musProg = new File("s:\\music\\musProg.txt");
-          String prog = "x = 1;\ny = 2;\nz = x + y;";
-//        String prog = "f x = up 3 x; \ng = f c3;\n";
-//        String prog = "m = if (1 == 2) c3 d3;";
-//        String prog = "l = up (3 + 2) c3;";
-
-//        String prog = "f c m = if (c == 5) m (f (c + 1) (m & up m 2)); \n m = f 0 c3;";
-
-        StringReader converter = new StringReader(prog);
-//        StringReader converter = new StringReader(musProg);
-//        BufferedReader reader = new BufferedReader(new FileReader(musProg));
-        BufferedReader in = new BufferedReader(converter);
-//        Trace.trace = true;
-        Env top = Prims.topEnv();
-        EnvHash userEnv = new EnvHash(4000, top);
-        TokenStream t = new TokenStream();
-
-//            ArrayList<LexerError> errs = Lexer.lexFile("s:\\music\\musProg.txt");
-        //used for single line tesxting
-        ArrayList<LexerError> errs = Lexer.lexString(prog, "music error");
-        // Check errs and continue if empty
-
-        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
-
-        for (Decl d : binds) {
-            System.out.println(d.LHS.asVar().getBody() + " = " + d.RHS.print());
-        }
-        // Catch parse errors
-        // Env userEnv = Env.recBinds(top, binds);
-        // Make a thunk out of the rhs
-
-        // Create top level env
-        for (Decl d : binds) {
-            userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
-        }
-        // Need to remember the names on the lhs of the decls
-        // Get first declaraction and find rhs
-        try {
-            for (Decl d : binds) {
-                Value result = userEnv.eval(d.LHS.asVar());
-                System.out.println("Value result:" + result.toString());
-
-                // if result is valMusic write a midi file other wise skip over
-
-                if (result.isMusic()) {
-                    
-                    ValMusic temp = ((ValMusic) result);
-                    BigRational fin = temp.val.perform(BigRational.ZERO,new Modifier());
-                } else {
-                    //skip over to next piece of result
-                    System.out.println(d.LHS.asVar().getBody() + " Not Music");
-                }
-            }
-        } catch (ExecutionError e) {
-            System.out.println("Execution Error: " + e.msg);
-        }
-    }
+  
 }
