@@ -173,14 +173,10 @@ public class BigRational implements Comparable<BigRational> {
     }
 
     public int toInt()
-    {
-        //if(this.isZero())return 0;
-        int d = Integer.valueOf(this.den.toString());
-        int n = Integer.valueOf(this.num.toString());
-        
-        if(d == 1)return n;
-        double res = d/n;
-        return (int)Math.round(res);
+    {        
+        double d = Double.valueOf(this.den.toString());
+        double n = Double.valueOf(this.num.toString());        
+        return (int) Math.round(n/d);
     }
 
     // is this Rational object equal to y?
