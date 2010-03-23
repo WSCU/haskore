@@ -21,8 +21,21 @@ public class Performance {
     //public BigRational absoluteTime;
 
 
-    public Performance(ArrayList<MusNote> n) {
-        notes = n;
+    public Performance(Music n) {
+        this.notes =  new ArrayList<MusNote>();
+        n.perform(BigRational.ZERO, new Modifier(), notes);
+    }
+
+    public boolean isIn(MusNote n)
+    {
+        for(MusNote i : this.notes)
+        {
+            boolean p = i.pitch == n.pitch;
+            boolean t = i.absolute.equals(n.absolute);
+            boolean d = i.duration.equals(n.duration);
+            if(p && t && d)return true;
+        }
+        return false;
     }
     /*
     public Performance(ArrayList<MusNote> notes, BigRational time) {
@@ -64,8 +77,12 @@ public class Performance {
             for(Instrument i : avail){
                 System.out.println(i.getName());
             }
-            Sequence sequence = new Sequence(Sequence.PPQ, 2);
+            Sequence sequence = new Sequence(Sequence.SMPTE_25, 2);
+
+
+
             Track track = sequence.createTrack();
+
             String prev = "";
             for (MusNote n : notes) {
                 int du = n.duration.toInt();
@@ -96,46 +113,13 @@ public class Performance {
             throw new Error("Midi Instrument error!");
         }
     }
-    public static boolean compare(Performance a, Performance b) {
-        ArrayList<MusNote> x = new ArrayList<MusNote>(a.notes);
-        ArrayList<MusNote> y = new ArrayList<MusNote>(b.notes);
-        for (int i = 0; i < x.size(); i++) {
-            boolean isIn = false;
-            for (int j = 0; j < y.size(); j++) {
-                if (x.get(i).compare(y.get(j))) {
-                    isIn = true;
-                    
-                    y.remove(j);
-                    break;
-                }
-            }
-            if (!isIn) {
-                return false;
-            }
-            isIn = false;
-        }
-        return true;
-    }
 
     public void add(MusNote note) {
         //       note.absolute = absoluteTime;
         notes.add(note);
     }
 
-    public void addAbs(MusNote note) {
-        int index = 0;
-        for (int i = 0; i < notes.size(); i++) {
-            //BigRational compare a >
-            if (note.absolute.compareTo(notes.get(i).absolute) == 1) {
-                index = i - 1;
-                break;
-            }
-        }
-        //ensures non-zero array position.
-        index = Math.max(index, 0);
-        notes.add(index, note);
-    }
-    /**
+  /**
      * ~~~~~~~~~~
      * I have decided to make this private in this class, as I can't think of 
      * any reason why you'd want to fiddle with this outside of writing to a
@@ -206,38 +190,27 @@ public class Performance {
     public static void main(String[] args) {
         String inst1 ="Piano";
         String inst2 ="Pizzicato Strings";
-        String inst3 = "Xylophone";
-        MusNote note1 = new MusNote(60, 70, inst3, new BigRational("10"));
-        MusNote note2 = new MusNote(20, 70, inst1, new BigRational("1/2"));
-        MusNote note3 = new MusNote(30, 70, inst1, new BigRational("1/2"));
-        MusNote note4 = new MusNote(40, 70, inst1, new BigRational("1/2"));
-        MusNote note5 = new MusNote(50, 70, inst1, new BigRational("1/2"));
-        MusNote note6 = new MusNote(60, 70, inst1, new BigRational("1"));
+        String inst3 = "Music Box";
+        MusNote note1 = new MusNote(60, 70, inst3, new BigRational("50"));
+        MusNote note2 = new MusNote(20, 70, inst1, new BigRational("75"));
+        MusNote note3 = new MusNote(30, 70, inst1, new BigRational("100"));
+        MusNote note4 = new MusNote(40, 70, inst1, new BigRational("100"));
+        MusNote note5 = new MusNote(50, 70, inst1, new BigRational("25"));
+        MusNote note6 = new MusNote(60, 70, inst1, new BigRational("25"));
         MusAfter tog0 = new MusAfter(note5, note6);
         MusAfter tog1 = new MusAfter(note4, tog0);
         MusAfter tog2 = new MusAfter(note3, tog1);
         MusAfter tog3 = new MusAfter(note2, tog2);
         MusAfter tog4 = new MusAfter(note1, tog3);
 
-        MusNote nbc1 = new MusNote(35, 70, inst1, new BigRational("1"));
-        MusNote nbc2 = new MusNote(22, 70, inst1, new BigRational("1"));
-        MusNote nbc3 = new MusNote(46, 50, inst1, new BigRational("1"));
+        
 
 
         MusMod mo = (MusMod) Music.up(tog4, 20);
         
         //result.perform(after);
         ArrayList<MusNote> notes = new ArrayList<MusNote>();
-        Performance result = new Performance(notes);
-        BigRational finish = mo.perform(BigRational.ZERO, new Modifier(), notes);
-        for (int i = 0; i < 20; i++) {
-            int f = (int) Math.floor(Math.random() * 50)+20;
-            MusNote note8 = new MusNote(f, 70, inst3, new BigRational("1"));
-            note8.perform(finish, new Modifier(), notes);
-            finish = finish.plus(note8.duration);
-        }
-
-
+        Performance result = new Performance(tog4);
         result.perform();
     }
 }

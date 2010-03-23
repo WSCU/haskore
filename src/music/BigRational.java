@@ -72,7 +72,7 @@ public class BigRational implements Comparable<BigRational> {
     //Turns a double (3.55) into 355/100 then reduces with init(*,*)
     private void takeDoubleString(String numerator)
     {
-        System.out.println(numerator);
+        
         String[] dubstr = numerator.split("\\.");
         String  back = dubstr[1];
             //Making the denominator
@@ -263,7 +263,7 @@ public class BigRational implements Comparable<BigRational> {
         y = new BigRational(1, 9);
         z = x.plus(y);
         System.out.println(z);
-         int x1 = new BigRational("1").toInt();
+         int x1 = new BigRational('4').toInt();
          int x2 = new BigRational("6").toInt();
          int x3 = new BigRational("3").toInt();
          System.out.println(x1+" "+x2+" "+x3);
