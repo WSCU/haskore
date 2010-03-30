@@ -293,17 +293,17 @@ public class ParserTest {
 //        Parser.requirePunct(s);
 //    }
 
-    @Test
-    public void testRequirePunct() {
-        String program = "mm=34.56+33;";
-        String fname = "ParserTest3";
-        ArrayList errors = Lexer.lexString(program, fname);
-        Symbol s = Symbol.equals;
-        Parser.setToks(Lexer.tokens);
-        System.out.println(Parser.toks.next());
-        System.out.println(Parser.toks.next());
-        Parser.requirePunct(s);
-    }
+//    @Test
+//    public void testRequirePunct() {
+//        String program = "mm=34.56+33;";
+//        String fname = "ParserTest3";
+//        ArrayList errors = Lexer.lexString(program, fname);
+//        Symbol s = Symbol.equals;
+//        Parser.setToks(Lexer.tokens);
+//        System.out.println(Parser.toks.next());
+//        System.out.println(Parser.toks.next());
+//        Parser.requirePunct(s);
+//    }
 
 
     private void compareParsedObjects(ParsedObject expected, ParsedObject actual) {
@@ -318,7 +318,8 @@ public class ParserTest {
                 System.out.println("Expected: " + e.expected + "\nRecieved: " + e.recieved);
             }
         }
-        Parser.setToks(Lexer.tokens);
+
+        Parser p = new Parser(Lexer.lexString(program));
     }
 //    @Test
 //    public void testParseExp() {

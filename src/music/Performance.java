@@ -196,7 +196,9 @@ public class Performance {
         //MusNote note4 = new MusNote(40, 70, inst1, new BigRational("1/16"));
         MusNote note5 = new MusNote(50, 80, inst2, new BigRational("1"));
         MusNote note6 = new MusNote(60, 70, inst1, new BigRational("4/4"));
-        MusAfter tog0 = new MusAfter(note5, note6);
+        MusNote c = Music.note("c4", new BigRational("1"), 80, inst3);
+        MusAfter tog0 = new MusAfter(c,Music.note("a5", new BigRational("1"), 80, inst3)
+                );
         //MusAfter tog1 = new MusAfter(note4, tog0);
         //MusAfter tog2 = new MusAfter(note3, tog1);
         //MusAfter tog3 = new MusAfter(note2, tog2);

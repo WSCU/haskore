@@ -297,9 +297,9 @@ public class Main extends javax.swing.JFrame {
             runProgramButton.setText("Edit Program");
             program_text = display_field.getText();
 
-            Lexer lex = new Lexer();
-            lex.lexString(program_text, "Testing GUI");
-            HTML = HTMLObject.generate(lex.tokens);
+            
+            
+            HTML = HTMLObject.generate(Lexer.lexString(program_text));
             display_field.setContentType("text/html");
             display_field.setText(HTML);
             display_field.setEditable(false);

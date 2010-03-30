@@ -23,10 +23,10 @@ public class Top {
         BufferedReader in = new BufferedReader(converter);
         Env top = Prims.topEnv();
         EnvHash userEnv = new EnvHash(4000, top);
-        Lexer tokens = new Lexer();
+        
         //Pay attention to lex errors and to parse errors.
-        Parser parser = new Parser();
-        ArrayList<Decl> binds = parser.parseDecls(tokens.lexString(program, "why"));
+        
+        ArrayList<Decl> binds = Parser.parseDecls(Lexer.lexString(program));
         for (Decl d : binds) {
             userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
         }

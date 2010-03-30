@@ -26,8 +26,8 @@ public class Place {
      * @param line line number in the file
      * @param col column number in the line
      */
-    public Place(String file, int line, int col) {
-        this.file = file;
+    public Place(int line, int col) {
+        
         this.line = line;
         this.col = col;
     }
