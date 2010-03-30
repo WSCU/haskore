@@ -40,7 +40,7 @@ result.add(Symbol.toSymbol("volume"), new Thunk(new ValFuncPrim(2,volumefn)));
 
   Prim ifMusicfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
-                ValBool arg0 = args.get(0).asBool();
+                ValNum arg0 = args.get(0).asNum();
                  Thunk arg1 = args.get(1);
                  Thunk arg2 = args.get(2);
                 return (Lib.ifMusic(arg0, arg1, arg2));
@@ -165,3 +165,4 @@ result.add(Symbol.toSymbol("!"), new Thunk(new ValFuncPrim(2,mustogether)));
         return result;
     }
 }
+
