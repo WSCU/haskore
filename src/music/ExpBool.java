@@ -10,7 +10,7 @@ public class ExpBool extends Exp{
 
     public ExpBool(Token body) {
         this.body = body;
-        this.value = new ValBool(body.body);
+        this.value = new ValBool(body.symbol == Symbol.trueKeyword);
     }
 
     @Override

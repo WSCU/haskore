@@ -50,7 +50,7 @@ public class ExpIf extends Exp {
         Value result;
         Value test = testExp.eval(e);
         if(!test.isBool())
-            throw new ExecutionError("Expected an if statement, but didn't get one.");
+            throw new ExecutionError("Expected a boolean in if statement test, but didn't get one.");
         ValBool b = (ValBool)test;
         if(b.val)
             result = thenExp.eval(e);

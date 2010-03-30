@@ -8,7 +8,7 @@ public class Prims {
         EnvHash result = new EnvHash(1000, null);
         // 1st argument should be roughly four times the number of
         // primatives in the system
-        
+
         Prim upfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
                 ValNum arg1 = args.get(0).asNum();
@@ -40,7 +40,7 @@ result.add(Symbol.toSymbol("volume"), new Thunk(new ValFuncPrim(2,volumefn)));
 
   Prim ifMusicfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
-                ValNum arg0 = args.get(0).asNum();
+                ValBool arg0 = args.get(0).asBool();
                  Thunk arg1 = args.get(1);
                  Thunk arg2 = args.get(2);
                 return (Lib.ifMusic(arg0, arg1, arg2));
@@ -146,7 +146,7 @@ result.add(Symbol.toSymbol("!"), new Thunk(new ValFuncPrim(2,mustogether)));
 
         //END
 
-        
+
         String[] letters = {"c","d","e","f","g","a","b"};
         for (int i = 0; i < letters.length; i++) {
             for (int j = 1; j <= 9; j++) {
