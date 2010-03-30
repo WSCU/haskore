@@ -17,12 +17,11 @@ import static org.junit.Assert.*;
  * Testing in the evaluation mechanisms.
  */
 public class TopTest {
-
     public TopTest() {
     }
 
     @BeforeClass
-    public static void setUpClass() throws Exception {
+    public static void setUpClass() throws Exception {                
         Symbol.init();
     }
 
@@ -49,7 +48,7 @@ public class TopTest {
      * @param LHS This is the LHS to test the value of
      * @param RHS The expected value. The strings 1 and 1.0 are the same.
      */
-    private void testEvaluatedDecls(ArrayList<Pair<String, String>> list, String LHS, String RHS) {
+    private void testEvaluatedDecls(ArrayList<Pair<String, Value>> list, String LHS, String RHS) {
         boolean varFound = false;
         for (Pair p1 : list) {
             if (p1.first.equals(LHS)) {
@@ -66,6 +65,66 @@ public class TopTest {
             fail(LHS + "was not found in " + list);
         }
     }
+    private void testMusicPresence(ArrayList<Pair<String, Value>> list, String musicName, String note, String time){
+        for(Pair p: list){
+            if(p.first.equals(musicName) && ((Value)p.second).isMusic()){
+                ValMusic vm = (ValMusic)p.second;
+                Music music = vm.val;
+                Performance perf1 = new Performance(music);
+
+                char letter = note.charAt(0);
+                int octave = Integer.parseInt(""+note.charAt(1));
+                if (note.length() == 3){/*do something for sharps and flats*/}
+                int pitch = 0;
+                switch (letter) {
+                    case 'a': pitch = 10 ; break;
+                    case 'b': pitch = 12 ; break;
+                    case 'c': pitch = 1 ; break;
+                    case 'd': pitch = 3 ; break;
+                    case 'e': pitch = 5 ; break;
+                    case 'f': pitch = 6 ; break;
+                    case 'g': pitch = 8 ; break;
+                }
+                switch(octave) {
+                    case 2: pitch += 12; break;
+                    case 3: pitch += 24; break;
+                    case 4: pitch += 36; break;
+                    case 5: pitch += 48; break;
+                    case 6: pitch += 60; break;
+                    case 7: pitch += 72; break;
+                    case 8: pitch += 84; break;
+                    case 9: pitch += 96; break;
+                }
+                MusNote ex1 = new MusNote(pitch);
+                ex1.absolute = new BigRational(time);
+                if(!perf1.isIn(ex1)){
+                    fail(note + " was not found in the performance at time " + time);
+                }
+            }
+        }
+    }
+
+// a3 was a 34
+// a2 was 22
+// a1 was 10, b1 was 12, c1 was 1, d1 was 3, e1 was 5, f1 was 6, g1 was 8
+// b2 was 24, c2 was 13, d2 was be 15, e2 was be 17, f2 was 18, g2 was 20
+// a1s was 334
+// a1f was 178
+    @Test
+    public void testMusic() {
+        String program = "m = a3 ! a2;";
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        testMusicPresence(result, "m", "a2", "0");
+    }
+    @Test
+    public void testMusic2() {
+        String program = "m = a3 & a2;";
+        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+        ArrayList result = Top.evaluateProgram(program);
+        testMusicPresence(result, "m", "a2", "1");
+    }
+
 
     @Test
     public void testEvaluateProgram() {
@@ -196,10 +255,15 @@ public class TopTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void testEval9() {
         //What is going on with this test?
-        String program = "f c m = if (c == 5) m (f (c + 1) (m ! up m 2)); \n m = f 0 c3;";
-        fail("can't test music yet");
+        //String program = "f c m = if (c == 5) m (f (c + 1) (m ! up m 2)); \n m = f 0 c3;";
+        String program = " m = c3; k = m & d2;";
+        ArrayList result = Top.evaluateProgram(program);
+        testEvaluatedDecls(result, "m", "25,1,0");
+        testEvaluatedDecls(result, "m", "25,1,1");
+        //fail("can't test music yet");
     }
 
     @Test
@@ -263,14 +327,5 @@ public class TopTest {
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "0");
         testEvaluatedDecls(result, "b", "5");
-    }
-
-    @Test
-    public void testMusic() {
-        String program = "m = a3 ! a4 ! a5 &(d4 ! d5 !d6)& (e3 ! b4 !d7);";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        
-        
     }
 }

@@ -17,9 +17,9 @@ public class Top {
      * @param program
      * @return List of definition names and their evaluated
      */
-    public static ArrayList<Pair<String, String>> evaluateProgram(String program) {
+    public static ArrayList<Pair<String, Value>> evaluateProgram(String program) {
         StringReader converter = new StringReader(program);
-        ArrayList<Pair<String, String>> results = new ArrayList<Pair<String, String>>();
+        ArrayList<Pair<String, Value>> results = new ArrayList<Pair<String, Value>>();
         BufferedReader in = new BufferedReader(converter);
         Env top = Prims.topEnv();
         EnvHash userEnv = new EnvHash(4000, top);
@@ -32,27 +32,13 @@ public class Top {
         try {
             //assumes that every left hand side is a sple variable.
             for (Decl d : binds) {
-                Value result = userEnv.eval(d.LHS.asVar());
-                
-                if (result.isMusic()) {
 
-                    ValMusic temp = ((ValMusic) result);
-                    
-                    //BigRational fin = temp.val.perform(BigRational.ZERO,new Modifier());
-                    
-                }
-                results.add(new Pair(d.LHS.asVar().getBody(), result.toString()));
+                Value result = userEnv.eval(d.LHS.asVar());                
+                results.add(new Pair(d.LHS.asVar().getBody(), result));
             }
         } catch (ExecutionError e) {
             System.out.println("Execution Error: " + e.msg);
         }
         return results;
     }
-
-    
-
-    /**
-     * @param args the command line arguments
-     */
-  
 }
