@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
  * @author austin
  */
 public class LexerTest {
+    private Lexer blex;
 
     public LexerTest() {
     }
@@ -35,11 +36,12 @@ public class LexerTest {
 
     @Before
     public void setUp() {
+         blex = new Lexer();
     }
 
     @After
     public void tearDown() {
-        Lexer.error = new ArrayList<LexerError>();
+       
     }
 
     @Test
@@ -58,11 +60,8 @@ public class LexerTest {
 
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        ArrayList errors = Lexer.lexString(program, fname);
-        System.out.println(errors);
-        System.out.println(Lexer.tokens);
-        assertEquals(new ArrayList(), errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
     @Test
@@ -72,9 +71,9 @@ public class LexerTest {
         TokenStream expResult = new TokenStream();
         expResult.addToken(new Token(Symbol.toSymbol(""), "    ", new Place(fname, 0, 0), TokenType.whiteToken));
         expResult.addToken(Token.eof);
-        ArrayList errors = Lexer.lexString(program, fname);
-        assertEquals(new ArrayList(), errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(expResult);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
     /**
@@ -90,9 +89,9 @@ public class LexerTest {
         expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 1), TokenType.whiteToken));
         expResult.addToken(new Token(Symbol.toSymbol("b"), "b", new Place(fname, 0, 2), TokenType.varToken));
         expResult.addToken(Token.eof);
-        ArrayList errors = Lexer.lexString(program, fname);
-        assertEquals(new ArrayList(), errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(expResult);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
     /*
@@ -105,9 +104,9 @@ public class LexerTest {
         TokenStream expResult = new TokenStream();
         expResult.addToken(new Token(Symbol.toSymbol("3.1"), "3.1", new Place(fname, 0, 0), TokenType.numberToken));
         expResult.addToken(Token.eof);
-        ArrayList errors = Lexer.lexString(program, fname);
-        assertEquals(new ArrayList(), errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(expResult);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
     @Test
@@ -124,11 +123,9 @@ public class LexerTest {
         expResult.addToken(new Token(Symbol.toSymbol("h"), "h", new Place(fname, 0, 7), TokenType.varToken));
         expResult.addToken(new Token(Symbol.toSymbol(")"), ")", new Place(fname, 0, 8), TokenType.puncToken));
         expResult.addToken(Token.eof);
-        ArrayList errors = Lexer.lexString(program, fname);
-         System.out.println(errors);
-        System.out.println(Lexer.tokens);
-        assertEquals(new ArrayList(), errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(expResult);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
     @Test
@@ -140,9 +137,9 @@ public class LexerTest {
             expResult.addToken(new Token(Symbol.toSymbol("" + program.charAt(i)), "" + program.charAt(i), new Place(fname, 0, i), TokenType.puncToken));
         }
         expResult.addToken(Token.eof);
-        ArrayList errors = Lexer.lexString(program, fname);
-        assertEquals(new ArrayList(), errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(expResult);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
     @Test
@@ -158,9 +155,9 @@ public class LexerTest {
         expResult.addToken(new Token(null, "--more comment", new Place(fname, 1, 0), TokenType.whiteToken));
         expResult.addToken(new Token(Symbol.toSymbol("389384"), "389384", new Place(fname, 2, 0), TokenType.numberToken));
         expResult.addToken(Token.eof);
-        ArrayList errors = Lexer.lexString(program, fname);
-        assertEquals(new ArrayList(), errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(expResult);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
     @Test
@@ -170,13 +167,12 @@ public class LexerTest {
         TokenStream expResult = new TokenStream();
         expResult.addToken(new Token(Symbol.toSymbol("a"), "a", new Place(fname, 0, 0), TokenType.varToken));
         expResult.addToken(new Token(Symbol.toSymbol("b"), "b", new Place(fname, 1, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("◄"), "◄", new Place(fname, 1, 1), TokenType.errorToken));
         expResult.addToken(new Token(Symbol.toSymbol("34"), "34", new Place(fname, 1, 2), TokenType.numberToken));
         expResult.addToken(Token.eof);
-        ArrayList errors = Lexer.lexString(program, fname);
-        ArrayList expectedErrors = new ArrayList();
-        expectedErrors.add(new LexerError("◄", "a valid character", 1, 1 + 1,fname));
-        compareErrorLists(expectedErrors, errors);
-        compareTokenStreams(expResult, Lexer.tokens);
+        System.out.println(expResult);
+        System.out.println(blex.lexString(program, fname));
+        compareTokenStreams(expResult, blex.tokens);
     }
 
 

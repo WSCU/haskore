@@ -31,10 +31,13 @@ public class Main extends javax.swing.JFrame {
             whiteKeys.add(temp);
         }
         //create the 5 black keys
+
         for (int i = 0; i < 5; i++) {
-            int position = keyboard.getWidth() / 7 - 3;
             int width = (int) (keyboard.getWidth() / 7 * .75);
             int height = keyboard.getHeight() / 2;
+            int placement = i;
+            
+            int position = (keyboard.getWidth()/7)+placement;
             PianoKey temp = new PianoKeyBlack(i, position * (i + 1), 0, width, height);
             blackKeys.add(temp);
         }
@@ -293,11 +296,14 @@ public class Main extends javax.swing.JFrame {
         if (runProgramButton.getText().equals("Run Program")) {
             runProgramButton.setText("Edit Program");
             program_text = display_field.getText();
-            ArrayList<LexerError> lexerror = Lexer.lexString(program_text, "Testing GUI");
-            HTML = HTMLObject.generate(Lexer.tokens);
+
+            Lexer lex = new Lexer();
+            lex.lexString(program_text, "Testing GUI");
+            HTML = HTMLObject.generate(lex.tokens);
             display_field.setContentType("text/html");
             display_field.setText(HTML);
             display_field.setEditable(false);
+            
         } else {
             runProgramButton.setText("Run Program");
             display_field.setEditable(true);

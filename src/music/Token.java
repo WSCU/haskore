@@ -102,6 +102,11 @@ public class Token {
         return isType(TokenType.opToken);
     }
 
+    public boolean isError() {
+        return isType(TokenType.errorToken);
+    }
+
+
     public boolean isMusic() {
         String AtoG = "abcdefg";
         String numbers = "123456789";

@@ -17,15 +17,16 @@ public class Top {
      * @param program
      * @return List of definition names and their evaluated
      */
-    public static ArrayList<Pair<String, Value>> evaluateProgram(String program) {
+    public ArrayList<Pair<String, Value>> evaluateProgram(String program) {
         StringReader converter = new StringReader(program);
         ArrayList<Pair<String, Value>> results = new ArrayList<Pair<String, Value>>();
         BufferedReader in = new BufferedReader(converter);
         Env top = Prims.topEnv();
         EnvHash userEnv = new EnvHash(4000, top);
-        ArrayList<LexerError> errs = Lexer.lexString(program, "music error");
+        Lexer tokens = new Lexer();
         //Pay attention to lex errors and to parse errors.
-        ArrayList<Decl> binds = Parser.parseDecls(Lexer.tokens);
+        Parser parser = new Parser();
+        ArrayList<Decl> binds = parser.parseDecls(tokens.lexString(program, "why"));
         for (Decl d : binds) {
             userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
         }

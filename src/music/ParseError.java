@@ -4,7 +4,7 @@
  */
 package music;
 
-public class ParseError extends RuntimeException {
+public class ParseError extends Exception {
 
     public String error;
     public Token token;

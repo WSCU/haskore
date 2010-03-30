@@ -77,19 +77,15 @@ public class Performance {
             for(Instrument i : avail){
                 System.out.println(i.getName());
             }
-            Sequence sequence = new Sequence(Sequence.PPQ, 2);
-
-
-
+            Sequence sequence = new Sequence(Sequence.SMPTE_30, 2);
             Track track = sequence.createTrack();
-
             String prev = "";
-            BigRational muldur = new BigRational(4);
+            BigRational duration_multiplier = new BigRational(120);
             for (MusNote n : notes) {
-                int du = n.duration.times(muldur).toInt();
+                int du = n.duration.times(duration_multiplier).toInt();
                 //int du = n.duration.toInt();
-                System.out.println("MAGIC NUMBER "+ du);
-                int s = n.absolute.toInt();
+                int s = n.absolute.times(duration_multiplier).toInt();
+                System.out.println("MAGIC NUMBER "+ s +"--->"+du);
                 int dInst = 0;
                 int chan = 0;
                     for (Instrument ti : avail) {
@@ -182,7 +178,7 @@ public class Performance {
         }
 
         MidiEvent event = new MidiEvent(message,
-                lTick*120);
+                lTick);
 
 
 
@@ -198,8 +194,8 @@ public class Performance {
         //MusNote note2 = new MusNote(20, 70, inst1, new BigRational("1/2"));
         //MusNote note3 = new MusNote(30, 70, inst1, new BigRational("2/2"));
         //MusNote note4 = new MusNote(40, 70, inst1, new BigRational("1/16"));
-        MusNote note5 = new MusNote(50, 80, inst2, new BigRational("1/4"));
-        MusNote note6 = new MusNote(60, 70, inst1, new BigRational("1/4"));
+        MusNote note5 = new MusNote(50, 80, inst2, new BigRational("1"));
+        MusNote note6 = new MusNote(60, 70, inst1, new BigRational("4/4"));
         MusAfter tog0 = new MusAfter(note5, note6);
         //MusAfter tog1 = new MusAfter(note4, tog0);
         //MusAfter tog2 = new MusAfter(note3, tog1);
