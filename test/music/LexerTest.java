@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  * @author austin
  */
 public class LexerTest {
-    private Lexer blex;
+    
 
     public LexerTest() {
     }
@@ -36,7 +36,7 @@ public class LexerTest {
 
     @Before
     public void setUp() {
-         blex = new Lexer();
+         
     }
 
     @After
@@ -50,18 +50,18 @@ public class LexerTest {
         String program = "m = 34.56.func";
         String fname = "LexerTest3";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol("m"), "m", new Place(fname, 0, 0), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 1), TokenType.whiteToken));
-        expResult.addToken(new Token(Symbol.toSymbol("="), "=", new Place(fname, 0, 2), TokenType.opToken));
-        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 3), TokenType.whiteToken));
-        expResult.addToken(new Token(Symbol.toSymbol("34.56"), "34.56", new Place(fname, 0, 4), TokenType.numberToken));
-        expResult.addToken(new Token(Symbol.toSymbol("."), ".", new Place(fname, 0, 9), TokenType.opToken));
-        expResult.addToken(new Token(Symbol.toSymbol("func"), "func", new Place(fname, 0, 10), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("m"), "m", new Place( 0, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place( 0, 1), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol("="), "=", new Place( 0, 2), TokenType.opToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place( 0, 3), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol("34.56"), "34.56", new Place( 0, 4), TokenType.numberToken));
+        expResult.addToken(new Token(Symbol.toSymbol("."), ".", new Place( 0, 9), TokenType.opToken));
+        expResult.addToken(new Token(Symbol.toSymbol("func"), "func", new Place( 0, 10), TokenType.varToken));
 
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
     @Test
@@ -69,11 +69,11 @@ public class LexerTest {
         String program = "    ";
         String fname = "LexerTest1";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol(""), "    ", new Place(fname, 0, 0), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), "    ", new Place( 0, 0), TokenType.whiteToken));
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
     /**
@@ -85,13 +85,13 @@ public class LexerTest {
         String program = "a b";
         String fname = "LexerTest2";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol("a"), "a", new Place(fname, 0, 0), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 1), TokenType.whiteToken));
-        expResult.addToken(new Token(Symbol.toSymbol("b"), "b", new Place(fname, 0, 2), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("a"), "a", new Place( 0, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place( 0, 1), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol("b"), "b", new Place( 0, 2), TokenType.varToken));
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
     /*
@@ -102,11 +102,11 @@ public class LexerTest {
         String program = "3.1";
         String fname = "LexerTest3";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol("3.1"), "3.1", new Place(fname, 0, 0), TokenType.numberToken));
+        expResult.addToken(new Token(Symbol.toSymbol("3.1"), "3.1", new Place( 0, 0), TokenType.numberToken));
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
     @Test
@@ -114,18 +114,18 @@ public class LexerTest {
         String program = "c3! (2+h)";
         String fname = "LexerTest4";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol("c3"), "c3", new Place(fname, 0, 0), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol("!"), "!", new Place(fname, 0, 2), TokenType.opToken));
-        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 3), TokenType.whiteToken));
-        expResult.addToken(new Token(Symbol.toSymbol("("), "(", new Place(fname, 0, 4), TokenType.puncToken));
-        expResult.addToken(new Token(Symbol.toSymbol("2"), "2", new Place(fname, 0, 5), TokenType.numberToken));
-        expResult.addToken(new Token(Symbol.toSymbol("+"), "+", new Place(fname, 0, 6), TokenType.opToken));
-        expResult.addToken(new Token(Symbol.toSymbol("h"), "h", new Place(fname, 0, 7), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol(")"), ")", new Place(fname, 0, 8), TokenType.puncToken));
+        expResult.addToken(new Token(Symbol.toSymbol("c3"), "c3", new Place( 0, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("!"), "!", new Place( 0, 2), TokenType.opToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place( 0, 3), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol("("), "(", new Place( 0, 4), TokenType.puncToken));
+        expResult.addToken(new Token(Symbol.toSymbol("2"), "2", new Place( 0, 5), TokenType.numberToken));
+        expResult.addToken(new Token(Symbol.toSymbol("+"), "+", new Place( 0, 6), TokenType.opToken));
+        expResult.addToken(new Token(Symbol.toSymbol("h"), "h", new Place( 0, 7), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol(")"), ")", new Place( 0, 8), TokenType.puncToken));
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
     @Test
@@ -134,12 +134,12 @@ public class LexerTest {
         String fname = "LexerTest5";
         TokenStream expResult = new TokenStream();
         for (int i = 0; i < program.length(); i++) {
-            expResult.addToken(new Token(Symbol.toSymbol("" + program.charAt(i)), "" + program.charAt(i), new Place(fname, 0, i), TokenType.puncToken));
+            expResult.addToken(new Token(Symbol.toSymbol("" + program.charAt(i)), "" + program.charAt(i), new Place( 0, i), TokenType.puncToken));
         }
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
     @Test
@@ -147,17 +147,17 @@ public class LexerTest {
         String program = "c&d --comment!@*$(@+_\n--more comment\n389384";
         String fname = "LexerTest6";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol("c"), "c", new Place(fname, 0, 0), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol("&"), "&", new Place(fname, 0, 1), TokenType.opToken));
-        expResult.addToken(new Token(Symbol.toSymbol("d"), "d", new Place(fname, 0, 2), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place(fname, 0, 3), TokenType.whiteToken));
-        expResult.addToken(new Token(null, "--comment!@*$(@+_", new Place(fname, 0, 4), TokenType.whiteToken));
-        expResult.addToken(new Token(null, "--more comment", new Place(fname, 1, 0), TokenType.whiteToken));
-        expResult.addToken(new Token(Symbol.toSymbol("389384"), "389384", new Place(fname, 2, 0), TokenType.numberToken));
+        expResult.addToken(new Token(Symbol.toSymbol("c"), "c", new Place( 0, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("&"), "&", new Place( 0, 1), TokenType.opToken));
+        expResult.addToken(new Token(Symbol.toSymbol("d"), "d", new Place( 0, 2), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol(""), " ", new Place( 0, 3), TokenType.whiteToken));
+        expResult.addToken(new Token(null, "--comment!@*$(@+_", new Place( 0, 4), TokenType.whiteToken));
+        expResult.addToken(new Token(null, "--more comment", new Place( 1, 0), TokenType.whiteToken));
+        expResult.addToken(new Token(Symbol.toSymbol("389384"), "389384", new Place( 2, 0), TokenType.numberToken));
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
     @Test
@@ -165,14 +165,14 @@ public class LexerTest {
         String program = "a\nb◄34";
         String fname = "LexerTest7";
         TokenStream expResult = new TokenStream();
-        expResult.addToken(new Token(Symbol.toSymbol("a"), "a", new Place(fname, 0, 0), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol("b"), "b", new Place(fname, 1, 0), TokenType.varToken));
-        expResult.addToken(new Token(Symbol.toSymbol("◄"), "◄", new Place(fname, 1, 1), TokenType.errorToken));
-        expResult.addToken(new Token(Symbol.toSymbol("34"), "34", new Place(fname, 1, 2), TokenType.numberToken));
+        expResult.addToken(new Token(Symbol.toSymbol("a"), "a", new Place( 0, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("b"), "b", new Place( 1, 0), TokenType.varToken));
+        expResult.addToken(new Token(Symbol.toSymbol("◄"), "◄", new Place( 1, 1), TokenType.errorToken));
+        expResult.addToken(new Token(Symbol.toSymbol("34"), "34", new Place( 1, 2), TokenType.numberToken));
         expResult.addToken(Token.eof);
         System.out.println(expResult);
-        System.out.println(blex.lexString(program, fname));
-        compareTokenStreams(expResult, blex.tokens);
+        System.out.println(Lexer.lexString(program));
+        compareTokenStreams(expResult, Lexer.lexString(program));
     }
 
 
