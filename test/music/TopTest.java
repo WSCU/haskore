@@ -1,4 +1,4 @@
-package music;
+    package music;
 
 
 
@@ -303,7 +303,7 @@ public class TopTest {
 
     @Test
     public void testBools1() {
-        String program = "t = True; f = False; a = if(f == f) 0 5;";
+        String program = "t = True; f = False; a = if(f == f) then 0 else 5;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "0");

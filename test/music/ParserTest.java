@@ -309,17 +309,17 @@ public class ParserTest {
     private void compareParsedObjects(ParsedObject expected, ParsedObject actual) {
         assertTrue(expected.compareTo(actual));
     }
-
-    private void lexProgram(String program) {
-        ArrayList<LexerError> errs = Lexer.lexString(program, "ParserTest.java");
-        if (errs.size() > 0) {
-            System.out.println(errs.size() + " errors while lexing " + program);
-            for (LexerError e : errs) {
-                System.out.println("Expected: " + e.expected + "\nRecieved: " + e.recieved);
-            }
+    @Test
+    public void ParseProgram() {
+        TokenStream tok = Lexer.lexString("a=23");
+        ArrayList<Decl> d = Parser.parseDecls(tok);
+        for(Token i : tok.tokens)
+        {
+            System.out.println(i.body);
+            System.out.println(i.type);
         }
 
-        Parser p = new Parser(Lexer.lexString(program));
+        
     }
 //    @Test
 //    public void testParseExp() {

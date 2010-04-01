@@ -34,6 +34,15 @@ public class Token {
         this.type = type;
     }
 
+    public Token(Token e) {
+        this.symbol = e.symbol;
+        this.body = e.body;
+        this.place = e.place;
+        this.type = e.type;
+    }
+
+    
+
     /**
      * s
      * @return returns a string with the information of the body

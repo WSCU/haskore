@@ -17,7 +17,7 @@ public class Top {
      * @param program
      * @return List of definition names and their evaluated
      */
-    public ArrayList<Pair<String, Value>> evaluateProgram(String program) {
+    public static ArrayList<Pair<String, Value>> evaluateProgram(String program) {
         StringReader converter = new StringReader(program);
         ArrayList<Pair<String, Value>> results = new ArrayList<Pair<String, Value>>();
         BufferedReader in = new BufferedReader(converter);
