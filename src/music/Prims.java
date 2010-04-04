@@ -104,10 +104,13 @@ Prim modfn = new Prim() {
 result.add(Symbol.toSymbol("%"), new Thunk(new ValFuncPrim(2,modfn)));
 
   Prim EqualsEqualsfn = new Prim() {
-            public Value call(ArrayList<Thunk> args) {
-                //This is way to thunky for brett and I.
+            public Value call(ArrayList<Thunk> args) {               
                 Thunk arg0 = args.get(0);
                 Thunk arg1 = args.get(1);
+                // this evaluates arguments so we can see the values that are in the thunks
+                // must call eval before checking value types.
+                arg0.eval();
+                arg1.eval();
                 if(arg0.v.isBool() && arg1.v.isBool())
                     return new ValBool(Lib.compare(args.get(0).asBool()
                             , args.get(1).asBool()));
