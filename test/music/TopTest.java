@@ -110,98 +110,98 @@ public class TopTest {
 // b2 was 24, c2 was 13, d2 was be 15, e2 was be 17, f2 was 18, g2 was 20
 // a1s was 334
 // a1f was 178
-    @Test
-    public void testMusic() {
-        String program = "m = a3 ! a2;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testMusicPresence(result, "m", "a2", "0");
-    }
-    @Test
-    public void testMusic2() {
-        String program = "m = a3 & a2;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testMusicPresence(result, "m", "a2", "1");
-    }
-
-
-    @Test
-    public void testEvaluateProgram() {
-        String program = "x = 1/2;\ny = 1.5;\nz = y-x;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "x", "1/2");
-        testEvaluatedDecls(result, "y", "3/2");
-        testEvaluatedDecls(result, "z", "1");
-    }
-
-    @Test
-    public void testEvaluateProgram2() {
-        String program = "a = 10; b = 2; c = a - b;";
-        System.out.println("\nTesting evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "a", "10");
-        testEvaluatedDecls(result, "b", "2");
-        testEvaluatedDecls(result, "c", "8");
-    }
-
-    @Test
-    public void testEvaluateProgram3() {
-        String program = "a = 10; b = 2; c = a - b; d = (c + a) - b; e = a - d;";
-        System.out.println("\nTesting evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "a", "10");
-        testEvaluatedDecls(result, "b", "2");
-        testEvaluatedDecls(result, "c", "8");
-        testEvaluatedDecls(result, "d", "16");
-        testEvaluatedDecls(result, "e", "-6");
-    }
-
-    @Test
-    public void testEval() {
-        String program = "x = 1;\ny = 2;\nz = x + y;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "z", "3");
-    }
-
-    @Test
-    public void testEval2() {
-        String program = "x = 2+2;\ny = 2;\nz = x + y;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "z", "6");
-    }
-
-    @Test
-    public void testEval3() {
-        String program = "f x = x+1;\nz = f 4;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "z", "5");
-    }
-
-    @Test
-    public void testEval4() {
-        String program = "f x y = x+y;\nz = f 4 4;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "z", "8");
-    }
-
-// Factorial function
 //    @Test
-//    public void testEval5() {
-//        String program = "f 0 = 0;\nf x = x + (f (x-1));\nz = f 3;";
+//    public void testMusic() {
+//        String program = "m = a3 ! a2;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testMusicPresence(result, "m", "a2", "0");
+//    }
+//    @Test
+//    public void testMusic2() {
+//        String program = "m = a3 & a2;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testMusicPresence(result, "m", "a2", "1");
+//    }
+//
+//
+//    @Test
+//    public void testEvaluateProgram() {
+//        String program = "x = 1/2;\ny = 1.5;\nz = y-x;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "x", "1/2");
+//        testEvaluatedDecls(result, "y", "3/2");
+//        testEvaluatedDecls(result, "z", "1");
+//    }
+//
+//    @Test
+//    public void testEvaluateProgram2() {
+//        String program = "a = 10; b = 2; c = a - b;";
+//        System.out.println("\nTesting evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "a", "10");
+//        testEvaluatedDecls(result, "b", "2");
+//        testEvaluatedDecls(result, "c", "8");
+//    }
+//
+//    @Test
+//    public void testEvaluateProgram3() {
+//        String program = "a = 10; b = 2; c = a - b; d = (c + a) - b; e = a - d;";
+//        System.out.println("\nTesting evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "a", "10");
+//        testEvaluatedDecls(result, "b", "2");
+//        testEvaluatedDecls(result, "c", "8");
+//        testEvaluatedDecls(result, "d", "16");
+//        testEvaluatedDecls(result, "e", "-6");
+//    }
+//
+//    @Test
+//    public void testEval() {
+//        String program = "x = 1;\ny = 2;\nz = x + y;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "z", "3");
+//    }
+//
+//    @Test
+//    public void testEval2() {
+//        String program = "x = 2+2;\ny = 2;\nz = x + y;";
 //        System.out.println("\nTesting  evaluateProgram(" + program + ")");
 //        ArrayList result = Top.evaluateProgram(program);
 //        testEvaluatedDecls(result, "z", "6");
 //    }
+//
+//    @Test
+//    public void testEval3() {
+//        String program = "f x = x+1;\nz = f 4;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "z", "5");
+//    }
+//
+//    @Test
+//    public void testEval4() {
+//        String program = "f x y = x+y;\nz = f 4 4;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "z", "8");
+//    }
+//
+//// Factorial function
+////    @Test
+////    public void testEval5() {
+////        String program = "f 0 = 0;\nf x = x + (f (x-1));\nz = f 3;";
+////        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+////        ArrayList result = Top.evaluateProgram(program);
+////        testEvaluatedDecls(result, "z", "6");
+////    }
 
     @Test
     public void testEval5if() {
-        String program = "f x = if(x==0) 0 (x-1);\na = f 2;\nb = f 0;";
+        String program = "f x = if(x==0) then 0 else (x-1);\na = f 2;\nb = f 0;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "1");
@@ -211,60 +211,60 @@ public class TopTest {
 
     @Test
     public void testEval5if2() {
-        String program = "f x = if(x==0) (x-1) 0; z = f 3;";
+        String program = "f x = if(x==0) then (x-1) else 0; z = f 3;";
         System.out.println("\nTesting evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "z", "0");
     }
+//
+//    @Test
+//    public void testEval6() {
+//        String program = "f x 0 = 1;\nf x y = x+y;\nz = f 0 0;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "z", "1");
+//    }
 
-    @Test
-    public void testEval6() {
-        String program = "f x 0 = 1;\nf x y = x+y;\nz = f 0 0;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "z", "1");
-    }
+//    @Test
+//    public void testEvalLong() {
+//        String program = "f x y z = x+y+z;\n" +
+//                "f 3 4 5 = 8;\n" +
+//                "y = f 6 1 20;\n" +
+//                "z = f 3 4 5;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "y", "27");
+//        testEvaluatedDecls(result, "z", "8");
+//    }
 
-    @Test
-    public void testEvalLong() {
-        String program = "f x y z = x+y+z;\n" +
-                "f 3 4 5 = 8;\n" +
-                "y = f 6 1 20;\n" +
-                "z = f 3 4 5;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "y", "27");
-        testEvaluatedDecls(result, "z", "8");
-    }
-
-    @Test
-    public void testEval7() {
-        String program = "f 0 = 1;\nf x y = x+y;\nz = f 0;\ny = (f z) -3;";
-        System.out.println("\nTesting  evaluateProgram(" + program + ")");
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "z", "1");
-        testEvaluatedDecls(result, "y", "-2");
-    }
+//    @Test
+//    public void testEval7() {
+//        String program = "f 0 = 1;\nf x y = x+y;\nz = f 0;\ny = (f z) -3;";
+//        System.out.println("\nTesting  evaluateProgram(" + program + ")");
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "z", "1");
+//        testEvaluatedDecls(result, "y", "-2");
+//    }
 
     @Test
     public void testEval8() {
-        String program = "x = 2;\nm = if (x == 1) 2 1;";
+        String program = "x = 2;\nm = if (x == 1) then 2 else 1;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "m", "1");
     }
 
-    @Test
-    @SuppressWarnings("unchecked")
-    public void testEval9() {
-        //What is going on with this test?
-        //String program = "f c m = if (c == 5) m (f (c + 1) (m ! up m 2)); \n m = f 0 c3;";
-        String program = " m = c3; k = m & d2;";
-        ArrayList result = Top.evaluateProgram(program);
-        testEvaluatedDecls(result, "m", "25,1,0");
-        testEvaluatedDecls(result, "m", "25,1,1");
-        //fail("can't test music yet");
-    }
+//    @Test
+//    @SuppressWarnings("unchecked")
+//    public void testEval9() {
+//        //What is going on with this test?
+//        //String program = "f c m = if (c == 5) m (f (c + 1) (m ! up m 2)); \n m = f 0 c3;";
+//        String program = " m = c3; k = m & d2;";
+//        ArrayList result = Top.evaluateProgram(program);
+//        testEvaluatedDecls(result, "m", "25,1,0");
+//        testEvaluatedDecls(result, "m", "25,1,1");
+//        //fail("can't test music yet");
+//    }
 
     @Test
     public void testEvalmul() {
@@ -313,7 +313,7 @@ public class TopTest {
 
     @Test
     public void testBools2() {
-        String program = "t = True; f = False; a = if(f == f) 0 5; b = if(t == f) 0 5;";
+        String program = "t = True; f = False; a = if(f == f) then 0 else 5; b = if(t == f) then 0 else 5;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "0");
@@ -322,7 +322,7 @@ public class TopTest {
 
     @Test
     public void testBools3() {
-        String program = "a = if(True == True) 0 5; b = if(True == False) 0 5;";
+        String program = "a = if(True == True) then 0 else 5; b = if(True == False) then 0 else 5;";
         System.out.println("\nTesting  evaluateProgram(" + program + ")");
         ArrayList result = Top.evaluateProgram(program);
         testEvaluatedDecls(result, "a", "0");
