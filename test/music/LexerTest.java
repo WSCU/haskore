@@ -177,19 +177,7 @@ public class LexerTest {
 
 
 
-    private void compareErrorLists(ArrayList expected, ArrayList actual){
-        if(actual.size() != expected.size()){
-            fail("Number of errors in Expected and Actual ArrayLists are different");
-        }
-        for (int i = 0; i < actual.size(); i ++){
-            LexerError exp = (LexerError) expected.get(i);
-            LexerError act = (LexerError) actual.get(i);
-            assertEquals("LexerError.expected", exp.expected, act.expected);
-            assertEquals("LexerError.recieved", exp.recieved, act.recieved);
-            assertEquals("LexerError.place.col", exp.place.getCol(), act.place.getCol());
-            assertEquals("LexerError.place.line", exp.place.getLine(), act.place.getLine());
-        }
-    }
+   
     
    
 
