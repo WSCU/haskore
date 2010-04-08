@@ -11,13 +11,13 @@ package music;
  */
 public class reviewTools {
 
-    public static void HtmlRender(javax.swing.JEditorPane jEditorPane1, TokenStream toks)
+    public static void HtmlRender(javax.swing.JEditorPane pane, TokenStream toks)
     {
        String body = "";
        for(Token i : toks.tokens)
        {
             body.concat(i.body);
        }
-       jEditorPane1.setText(body);
+       pane.setText(body);
     }
 }

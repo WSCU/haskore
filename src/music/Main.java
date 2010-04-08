@@ -24,23 +24,7 @@ public class Main extends javax.swing.JFrame {
         display_field.addHyperlinkListener(hyperlinkListener);
 
         //create the 7 white keys
-        for (int i = 0; i < 7; i++) {
-            int width = keyboard.getWidth() / 7;
-            int height = keyboard.getHeight() - 2;
-            PianoKey temp = new PianoKeyWhite(i, width * i, 0, width, height);
-            whiteKeys.add(temp);
-        }
-        //create the 5 black keys
-
-        for (int i = 0; i < 5; i++) {
-            int width = (int) (keyboard.getWidth() / 7 * .75);
-            int height = keyboard.getHeight() / 2;
-            int placement = i;
-            
-            int position = (keyboard.getWidth()/7)+placement;
-            PianoKey temp = new PianoKeyBlack(i, position * (i + 1), 0, width, height);
-            blackKeys.add(temp);
-        }
+        
     }
 
     public class GPanel extends JPanel {
