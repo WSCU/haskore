@@ -2,6 +2,7 @@ package music;
 
 import music.*;
 import java.util.ArrayList;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -35,45 +36,61 @@ public class ParserTest {
     public void tearDown() {
     }
 
-//    @Test
-//    public void testParselhs() {
-//        System.out.println("parselhs");
-//        String program = "x=5";
-//        lexProgram(program);
-//        ArrayList<Pat> result = Parser.parselhs();
-//        Pat e = result.get(0);
-//        compareParsedObjects(e, new PatVar(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 1), TokenType.varToken)));
-//    }
-//
-//    /**
-//     * Test of parselhs method with program "f x=x+1"
-//     */
-//    @Test
-//    public void testParselhs2() {
-//        System.out.println("parselhs2");
-//        String program = "f x=x+1";
-//        lexProgram(program);
-//        ArrayList<Pat> result = Parser.parselhs();
-//        Pat e = result.get(0);
-//        compareParsedObjects(new PatVar(new Token(Symbol.toSymbol("f"), "f", new Place("testParsePat", 0, 1), TokenType.varToken)), e);
-//        e = result.get(1);
-//        compareParsedObjects(new PatVar(new Token(Symbol.toSymbol("x"), "x", new Place("testParsePat", 0, 3), TokenType.varToken)), e);
-//    }
-//
-//    /**
-//     * Test of parsePat method, with a numberToken.
-//     */
-//    @Test
-//    public void testParsePat() {
-//        System.out.println("Testing parsePat");
-//        Pat expResult = new PatConst(new Token(Symbol.toSymbol("5"), "5", new Place("testParsePat", 0, 1), TokenType.numberToken));
-//        TokenStream tokens = new TokenStream();
-//        tokens.addToken(new Token(Symbol.toSymbol("5"), "5", new Place("testParsePat", 0, 1), TokenType.numberToken));
-//        Parser.setToks(tokens);
-//        Pat result = Parser.parsePat();
-//        compareParsedObjects(expResult, result);
-//    }
-//
+    @Test
+    public void testParselhs() {
+        System.out.println("parselhs");
+        String program = "x=5";
+        TokenStream t = Lexer.lexString(program);
+        ArrayList<Pat> result = null;
+        try
+        {
+            result = Parser.parselhs(t);
+        }
+        catch ( ParseError ex)
+        {
+            Assert.fail("parser exception in lhs");
+        }
+        Pat e = result.get(0);
+        compareParsedObjects(e, new PatVar(new Token(Symbol.toSymbol("x"), "x", new Place(0, 1), TokenType.varToken)));
+    }
+
+    /**
+     * Test of parselhs method with program "f x=x+1"
+     */
+    @Test
+    public void testParselhs2() {
+        System.out.println("parselhs2");
+        String program = "f x=x+1";
+        TokenStream t = Lexer.lexString(program);
+        ArrayList<Pat> result = null;
+        try
+        {
+            result = Parser.parselhs(t);
+        }
+        catch (ParseError ex)
+        {
+            Assert.fail("parser exception in lhs");
+        }
+        Pat e = result.get(0);
+        compareParsedObjects(new PatVar(new Token(Symbol.toSymbol("f"), "f", new Place(0, 1), TokenType.varToken)), e);
+        e = result.get(1);
+        compareParsedObjects(new PatVar(new Token(Symbol.toSymbol("x"), "x", new Place(0, 3), TokenType.varToken)), e);
+    }
+
+  //  /**
+  //   * Test of parsePat method, with a numberToken.
+  //   */
+  //  @Test
+  //  public void testParsePat() {
+  //      System.out.println("Testing parsePat");
+  //      Pat expResult = new PatConst(new Token(Symbol.toSymbol("5"), "5", new Place(0, 1), TokenType.numberToken));
+  //      TokenStream tokens = new TokenStream();
+  //      tokens.addToken(new Token(Symbol.toSymbol("5"), "5", new Place(0, 1), TokenType.numberToken));
+  //      Parser.setToks(tokens);
+  //      Pat result = Parser.parsePat();
+  //      compareParsedObjects(expResult, result);
+  //  }
+
 //    /**
 //     * The parseAPat method calls the next() method on its TokenStream toks.
 //     * Since our token is in column 0 the next method returns a Token.semicolon
