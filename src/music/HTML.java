@@ -9,15 +9,28 @@ import music.Token;
  */
 public class HTML {
 
-    public static String tokenstreamHTML(TokenStream t) {
+    public static String tokenstreamHTML(TokenStream t, ArrayList<Decl> decls) {
         String generatedHTML = "<html><body>";
+        
         for (Token t1 : t.tokens) {
+            
+            System.out.println(t1.type+" - "+t1.body);
             switch (t1.type) {
                 case varToken:
-                    generatedHTML += HTMLVar(t1);
+                    boolean func = false;
+                    for(Decl d : decls)
+                    {
+                        String funcName = d.LHS.asVar().toString();
+                        System.out.println("function name!!!!!="+funcName+" token "+t1.body);
+                        if(funcName.equals(t1.body)){
+                            func=!func;
+                            break;
+                        }
+                    }
+                    generatedHTML += func?HTMLFunc(t1):HTMLVar(t1);
                     break;
                 case semiToken:
-                    generatedHTML += "< \br>";
+                    generatedHTML += "<\br>";
                     break;
                 case numberToken:
                     generatedHTML += HTMLNum(t1);
@@ -29,10 +42,14 @@ public class HTML {
                     generatedHTML += HTMLPunc(t1);
                     break;
                 case whiteToken:
+                    
                     generatedHTML += HTMLWhite(t1);
                     break;
                 case eofToken:
                     generatedHTML += "</body></html>";
+                    break;
+                case errorToken:
+                    generatedHTML += HTMLError(t1);
                     break;
             }
         }
@@ -45,6 +62,10 @@ public class HTML {
             color = "#FF00FF";//purple
         }
         return "<span style=\"color:" + color + ";\">" + t.body + "</span>";
+    }
+    private static String HTMLFunc(Token t) {
+        String color = "#00EEFF";
+        return "<strong style=\"color:" + color + ";font-weight:bold;\">" + t.body + "</strong>";
     }
 
     private static String HTMLNum(Token t) {
@@ -67,7 +88,9 @@ public class HTML {
                 punc += t.body.charAt(i);
             }
         }
-        return punc;
+        String color = "#cc12EE";
+        return "<span style=\"color:" + color + ";\">" + punc + "</span>";
+        
     }
 
     private static String HTMLWhite(Token t) {
@@ -81,5 +104,9 @@ public class HTML {
             }
         }
         return whiteSpace;
+    }
+    private static String HTMLError(Token t) {
+        String color = "#EE0000"; //orange
+        return "<span style=\"color:" + color + ";\">" + t.body + "</span>";
     }
 }

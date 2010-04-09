@@ -5,19 +5,17 @@
 
 package music;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author austin
  */
 public class reviewTools {
 
-    public static void HtmlRender(javax.swing.JEditorPane pane, TokenStream toks)
+    public static void HtmlRender(javax.swing.JEditorPane pane, TokenStream toks, ArrayList<Decl> d)
     {
-       String body = "";
-       for(Token i : toks.tokens)
-       {
-            body.concat(i.body);
-       }
-       pane.setText(body);
+       
+       pane.setText(HTML.tokenstreamHTML(toks,d));
     }
 }

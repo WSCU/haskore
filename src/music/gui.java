@@ -21,9 +21,10 @@ public class gui extends javax.swing.JFrame {
 
     /** Creates new form gui */
     public gui() {
-        initComponents();
         Symbol.init();
-
+        initComponents();
+        
+        
       
         
     }
@@ -32,7 +33,7 @@ public class gui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabHolder = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         editPane = new javax.swing.JEditorPane();
@@ -44,6 +45,12 @@ public class gui extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Haskore-Haskell~midi music");
         setLocationByPlatform(true);
+
+        tabHolder.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabHolderStateChanged(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(editPane);
 
@@ -83,8 +90,9 @@ public class gui extends javax.swing.JFrame {
 
         pianowindow.getAccessibleContext().setAccessibleName("");
 
-        jTabbedPane1.addTab("Edit", jPanel1);
+        tabHolder.addTab("Edit", jPanel1);
 
+        browsePane.setContentType("text/html");
         browsePane.setEditable(false);
         jScrollPane2.setViewportView(browsePane);
 
@@ -105,25 +113,37 @@ public class gui extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Review", jPanel2);
+        tabHolder.addTab("Review", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+            .addComponent(tabHolder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tabHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.getAccessibleContext().setAccessibleName("Display");
+        tabHolder.getAccessibleContext().setAccessibleName("Display");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tabHolderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHolderStateChanged
+        // TODO add your handling code here:
+        System.out.println(this.tabHolder.isEnabledAt(0));
+        Env top = Prims.topEnv();
+        EnvHash userEnv = new EnvHash(4000, top);
+        //Pay attention to lex errors and to parse errors.
+        TokenStream str = Lexer.lexString(this.editPane.getText());
+        ArrayList<Decl> binds = Parser.parseDecls(str);
+        System.out.println(binds.size());
+        reviewTools.HtmlRender(this.browsePane, str,binds);
+    }//GEN-LAST:event_tabHolderStateChanged
 
 
     @Override
@@ -153,7 +173,7 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pianowindow;
+    private javax.swing.JTabbedPane tabHolder;
     // End of variables declaration//GEN-END:variables
 }

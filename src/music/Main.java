@@ -283,10 +283,7 @@ public class Main extends javax.swing.JFrame {
 
             
             
-            HTML = HTMLObject.generate(Lexer.lexString(program_text));
-            display_field.setContentType("text/html");
-            display_field.setText(HTML);
-            display_field.setEditable(false);
+            
             
         } else {
             runProgramButton.setText("Run Program");
@@ -326,7 +323,7 @@ public class Main extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void mains(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
