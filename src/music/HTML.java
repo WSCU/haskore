@@ -20,12 +20,14 @@ public class HTML {
                     boolean func = false;
                     for(Decl d : decls)
                     {
-                        String funcName = d.LHS.asVar().toString();
+                        String funcName = d.LHS.asVar().getBody();
+                        
                         System.out.println("function name!!!!!="+funcName+" token "+t1.body);
                         if(funcName.equals(t1.body)){
                             func=!func;
                             break;
                         }
+                        if(func)break;
                     }
                     generatedHTML += func?HTMLFunc(t1):HTMLVar(t1);
                     break;
@@ -61,7 +63,8 @@ public class HTML {
         if (t.isMusic()) {
             color = "#FF00FF";//purple
         }
-        return "<span style=\"color:" + color + ";\">" + t.body + "</span>";
+        
+        return "<a href='' style=\"color:" + color + ";\">" + t.body + "</a>";
     }
     private static String HTMLFunc(Token t) {
         String color = "#00EEFF";

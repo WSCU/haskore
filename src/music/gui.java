@@ -12,6 +12,7 @@ package music;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import javax.swing.event.HyperlinkEvent.EventType;
 
 /**
  *
@@ -23,16 +24,13 @@ public class gui extends javax.swing.JFrame {
     public gui() {
         Symbol.init();
         initComponents();
-        
-        
-      
-        
     }
     Env worldenv;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        playwindow = new javax.swing.JInternalFrame();
         tabHolder = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -41,6 +39,19 @@ public class gui extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         browsePane = new javax.swing.JEditorPane();
+
+        playwindow.setVisible(true);
+
+        javax.swing.GroupLayout playwindowLayout = new javax.swing.GroupLayout(playwindow.getContentPane());
+        playwindow.getContentPane().setLayout(playwindowLayout);
+        playwindowLayout.setHorizontalGroup(
+            playwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 15, Short.MAX_VALUE)
+        );
+        playwindowLayout.setVerticalGroup(
+            playwindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Haskore-Haskell~midi music");
@@ -94,6 +105,11 @@ public class gui extends javax.swing.JFrame {
 
         browsePane.setContentType("text/html");
         browsePane.setEditable(false);
+        browsePane.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                musicClick(evt);
+            }
+        });
         jScrollPane2.setViewportView(browsePane);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -124,7 +140,7 @@ public class gui extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(60, 60, 60)
                 .addComponent(tabHolder, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -143,7 +159,22 @@ public class gui extends javax.swing.JFrame {
         ArrayList<Decl> binds = Parser.parseDecls(str);
         System.out.println(binds.size());
         reviewTools.HtmlRender(this.browsePane, str,binds);
+        worldenv = userEnv;
     }//GEN-LAST:event_tabHolderStateChanged
+
+    private void musicClick(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_musicClick
+        if (evt.getEventType()==EventType.ENTERED)
+        {
+            System.out.println(evt.getDescription());
+            System.out.println("enter");
+        }
+        if (evt.getEventType()==EventType.ACTIVATED)
+        {
+            System.out.println("click");
+        }
+
+        playwindow.setLocation(WIDTH, WIDTH);
+    }//GEN-LAST:event_musicClick
 
 
     @Override
@@ -174,6 +205,7 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pianowindow;
+    private javax.swing.JInternalFrame playwindow;
     private javax.swing.JTabbedPane tabHolder;
     // End of variables declaration//GEN-END:variables
 }

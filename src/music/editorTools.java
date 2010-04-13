@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class editorTools {
    // public static Keyboard main = new Keyboard();
 
+
+    
     public static void smrtAddTxt(javax.swing.JEditorPane pane, String sample) {
         String sel = pane.getSelectedText();
         if (sel != null && !sel.equals("") && !sel.matches("\\s*")) {
