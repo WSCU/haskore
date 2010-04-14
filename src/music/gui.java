@@ -150,30 +150,13 @@ public class gui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabHolderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHolderStateChanged
-        // TODO add your handling code here:
-        System.out.println(this.tabHolder.isEnabledAt(0));
-        Env top = Prims.topEnv();
-        EnvHash userEnv = new EnvHash(4000, top);
-        //Pay attention to lex errors and to parse errors.
-        TokenStream str = Lexer.lexString(this.editPane.getText());
-        ArrayList<Decl> binds = Parser.parseDecls(str);
-        System.out.println(binds.size());
-        reviewTools.HtmlRender(this.browsePane, str,binds);
-        worldenv = userEnv;
+        if(tabHolder.isEnabledAt(1)){
+            reviewTools.compile(editPane, browsePane);
+        }
     }//GEN-LAST:event_tabHolderStateChanged
 
     private void musicClick(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_musicClick
-        if (evt.getEventType()==EventType.ENTERED)
-        {
-            System.out.println(evt.getDescription());
-            System.out.println("enter");
-        }
-        if (evt.getEventType()==EventType.ACTIVATED)
-        {
-            System.out.println("click");
-        }
-
-        playwindow.setLocation(WIDTH, WIDTH);
+        reviewTools.action(evt);
     }//GEN-LAST:event_musicClick
 
 

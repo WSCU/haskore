@@ -18,16 +18,21 @@ public class HTML {
             switch (t1.type) {
                 case varToken:
                     boolean func = false;
+                    
                     for(Decl d : decls)
                     {
                         String funcName = d.LHS.asVar().getBody();
-                        
-                        System.out.println("function name!!!!!="+funcName+" token "+t1.body);
+                        //System.out.println(d.LHS.lastToken);
+                        //System.out.println("function name!!!!!="+funcName+" token "+t1.body);
                         if(funcName.equals(t1.body)){
-                            func=!func;
+//                            if(i-decls.size()>=1)
+//                            {
+//                                System.out.println(decls.get(i+1).RHS.
+                            func=true;
                             break;
                         }
                         if(func)break;
+                        
                     }
                     generatedHTML += func?HTMLFunc(t1):HTMLVar(t1);
                     break;
