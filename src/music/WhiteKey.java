@@ -11,22 +11,21 @@ public class WhiteKey extends Key
 {
     int startX;
     int startY;
-    int endX;
-    final int endY = 70;
+    final int Height = 20;
+    final int Width = 70;
 
     public WhiteKey(int x1, int y1)
     {
         startX = x1;
         startY = y1;
-        endX = x1 + 15;
     }
 
     @Override
     public void paint(Graphics g, int octave)
     {
         g.setColor(Color.white);
-        g.fillRect(startX, startY, endX, endY);
+        g.fillRect(startX, startY, Height, Width);
         g.setColor(Color.black);
-        g.drawRect(startX, startY, endX, endY);
+        g.drawRect(startX, startY, Height, Width);
     }
 }
