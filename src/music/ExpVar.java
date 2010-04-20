@@ -31,7 +31,9 @@ public class ExpVar extends Exp {
 
     @Override
     public Value eval(Env e) {
-        return e.eval(body.symbol);
+        Value v = e.eval(body.symbol);
+        this.body.addValue(v);
+        return v;
     }
 
     public String print() {

@@ -19,10 +19,10 @@ import javax.swing.event.HyperlinkEvent.EventType;
  *
  * @author austin
  */
-public class gui extends javax.swing.JFrame {
+public class MainGui extends javax.swing.JFrame {
 
     /** Creates new form gui */
-    public gui() {
+    public MainGui() {
         Symbol.init();
         initComponents();
     }
@@ -114,8 +114,6 @@ public class gui extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(editPane);
 
-        pianowindow.setBackground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout pianowindowLayout = new javax.swing.GroupLayout(pianowindow);
         pianowindow.setLayout(pianowindowLayout);
         pianowindowLayout.setHorizontalGroup(
@@ -131,8 +129,6 @@ public class gui extends javax.swing.JFrame {
 
         jLabel1.setText("Rest");
 
-        melchord.setBackground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout melchordLayout = new javax.swing.GroupLayout(melchord);
         melchord.setLayout(melchordLayout);
         melchordLayout.setHorizontalGroup(
@@ -143,8 +139,6 @@ public class gui extends javax.swing.JFrame {
             melchordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 55, Short.MAX_VALUE)
         );
-
-        notepallet.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout notepalletLayout = new javax.swing.GroupLayout(notepallet);
         notepallet.setLayout(notepalletLayout);
@@ -253,13 +247,13 @@ public class gui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabHolderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHolderStateChanged
-        if(tabHolder.isEnabledAt(1)){
-            reviewTools.compile(editPane, browsePane);
-        }
+        System.out.println(tabHolder.getSelectedIndex());
+        if(!editPane.getText().isEmpty())ReviewTools.compile(editPane, browsePane);
     }//GEN-LAST:event_tabHolderStateChanged
 
     private void musicClick(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_musicClick
-        reviewTools.action(evt);
+        ReviewTools.action(evt);
+        
     }//GEN-LAST:event_musicClick
 
 
@@ -287,7 +281,7 @@ public class gui extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new gui().setVisible(true);
+                new MainGui().setVisible(true);
 
             }
         });

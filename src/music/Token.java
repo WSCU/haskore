@@ -19,6 +19,7 @@ public class Token {
     public Place place;
     public TokenType type;
     public boolean unary = false;  // used in the parser to mark unary -
+    public Value tokVal;
 
     /**
      * Creates a new token and sets the symbol, body, place and type
@@ -32,6 +33,16 @@ public class Token {
         this.body = body;
         this.place = place;
         this.type = type;
+        this.tokVal=null;
+    }
+
+    public Token(Symbol symbol, String body, Place place, TokenType type, Value tv) {
+        this.symbol = symbol;
+        this.body = body;
+        this.place = place;
+        this.type = type;
+        this.tokVal = tv;
+
     }
 
     public Token(Token e) {
@@ -39,6 +50,11 @@ public class Token {
         this.body = e.body;
         this.place = e.place;
         this.type = e.type;
+    }
+
+    public void addValue(Value tv)
+    {
+        this.tokVal=tv;
     }
 
     

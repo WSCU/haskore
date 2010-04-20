@@ -36,8 +36,8 @@ public class ReviewTools {
     }
     public static void HtmlRender(javax.swing.JEditorPane pane,
             TokenStream toks,
-            ArrayList<Decl> dec, Env env) {
-        pane.setText(HTML.tokenstreamHTML(toks, dec));
+            ArrayList<Decl> dec, EnvHash env) {
+        pane.setText(HTML.tokenstreamHTML(toks, dec, env));
     }
     public static void action(javax.swing.event.HyperlinkEvent evt)
     {

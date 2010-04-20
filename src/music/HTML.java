@@ -9,30 +9,45 @@ import music.Token;
  */
 public class HTML {
 
-    public static String tokenstreamHTML(TokenStream t, ArrayList<Decl> decls) {
+    public static String tokenstreamHTML(TokenStream t, ArrayList<Decl> decls, EnvHash env) {
         String generatedHTML = "<html><body>";
-        
+        boolean func = false;
         for (Token t1 : t.tokens) {
-            
             System.out.println(t1.type+" - "+t1.body);
             switch (t1.type) {
                 case varToken:
-                    boolean func = false;
-                    
+                    if(func)
+                    {
+
+                        int i = t.tokens.indexOf(t1)+1;
+                        if(i<t.tokens.size()){
+                            if(!t.tokens.get(i).isType(TokenType.whiteToken) && t.tokens.get(i).isOp())
+                            {
+                                func=false;
+                            }
+                        }
+                        generatedHTML += HTMLNum(t1);
+                        break;
+                    }
+                    int i=0;
                     for(Decl d : decls)
                     {
                         String funcName = d.LHS.asVar().getBody();
                         //System.out.println(d.LHS.lastToken);
                         //System.out.println("function name!!!!!="+funcName+" token "+t1.body);
                         if(funcName.equals(t1.body)){
-//                            if(i-decls.size()>=1)
-//                            {
-//                                System.out.println(decls.get(i+1).RHS.
-                            func=true;
-                            break;
+                            if(i<decls.size())
+                            {
+                                if(decls.get(i).RHS.isLambda()){
+                                    func=true;
+                                    break;
+                                }
+                                
+                            }
+                            
                         }
+                        i++;
                         if(func)break;
-                        
                     }
                     generatedHTML += func?HTMLFunc(t1):HTMLVar(t1);
                     break;
@@ -68,8 +83,10 @@ public class HTML {
         if (t.isMusic()) {
             color = "#FF00FF";//purple
         }
-        
-        return "<a href='' style=\"color:" + color + ";\">" + t.body + "</a>";
+        String tval="";
+        if(t.tokVal!=null) tval= t.tokVal.toString();
+        System.out.println("hey"+tval);
+        return "<a href ='"+tval+"'alt='"+tval+"' name='"+tval+"' style='color:" + color + ";'>" + t.body + "</a>";
     }
     private static String HTMLFunc(Token t) {
         String color = "#00EEFF";
