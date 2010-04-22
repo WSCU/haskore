@@ -117,6 +117,11 @@ public class MainGui extends javax.swing.JFrame {
 
         pianowindow.setBackground(new java.awt.Color(255, 255, 255));
         pianowindow.setPreferredSize(new java.awt.Dimension(375, 70));
+        pianowindow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pianowindowMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pianowindowLayout = new javax.swing.GroupLayout(pianowindow);
         pianowindow.setLayout(pianowindowLayout);
@@ -266,6 +271,85 @@ public class MainGui extends javax.swing.JFrame {
         ReviewTools.action(evt);
         
     }//GEN-LAST:event_musicClick
+
+    private void pianowindowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pianowindowMouseClicked
+        int x = evt.getX();
+        int y = evt.getY();
+        int hiX = x;
+        int note = x % 125;
+        int octave = 0;
+        final int whiteY = 70;
+        final int blackY = 45;
+        while (hiX > 0)
+        {
+            octave++;
+            hiX -= 125;
+        }
+        System.out.println("x = " + x + "y = " + y);
+        if (note < 20 && y >=0 && y < whiteY)
+        {
+            if (note >= 12 && note < 27 && y < blackY)
+            {
+                System.out.println("c" + octave + "s");
+            }
+            else
+            {
+                System.out.println("c" + octave);
+            }
+        }
+        if (note >= 20 && note < 40 && y < whiteY)
+        {
+            if (note >= 32 && note < 47 && y < blackY)
+            {
+                System.out.println("d" + octave + "s");
+            }
+            else
+            {
+                System.out.println("d" + octave);
+            }
+        }
+        if (note >= 40 && note < 60 && y < whiteY)
+        {
+            System.out.println("e" + octave);
+        }
+        if (note >= 60 && note < 80 && y < whiteY)
+        {
+            if (note >= 72 && note < 87 && y < blackY)
+            {
+                System.out.println("f" + octave + "s");
+            }
+            else
+            {
+                System.out.println("f" + octave);
+            }
+        }
+        if (note >= 80 && note < 100 && y < whiteY)
+        {
+            if (note >= 92 && note < 107 && y < blackY)
+            {
+                System.out.println("g" + octave + "s");
+            }
+            else
+            {
+                System.out.println("g");
+            }
+        }
+        if (note >= 100 && note < 120 && y < whiteY)
+        {
+            if (note >= 112 && note < 127 && y < blackY)
+            {
+                System.out.println("a" + octave + "s");
+            }
+            else
+            {
+                System.out.println("a");
+            }
+        }
+        if (note >= 120 && note < 140 && y < whiteY)
+        {
+            System.out.println("b");
+        }
+    }//GEN-LAST:event_pianowindowMouseClicked
 
 
     @Override

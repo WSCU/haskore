@@ -11,8 +11,8 @@ public class WhiteKey extends Key
 {
     int startX;
     int startY;
-    final int Height = 20;
-    final int Width = 70;
+    final int Height = 70;
+    final int Width = 20;
 
     public WhiteKey(int x1, int y1)
     {
