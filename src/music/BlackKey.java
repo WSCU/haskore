@@ -25,10 +25,5 @@ public class BlackKey extends Key
     {
         g.setColor(Color.black);
         g.fillRect(startX, startY, Width, Height);
-        System.out.println(startX);
-        System.out.println(startY);
-        System.out.println(Width);
-        System.out.println(Height);
-        
     }
 }
