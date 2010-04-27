@@ -11,9 +11,9 @@ public class Prims {
 
         Prim upfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
-                ValNum arg1 = args.get(0).asNum();
-                ValMusic arg2 = args.get(1).asMusic();
-                return new ValMusic(Music.up(arg2.val, (int)arg1.val.toDouble()));
+                ValNum arg2 = args.get(1).asNum();
+                ValMusic arg1 = args.get(0).asMusic();
+                return new ValMusic(Music.up(arg1.val, arg2.val.toInt()));
             }
         };
        result.add(Symbol.toSymbol("up", true), new Thunk(new ValFuncPrim(2,upfn)));
@@ -29,6 +29,41 @@ public class Prims {
        };
 result.add(Symbol.toSymbol("down", true), new Thunk(new ValFuncPrim(2,downfn)));
 
+Prim qnfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+                
+                ValMusic arg1 = args.get(0).asMusic();
+                return new ValMusic(Music.changeDuration(arg1.val, new BigRational("1/4")));
+            }
+        };
+       result.add(Symbol.toSymbol("q", true), new Thunk(new ValFuncPrim(1,qnfn)));
+
+Prim enfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+
+                ValMusic arg1 = args.get(0).asMusic();
+                return new ValMusic(Music.changeDuration(arg1.val, new BigRational("1/8")));
+            }
+        };
+       result.add(Symbol.toSymbol("e", true), new Thunk(new ValFuncPrim(1,enfn)));
+Prim snfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+
+                ValMusic arg1 = args.get(0).asMusic();
+                return new ValMusic(Music.changeDuration(arg1.val, new BigRational("1/16")));
+            }
+        };
+       result.add(Symbol.toSymbol("s", true), new Thunk(new ValFuncPrim(1,snfn)));
+Prim tnfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+
+                ValMusic arg1 = args.get(0).asMusic();
+                return new ValMusic(Music.changeDuration(arg1.val, new BigRational("1/32")));
+            }
+        };
+       result.add(Symbol.toSymbol("t", true), new Thunk(new ValFuncPrim(1,tnfn)));
+
+       
   Prim volumefn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
                 ValMusic arg0 = args.get(0).asMusic();
@@ -36,7 +71,7 @@ result.add(Symbol.toSymbol("down", true), new Thunk(new ValFuncPrim(2,downfn)));
                 return new ValMusic(Music.withVelocity(arg0.val, arg1.val.toInt()));
             }
        };
-result.add(Symbol.toSymbol("volume"), new Thunk(new ValFuncPrim(2,volumefn)));
+result.add(Symbol.toSymbol("volume", true), new Thunk(new ValFuncPrim(2,volumefn)));
 
   Prim ifMusicfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
@@ -127,7 +162,7 @@ result.add(Symbol.toSymbol("=="), new Thunk(new ValFuncPrim(2,EqualsEqualsfn)));
                 return new ValMusic(MusNote.empty());
             }
        };
-result.add(Symbol.toSymbol("empty"), new Thunk(new ValFuncPrim(0,emptyfn)));
+result.add(Symbol.toSymbol("empty", true), new Thunk(new ValFuncPrim(0,emptyfn)));
 
 Prim musafter = new Prim() {
             public Value call(ArrayList<Thunk> args) {
@@ -161,8 +196,9 @@ result.add(Symbol.toSymbol("!"), new Thunk(new ValFuncPrim(2,mustogether)));
                 }
             }
         }
+        result.add(Symbol.toSymbol("r"), new Thunk(new ValMusic(Music.note("r", WHOLE, 50, "Piano"))));
 
-        result.add(Symbol.toSymbol("c3"), new Thunk(new ValMusic(Music.note("c3", WHOLE, 50, "Piano"))));
+        //result.add(Symbol.toSymbol("c3"), new Thunk(new ValMusic(Music.note("c3", WHOLE, 50, "Piano"))));
         //c3 doesn't take any arguments because it is just a note.
 
         return result;

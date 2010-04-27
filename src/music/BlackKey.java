@@ -29,6 +29,6 @@ public class BlackKey extends Key
         System.out.println(startY);
         System.out.println(Width);
         System.out.println(Height);
-        System.out.println("Boobs!!!!");
+        
     }
 }

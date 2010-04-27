@@ -135,10 +135,17 @@ public class Token {
     public boolean isMusic() {
         String AtoG = "abcdefg";
         String numbers = "123456789";
+        if(body.equals("r"))return true;
         if (body.length() == 2) {
             char first = body.charAt(0);
             char second = body.charAt(1);
             return AtoG.indexOf(first) != -1 && numbers.indexOf(second) != -1;
+        }
+        if (body.length() == 3) {
+            char first = body.charAt(0);
+            char num = body.charAt(1);
+            char sorf = body.charAt(2);
+            return AtoG.indexOf(first) != -1 && numbers.indexOf(num) != -1 && (sorf=='s'||sorf=='f');
         }
         return false;
     }

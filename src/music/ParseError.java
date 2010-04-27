@@ -16,6 +16,11 @@ public class ParseError extends Exception {
 
     @Override
     public String toString() {
-        return error + "\n" + token.place.toString();
+        return error + " " + token.place.toString();
+    }
+    @Override
+    public String getMessage()
+    {
+        return this.toString();
     }
 }
