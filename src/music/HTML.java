@@ -13,46 +13,33 @@ public class HTML {
         String generatedHTML = "<html><body>";
         boolean func = false;
         for (Token t1 : t.tokens) {
-            System.out.println(t1.type+" - "+t1.body);
+            
             switch (t1.type) {
                 case varToken:
-                    if(func)
-                    {
-
-                        int i = t.tokens.indexOf(t1)+1;
-                        if(i<t.tokens.size()){
-                            if(!t.tokens.get(i).isType(TokenType.whiteToken) && t.tokens.get(i).isOp())
-                            {
-                                func=false;
+                   if (func) {
+                        int i = t.tokens.indexOf(t1) + 1;
+                        if (i < t.tokens.size()) {
+                            if (!t.tokens.get(i).isType(TokenType.whiteToken) && t.tokens.get(i).isOp()) {
+                                func = false;
                             }
                         }
                         generatedHTML += HTMLNum(t1);
                         break;
                     }
-                    int i=0;
-                    for(Decl d : decls)
-                    {
+                    for (Decl d : decls) {
+                        int i = 0;
                         String funcName = d.LHS.asVar().getBody();
-                        //System.out.println(d.LHS.lastToken);
-                        //System.out.println("function name!!!!!="+funcName+" token "+t1.body);
-                        if(funcName.equals(t1.body)){
-                            if(i<decls.size())
-                            {
-                                if(decls.get(i).RHS.isLambda()){
-                                    func=true;
-                                    break;
-                                }
-                                
-                            }
-                            
+                        System.out.println(d.LHS.isPat() + " " + ((PatVar) d.LHS).asVar());
+                        if (funcName.equals(t1.body) && (i < decls.size() && decls.get(i).RHS.isLambda())) {                         
+                            func = true;
+                            break;
                         }
                         i++;
-                        if(func)break;
                     }
-                    generatedHTML += func?HTMLFunc(t1):HTMLVar(t1);
+                    generatedHTML += func ? HTMLFunc(t1) : HTMLVar(t1);
                     break;
                 case semiToken:
-                    generatedHTML += "<\br>";
+                    generatedHTML += "<br/>";
                     break;
                 case numberToken:
                     generatedHTML += HTMLNum(t1);
@@ -64,7 +51,7 @@ public class HTML {
                     generatedHTML += HTMLPunc(t1);
                     break;
                 case whiteToken:
-                    
+
                     generatedHTML += HTMLWhite(t1);
                     break;
                 case eofToken:
@@ -79,15 +66,19 @@ public class HTML {
     }
 
     private static String HTMLVar(Token t) {
+        //make non music vals non a
         String color = "#228B22"; //green
         if (t.isMusic()) {
             color = "#FF00FF";//purple
         }
-        String tval="";
-        if(t.tokVal!=null) tval= t.tokVal.toString();
-        System.out.println("hey"+tval);
-        return "<a href ='"+tval+"'alt='"+tval+"' name='"+tval+"' style='color:" + color + ";'>" + t.body + "</a>";
+        if (t.tokVal != null ) {
+            if(t.tokVal.isMusic() || t.isMusic())
+                return "<a href='#' style='color:" + color + ";'>" + t.body + "</a>";
+            
+        }
+        return "<span style='color:" + color + ";'>" + t.body + "</span>";
     }
+
     private static String HTMLFunc(Token t) {
         String color = "#00EEFF";
         return "<strong style=\"color:" + color + ";font-weight:bold;\">" + t.body + "</strong>";
@@ -105,33 +96,32 @@ public class HTML {
 
     private static String HTMLPunc(Token t) {
         String punc = "";
-        for(int i=0; i<t.body.length(); i++){
-            if(t.body.charAt(i) == "&".charAt(0)){
+        for (int i = 0; i < t.body.length(); i++) {
+            if (t.body.charAt(i) == "&".charAt(0)) {
                 punc += "&amp;";
-            }
-            else {
+            } else {
                 punc += t.body.charAt(i);
             }
         }
         String color = "#cc12EE";
         return "<span style=\"color:" + color + ";\">" + punc + "</span>";
-        
+
     }
 
     private static String HTMLWhite(Token t) {
         String whiteSpace = "";
-        for(int i=0; i<t.body.length(); i++){
-            if(t.body.charAt(i) == " ".charAt(0)){
+        for (int i = 0; i < t.body.length(); i++) {
+            if (t.body.charAt(i) == " ".charAt(0)) {
                 whiteSpace += "&nbsp;";
-            }
-            else if(t.body.charAt(i) == "\n".charAt(0)){
+            } else if (t.body.charAt(i) == "\n".charAt(0)) {
                 whiteSpace += "< br/>";
             }
         }
         return whiteSpace;
     }
+
     private static String HTMLError(Token t) {
-        String color = "#EE0000"; //orange
-        return "<span style=\"color:" + color + ";\">" + t.body + "</span>";
+        String color = "#ff0000";
+        return "<span style=\"color:" + color + ";text-decoration:underline;\">" + t.body + "</span>";
     }
 }

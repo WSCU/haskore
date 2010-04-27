@@ -16,7 +16,7 @@ public class Prims {
                 return new ValMusic(Music.up(arg2.val, (int)arg1.val.toDouble()));
             }
         };
-
+       result.add(Symbol.toSymbol("up", true), new Thunk(new ValFuncPrim(2,upfn)));
         //ENTER HERE
 
 
@@ -27,7 +27,7 @@ public class Prims {
                 return new ValMusic(Music.down(arg0.val, arg1.val.toInt()));
             }
        };
-result.add(Symbol.toSymbol("down"), new Thunk(new ValFuncPrim(2,downfn)));
+result.add(Symbol.toSymbol("down", true), new Thunk(new ValFuncPrim(2,downfn)));
 
   Prim volumefn = new Prim() {
             public Value call(ArrayList<Thunk> args) {

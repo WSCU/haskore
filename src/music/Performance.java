@@ -1,13 +1,7 @@
 package music;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.BufferedOutputStream;
 import java.util.ArrayList;
 import javax.sound.midi.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * The Functional Music project
  * 
@@ -199,11 +193,12 @@ public class Performance {
         MusNote c = Music.note("c4", new BigRational("1"), 80, inst3);
         MusAfter tog0 = new MusAfter(c,Music.note("a5", new BigRational("1"), 80, inst3)
                 );
+        
         //MusAfter tog1 = new MusAfter(note4, tog0);
         //MusAfter tog2 = new MusAfter(note3, tog1);
         //MusAfter tog3 = new MusAfter(note2, tog2);
         //MusAfter tog4 = new MusAfter(note1, tog3);
-        Performance result = new Performance(tog0);
+        Performance result = new Performance(Music.up(tog0, 2));
         result.perform();
     }
 }

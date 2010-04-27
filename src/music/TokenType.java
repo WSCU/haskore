@@ -7,6 +7,10 @@ package music;
 public enum TokenType {
 
     /**
+     * Indicates a function token.
+     */
+    funcToken,
+    /**
      * Indicates a number token.
      */
     numberToken,
