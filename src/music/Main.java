@@ -22,8 +22,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         HyperlinkListener hyperlinkListener = new ActivatedHyperlinkListener(display_field);
         display_field.addHyperlinkListener(hyperlinkListener);
-
-        //create the 7 white keys
+                //create the 7 white keys
         
     }
 

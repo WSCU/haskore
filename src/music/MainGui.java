@@ -29,7 +29,11 @@ public class MainGui extends javax.swing.JFrame {
     public MainGui() {
         Symbol.init();
         initComponents();
+
+        Top.Initialize();//---------------------------------------------
+
         
+
     }
     Env worldenv;
     public class PianoWindow  extends JPanel
@@ -51,8 +55,43 @@ public class MainGui extends javax.swing.JFrame {
             }
         }
     }
-    
-     
+    public class MelChord extends JPanel
+    {
+        BufferedImage image;
+        public MelChord(String path)
+        {
+            try
+            {
+                image = ImageIO.read(new File(path));
+            }
+            catch (IOException ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+        }
+        @Override
+        public void paint(Graphics g)
+        {
+            super.paint(g);
+
+
+            g.drawImage(image, 0, 0, null);
+
+        }
+    }
+    public class NotePallet extends JPanel
+    {
+        public NotePallet()
+        {
+
+        }
+        @Override
+        public void paint(Graphics g)
+        {
+            super.paint(g);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -65,8 +104,8 @@ public class MainGui extends javax.swing.JFrame {
         pianowindow = new PianoWindow();
         octaveSet = new javax.swing.JSpinner();
         RestLabel = new javax.swing.JLabel();
-        melchord = new ImagePanel("music/nm.jpg");
-        notepallet = new ImagePanel("pallete.gif");
+        melchord = new MelChord("music/nm.jpg");
+        notepallet = new NotePallet();
         instrumentBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         chordCheck = new javax.swing.JCheckBox();
@@ -122,7 +161,6 @@ public class MainGui extends javax.swing.JFrame {
             .addGap(0, 81, Short.MAX_VALUE)
         );
 
-        octaveSet.setValue(1);
         octaveSet.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 octaveSetStateChanged(evt);
@@ -165,11 +203,11 @@ public class MainGui extends javax.swing.JFrame {
         notepallet.setLayout(notepalletLayout);
         notepalletLayout.setHorizontalGroup(
             notepalletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 336, Short.MAX_VALUE)
         );
         notepalletLayout.setVerticalGroup(
             notepalletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
+            .addGap(0, 163, Short.MAX_VALUE)
         );
 
         instrumentBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Piano", "Flute", "Drums", "Oboe" }));
@@ -222,7 +260,7 @@ public class MainGui extends javax.swing.JFrame {
                                 .addComponent(pianowindow, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(chordCheck)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(instrumentBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(RestLabel)
@@ -232,7 +270,7 @@ public class MainGui extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(notepallet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(melchord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,14 +296,14 @@ public class MainGui extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -298,95 +336,102 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_musicClick
 
     private void pianowindowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pianowindowMouseClicked
+        //the following code is partially broken. If you click on a black key, it will only
+        //register as a sharp if it is on the left of the dividing line between notes.
+        
         int x = evt.getX();
+        int keyOctave;
         int y = evt.getY();
         int hiX = x;
-        int note = x % 125;
+        int note = x % 140;
         final int whiteY = 70;
         final int blackY = 40;
         String noteName = "";
-        
+        keyOctave = (Integer)octaveSet.getValue();
         while (hiX > 0)
         {
-            octave++;
-            hiX -= 125;
+            keyOctave++;
+            hiX -= 140;
         }
         System.out.println("x = " + x + "y = " + y);
-        if (note < 20 && y >=0 && y < whiteY)
+
+        if (note < 27 && y >=0 && y < whiteY)
         {
             if (note >= 12 && note < 27 && y < blackY)
             {
-                System.out.println("c" + octave + "s");
-                noteName = "c" + octave + "s";
+                System.out.println("c" + keyOctave + "s");
+                noteName = "c" + keyOctave + "s";
             }
-            else
+            else if(note < 20)
             {
-                System.out.println("c" + octave);
-                noteName = "c" + octave ;
+            
+                System.out.println("c" + keyOctave);
+                noteName = "c" + keyOctave ;
             }
 
         }
-        if (note >= 20 && note < 40 && y < whiteY)
+        if (note >= 20 && note < 47 && y < whiteY && (y > blackY || note >27))
         {
+
             if (note >= 32 && note < 47 && y < blackY)
             {
-                System.out.println("d" + octave + "s");
-                noteName = "d" + octave + "s";
+                System.out.println("d" + keyOctave + "s");
+                noteName = "d" + keyOctave + "s";
             }
-            else
+            else if (note < 40)
             {
-                System.out.println("d" + octave);
-                noteName = "d" + octave ;
+                System.out.println("d" + keyOctave);
+                noteName = "d" + keyOctave ;
             }
         }
-        if (note >= 40 && note < 60 && y < whiteY)
+        if (note >= 40 && note < 60 && y < whiteY && (y > blackY || note > 47))
         {
-            System.out.println("e" + octave);
-            noteName = "e" + octave;
+            System.out.println("e" + keyOctave);
+            noteName = "e" + keyOctave;
         }
-        if (note >= 60 && note < 80 && y < whiteY)
+        if (note >= 60 && note < 87 && y < whiteY )
         {
             if (note >= 72 && note < 87 && y < blackY)
             {
-                System.out.println("f" + octave + "s");
-                noteName = "f" + octave + "s";
+                System.out.println("f" + keyOctave + "s");
+                noteName = "f" + keyOctave + "s";
             }
-            else
+            else if(note < 80)
             {
-                System.out.println("f" + octave);
-                noteName = "f" + octave;
+                System.out.println("f" + keyOctave);
+                noteName = "f" + keyOctave;
             }
         }
-        if (note >= 80 && note < 100 && y < whiteY)
+        if (note >= 80 && note < 107 && y < whiteY && (y > blackY || note > 87))
         {
             if (note >= 92 && note < 107 && y < blackY)
             {
-                System.out.println("g" + octave + "s");
-                noteName = "g" + octave + "s";
+                System.out.println("g" + keyOctave + "s");
+                noteName = "g" + keyOctave + "s";
             }
-            else
+            else if(note < 100)
             {
-                System.out.println("g");
-                noteName = "g" + octave;
+                System.out.println("g" + keyOctave);
+                noteName = "g" + keyOctave;
             }
         }
-        if (note >= 100 && note < 120 && y < whiteY)
+       if (note >= 100 && note < 127 && y < whiteY && (y > blackY || note > 107))
         {
             if (note >= 112 && note < 127 && y < blackY)
             {
-                System.out.println("a" + octave + "s");
-                noteName = "a" + octave + "s";
+                System.out.println("a" + keyOctave + "s");
+                noteName = "a" + keyOctave + "s";
             }
-            else
+            else if (note < 120)
             {
-                System.out.println("a");
-                noteName = "a" + octave;
+                System.out.println("a" + keyOctave);
+                noteName = "a" + keyOctave;
             }
         }
-        if (note >= 120 && note < 140 && y < whiteY)
+        if (note >= 120 && note < 140 && y < whiteY && (y > blackY || note > 127))
         {
-            System.out.println("b");
-            noteName = "b" + octave ;
+            System.out.println("b" + keyOctave);
+            noteName = "b" + keyOctave ;
         }
         if(musicType)noteName = chord ? " ! "+noteName:" & "+noteName;
         EditorTools.smrtAddTxt(editPane, noteName);
