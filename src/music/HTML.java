@@ -2,7 +2,7 @@ package music;
 
 import java.util.ArrayList;
 import music.Token;
-
+//rep x y = if y==0 then x else rep x (y-1);
 /**
  * The Functional Music project
  * @author Western State College, CIS412 class
@@ -24,7 +24,7 @@ public class HTML {
                     if (func) {
                         if (dkeep != null) {
                             String c = dkeep.RHS.print();
-                            
+                            System.out.println(c);
                             if (!c.contains(t1.body)) {
                                 func = false;
                                 dkeep = null;
@@ -32,21 +32,23 @@ public class HTML {
                             generatedHTML += HTMLNum(t1);
                             break;
                         }
-                    }
-                   
-                    for (Decl d : decls) {
-                       
+                    }                   
+                    for (Decl d : decls) {                      
                         String funcName = d.LHS.asVar().getBody();
-                        if (funcName.equals(t1.body) && d.RHS.isLambda()) {
-                            func = true;
-                            dkeep = d;
-                            break;
+                        if(!d.RHS.isCall()){
+                            if (funcName.equals(t1.body) && d.RHS.isLambda()) {
+                                func = true;
+                                dkeep = d;
+                                break;
+                            }
                         }
+
                     }
                     generatedHTML += func ? HTMLFunc(t1) : HTMLVar(t1);
                     break;
                 case semiToken:
                     func = false;
+                    dkeep = null;
                     generatedHTML += "<br />";
                     break;
                 case numberToken:

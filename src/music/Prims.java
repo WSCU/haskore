@@ -29,6 +29,23 @@ public class Prims {
        };
 result.add(Symbol.toSymbol("down", true), new Thunk(new ValFuncPrim(2,downfn)));
 
+Prim hnfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+
+                ValMusic arg1 = args.get(0).asMusic();
+                return new ValMusic(Music.changeDuration(arg1.val, new BigRational("1/2")));
+            }
+        };
+       result.add(Symbol.toSymbol("h", true), new Thunk(new ValFuncPrim(1,hnfn)));
+Prim dhnfn = new Prim() {
+            public Value call(ArrayList<Thunk> args) {
+
+                ValMusic arg1 = args.get(0).asMusic();
+                return new ValMusic(Music.changeDuration(arg1.val, new BigRational("3/4")));
+            }
+        };
+       result.add(Symbol.toSymbol("h", true), new Thunk(new ValFuncPrim(1,hnfn)));
+
 Prim qnfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
                 
@@ -192,6 +209,7 @@ result.add(Symbol.toSymbol("!"), new Thunk(new ValFuncPrim(2,mustogether)));
                     String name = letters[i]+j;
                     if (k==1) name += "s";
                     else if (k==2) name += "f";
+                    
                     result.add(Symbol.toSymbol(name), new Thunk(new ValMusic(Music.note(name, WHOLE, 50, "Piano"))));
                 }
             }
