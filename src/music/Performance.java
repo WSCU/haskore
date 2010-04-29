@@ -165,7 +165,7 @@ public class Performance {
                     inst, // always on channel 1
                     nKey,
                     nVelocity);
-
+System.out.println("Performance-noteEvent: "+ nVelocity);
         } catch (InvalidMidiDataException e) {
             e.printStackTrace();
             System.exit(1);

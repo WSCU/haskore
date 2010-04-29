@@ -15,16 +15,18 @@ import javax.swing.JPanel;
  *
  * @author austin
  */
-class imagePanel extends JPanel {
+class ImagePanel extends JPanel {
 
 
     BufferedImage image;
-    public imagePanel(String path)
+    public ImagePanel(String path)
     {
         try {
-          image = ImageIO.read(new File(path));
+            File x = new File(path);
+            System.out.println(x.canRead());
+          image = ImageIO.read(x);
        } catch (IOException ex) {
-            System.out.println("Chris write your own code");
+            System.out.println(ex.getMessage()+" Chris write your own code");
        }
 
         
