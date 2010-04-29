@@ -22,11 +22,9 @@ class ImagePanel extends JPanel {
     public ImagePanel(String path)
     {
         try {
-            File x = new File(path);
-            System.out.println(x.canRead());
-          image = ImageIO.read(x);
+          image = ImageIO.read(new File(path));
        } catch (IOException ex) {
-            System.out.println(ex.getMessage()+" Chris write your own code");
+            System.out.println("Chris write your own code");
        }
 
         

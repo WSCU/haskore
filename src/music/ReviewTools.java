@@ -12,6 +12,10 @@ public class ReviewTools {
 
     public static Env compile(javax.swing.JEditorPane editPane,
             javax.swing.JEditorPane browsePane) {
+             Top.Initialize();//---------------------------------------------
+
+
+
         Env top = Prims.topEnv();
         EnvHash userEnv = new EnvHash(4000, top);
         //Pay attention to lex errors and to parse errors.
@@ -20,7 +24,8 @@ public class ReviewTools {
         for (Decl d : binds) {
             userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
         }
-        //assumes that every left hand side is a sple variable.
+        
+            //assumes that every left hand side is a sple variable.
         for (Decl d : binds) {
             try{
             Value result = userEnv.eval(d.LHS.asVar());
@@ -34,10 +39,12 @@ public class ReviewTools {
                 if(d.LHS.isPat()){
                     PatVar pv = (PatVar)d.LHS;
                     pv.body.type = TokenType.errorToken;
-                    pv.body.body = e.msg;           
+                    pv.body.body = e.msg;
+                    
                 }
             }
         }
+        
         HtmlRender(browsePane, str, binds, userEnv);
         world = str;
         return userEnv;
