@@ -60,7 +60,7 @@ public class Token {
     
 
     /**
-     * s
+     * 
      * @return returns a string with the information of the body
      */
     @Override
