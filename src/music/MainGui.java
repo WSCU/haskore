@@ -296,95 +296,101 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_musicClick
 
     private void pianowindowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pianowindowMouseClicked
+         //the following code is partially broken. If you click on a black key, it will only
+        //register as a sharp if it is on the left of the dividing line between notes.
         int x = evt.getX();
+        int keyOctave;
         int y = evt.getY();
         int hiX = x;
-        int note = x % 125;
+        int note = x % 140;
         final int whiteY = 70;
         final int blackY = 40;
         String noteName = "";
-       
+        keyOctave = (Integer)octaveSet.getValue();
         while (hiX > 0)
         {
-            octave++;
-            hiX -= 125;
+            keyOctave++;
+            hiX -= 140;
         }
         System.out.println("x = " + x + "y = " + y);
-        if (note < 20 && y >=0 && y < whiteY)
+
+        if (note < 27 && y >=0 && y < whiteY)
         {
             if (note >= 12 && note < 27 && y < blackY)
             {
-                System.out.println("c" + octave + "s");
-                noteName = "c" + octave + "s";
+                System.out.println("c" + keyOctave + "s");
+                noteName = "c" + keyOctave + "s";
             }
-            else
+            else if(note < 20)
             {
-                System.out.println("c" + octave);
-                noteName = "c" + octave ;
+
+                System.out.println("c" + keyOctave);
+                noteName = "c" + keyOctave ;
             }
 
         }
-        if (note >= 20 && note < 40 && y < whiteY)
+        if (note >= 20 && note < 47 && y < whiteY && (y > blackY || note >27))
         {
+
             if (note >= 32 && note < 47 && y < blackY)
             {
-                System.out.println("d" + octave + "s");
-                noteName = "d" + octave + "s";
+                System.out.println("d" + keyOctave + "s");
+                noteName = "d" + keyOctave + "s";
             }
-            else
+            else if (note < 40)
             {
-                System.out.println("d" + octave);
-                noteName = "d" + octave ;
+                System.out.println("d" + keyOctave);
+                noteName = "d" + keyOctave ;
             }
         }
-        if (note >= 40 && note < 60 && y < whiteY)
+        if (note >= 40 && note < 60 && y < whiteY && (y > blackY || note > 47))
         {
-            System.out.println("e" + octave);
-            noteName = "e" + octave;
+            System.out.println("e" + keyOctave);
+            noteName = "e" + keyOctave;
         }
-        if (note >= 60 && note < 80 && y < whiteY)
+        if (note >= 60 && note < 87 && y < whiteY )
         {
             if (note >= 72 && note < 87 && y < blackY)
             {
-                System.out.println("f" + octave + "s");
-                noteName = "f" + octave + "s";
+                System.out.println("f" + keyOctave + "s");
+                noteName = "f" + keyOctave + "s";
             }
-            else
+            else if(note < 80)
             {
-                System.out.println("f" + octave);
-                noteName = "f" + octave;
+                System.out.println("f" + keyOctave);
+                noteName = "f" + keyOctave;
             }
         }
-        if (note >= 80 && note < 100 && y < whiteY)
+        if (note >= 80 && note < 107 && y < whiteY && (y > blackY || note > 87))
         {
             if (note >= 92 && note < 107 && y < blackY)
             {
-                System.out.println("g" + octave + "s");
-                noteName = "g" + octave + "s";
+                System.out.println("g" + keyOctave + "s");
+                noteName = "g" + keyOctave + "s";
             }
-            else
+            else if(note < 100)
             {
-                System.out.println("g");
-                noteName = "g" + octave;
+                System.out.println("g" + keyOctave);
+                noteName = "g" + keyOctave;
             }
         }
-        if (note >= 100 && note < 120 && y < whiteY)
+       if (note >= 100 && note < 127 && y < whiteY && (y > blackY || note > 107))
         {
             if (note >= 112 && note < 127 && y < blackY)
             {
-                System.out.println("a" + octave + "s");
-                noteName = "a" + octave + "s";
+                System.out.println("a" + keyOctave + "s");
+                noteName = "a" + keyOctave + "s";
             }
-            else
+            else if (note < 120)
             {
-                System.out.println("a");
-                noteName = "a" + octave;
+                System.out.println("a" + keyOctave);
+                noteName = "a" + keyOctave;
             }
         }
-        if (note >= 120 && note < 140 && y < whiteY)
+        if (note >= 120 && note < 140 && y < whiteY && (y > blackY || note > 127))
         {
-            System.out.println("b");
-            noteName = "b" + octave ;
+            System.out.println("b" + keyOctave);
+            noteName = "b" + keyOctave ;
         }
         if(musicType)noteName = chord ? " ! "+noteName:" & "+noteName;
         EditorTools.smrtAddTxt(editPane, noteName);
