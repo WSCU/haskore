@@ -10,11 +10,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.event.HyperlinkEvent.EventType;
-
 /**
  * @author austin
  */
@@ -22,6 +19,7 @@ public class MainGui extends javax.swing.JFrame {
     public static boolean MUTE = false;
     private boolean musicType= false;
     private boolean chord = false;
+    private String noteType = "";
     public int octave = 0;
     String cm = "Click to construct a melody with the & operator";
     String cch = "Click to construct chords with the ! operator";
@@ -67,7 +65,7 @@ public class MainGui extends javax.swing.JFrame {
             }
         }
         @Override
-        public void paintComponent(Graphics g)
+        public void paint(Graphics g)
         {
             super.paintComponent(g);
             if (image != null)
@@ -472,19 +470,22 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_pianowindowMouseClicked
    
     private void RestLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RestLabelMouseClicked
-
+        EditorTools.smrtAddTxt(editPane, this.noteType+" r");
     }//GEN-LAST:event_RestLabelMouseClicked
 
     private void melchordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_melchordMouseClicked
+        System.out.println("click melchrd");
         int x = evt.getX();
         int y = evt.getY();
         if (x >= 0 && x < 65 && y < 53)
         {
-            //setBoxIndicator(1);
+            MelChord m = (MelChord)this.melchord;
+            m.setBoxIndicator(1);
         }
         if (x > 73 && x < 127 && y < 53)
         {
-            //setBoxIndicator(2);
+            MelChord m = (MelChord)this.melchord;
+            m.setBoxIndicator(2);
         }
     }//GEN-LAST:event_melchordMouseClicked
 

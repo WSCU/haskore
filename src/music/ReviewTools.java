@@ -43,7 +43,6 @@ public class ReviewTools {
         }
         
         HtmlRender(browsePane, str, binds, userEnv);
-        world = null;
         world = str;
         return userEnv;
     }
