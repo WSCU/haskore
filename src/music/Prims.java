@@ -174,6 +174,72 @@ result.add(Symbol.toSymbol("%"), new Thunk(new ValFuncPrim(2,modfn)));
        };
 result.add(Symbol.toSymbol("=="), new Thunk(new ValFuncPrim(2,EqualsEqualsfn)));
 
+ Prim andfn = new Prim() {
+
+            public Value call(ArrayList<Thunk> args) {
+                Thunk arg0 = args.get(0);
+                Thunk arg1 = args.get(1);
+                // this evaluates arguments so we can see the values that are in the thunks
+                // must call eval before checking value types.
+                arg0.eval();
+
+
+                if (arg0.v.isBool()) {
+                    if (!((ValBool) arg0.v).val) {
+                        return arg0.v;
+                    } else {
+                        arg1.eval();
+                        if (arg1.v.isBool()) {
+                            if (!((ValBool) arg1.v).val) {
+                                return arg1.v;
+                            }
+                            return arg1.v;
+                        } else {
+                            throw new ExecutionError("Use bools or num, never mix them.");
+                        }
+                    }
+                }
+                else {
+                    throw new ExecutionError("Use bools or num, never mix them.");
+                }
+            }
+        };
+        result.add(Symbol.toSymbol("&&"), new Thunk(new ValFuncPrim(2, andfn)));
+
+
+        Prim orfn = new Prim() {
+
+            public Value call(ArrayList<Thunk> args) {
+                Thunk arg0 = args.get(0);
+                Thunk arg1 = args.get(1);
+                // this evaluates arguments so we can see the values that are in the thunks
+                // must call eval before checking value types.
+                arg0.eval();
+
+                if (arg0.v.isBool()) {
+                    if (!((ValBool) arg0.v).val) {
+                        arg1.eval();
+                        if (arg1.v.isBool()) {
+                            if (!((ValBool) arg1.v).val) {
+                                return arg1.v;
+                            }
+                            return arg1.v;
+                        }
+                        else {
+                          throw new ExecutionError("Use bools or num, never mix them.");
+                        }
+                    }
+                    return arg0.v;
+                }
+                else {
+                  throw new ExecutionError("Use bools or num, never mix them.");
+                }
+            }
+
+        };
+        result.add(Symbol.toSymbol("||"), new Thunk(new ValFuncPrim(2, orfn)));
+
+
   Prim emptyfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
                 return new ValMusic(MusNote.empty());

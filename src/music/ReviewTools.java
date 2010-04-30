@@ -12,15 +12,12 @@ public class ReviewTools {
 
     public static Env compile(javax.swing.JEditorPane editPane,
             javax.swing.JEditorPane browsePane) {
-             Top.Initialize();//---------------------------------------------
-
-
-
         Env top = Prims.topEnv();
         EnvHash userEnv = new EnvHash(4000, top);
         //Pay attention to lex errors and to parse errors.
         TokenStream str = Lexer.lexString(editPane.getText());
         ArrayList<Decl> binds = Parser.parseDecls(str);
+        binds = Desugaring.desugar(binds);
         for (Decl d : binds) {
             userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
         }
@@ -46,6 +43,7 @@ public class ReviewTools {
         }
         
         HtmlRender(browsePane, str, binds, userEnv);
+        world = null;
         world = str;
         return userEnv;
     }

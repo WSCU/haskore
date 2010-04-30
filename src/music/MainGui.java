@@ -29,7 +29,7 @@ public class MainGui extends javax.swing.JFrame {
     public MainGui() {
         Symbol.init();
         initComponents();
-       
+        Top.Initialize();
     }
     Env worldenv;
     public class PianoWindow  extends JPanel
@@ -64,7 +64,7 @@ public class MainGui extends javax.swing.JFrame {
         octaveSet = new javax.swing.JSpinner();
         RestLabel = new javax.swing.JLabel();
         melchord = new ImagePanel("nm.jpg");
-        notepallet = new ImagePanel("notepallete.gif");
+        notepallet = new ImagePanel("pallete.gif");
         instrumentBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         chordCheck = new javax.swing.JCheckBox();
@@ -286,13 +286,13 @@ public class MainGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabHolderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabHolderStateChanged
-        System.out.println(tabHolder.getSelectedIndex());
+        System.out.println("tab "+tabHolder.getSelectedIndex());
+        if(tabHolder.getSelectedIndex()==0)browsePane.setText("");
         if(!editPane.getText().isEmpty())ReviewTools.compile(editPane, browsePane);
     }//GEN-LAST:event_tabHolderStateChanged
 
     private void musicClick(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_musicClick
-        ReviewTools.action(evt, browsePane);
-       
+        ReviewTools.action(evt, browsePane); 
     }//GEN-LAST:event_musicClick
 
     private void pianowindowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pianowindowMouseClicked

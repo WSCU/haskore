@@ -130,7 +130,7 @@ public class LexerTest {
 
     @Test
     public void testLexString5() {
-        String program = "[](;);{,}";
+        String program = "[](){,}";
         String fname = "LexerTest5";
         TokenStream expResult = new TokenStream();
         for (int i = 0; i < program.length(); i++) {

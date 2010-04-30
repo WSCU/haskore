@@ -23,6 +23,7 @@ public class Top {
         EnvHash userEnv = new EnvHash(4000, top);
         //Pay attention to lex errors and to parse errors.
         ArrayList<Decl> binds = Parser.parseDecls(Lexer.lexString(program));
+        binds = Desugaring.desugar(binds);
         for (Decl d : binds) {
             userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
         }
