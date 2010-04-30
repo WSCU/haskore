@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.event.HyperlinkEvent.EventType;
 
 /**
- *
  * @author austin
  */
 public class MainGui extends javax.swing.JFrame {
@@ -51,6 +50,30 @@ public class MainGui extends javax.swing.JFrame {
             }
         }
     }
+    public class ImagePanel extends JPanel
+    {
+        BufferedImage image;
+        public ImagePanel(String path)
+        {
+            try
+            {
+                image = ImageIO.read(new File(path));
+            }
+            catch (IOException ex)
+            {
+            System.out.println("Chris write your own code");
+            }
+        }
+        @Override
+        public void paintComponent(Graphics g)
+        {
+            super.paintComponent(g);
+            if (image != null)
+            {
+                g.drawImage(image, 0, 0, this);
+            }
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -63,11 +86,10 @@ public class MainGui extends javax.swing.JFrame {
         pianowindow = new PianoWindow();
         octaveSet = new javax.swing.JSpinner();
         RestLabel = new javax.swing.JLabel();
-        melchord = new ImagePanel("nm.jpg");
+        melchord = new ImagePanel("melchord.gif");
         notepallet = new ImagePanel("pallete.gif");
         instrumentBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        chordCheck = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         browsePane = new javax.swing.JEditorPane();
@@ -134,7 +156,6 @@ public class MainGui extends javax.swing.JFrame {
             }
         });
 
-        melchord.setBackground(new java.awt.Color(239, 126, 126));
         melchord.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 melchordMouseClicked(evt);
@@ -145,7 +166,7 @@ public class MainGui extends javax.swing.JFrame {
         melchord.setLayout(melchordLayout);
         melchordLayout.setHorizontalGroup(
             melchordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 91, Short.MAX_VALUE)
+            .addGap(0, 127, Short.MAX_VALUE)
         );
         melchordLayout.setVerticalGroup(
             melchordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,6 +174,7 @@ public class MainGui extends javax.swing.JFrame {
         );
 
         notepallet.setBackground(new java.awt.Color(83, 230, 47));
+        notepallet.setPreferredSize(new java.awt.Dimension(234, 163));
         notepallet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 notepalletMouseClicked(evt);
@@ -163,24 +185,16 @@ public class MainGui extends javax.swing.JFrame {
         notepallet.setLayout(notepalletLayout);
         notepalletLayout.setHorizontalGroup(
             notepalletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 218, Short.MAX_VALUE)
         );
         notepalletLayout.setVerticalGroup(
             notepalletLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
+            .addGap(0, 159, Short.MAX_VALUE)
         );
 
         instrumentBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Piano", "Flute", "Drums", "Oboe" }));
 
         jLabel2.setText("Octave:");
-
-        chordCheck.setText("Chords");
-        chordCheck.setToolTipText(cch);
-        chordCheck.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                toggleChord(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,12 +215,10 @@ public class MainGui extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(octaveSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(melchord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chordCheck))
+                                .addComponent(melchord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pianowindow, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(notepallet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(27, 27, 27)
+                        .addComponent(notepallet, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -215,26 +227,21 @@ public class MainGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(pianowindow, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(pianowindow, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chordCheck)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(instrumentBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(RestLabel)
-                                    .addComponent(octaveSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(25, 25, 25))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(notepallet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(melchord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(495, 495, 495))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(instrumentBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(RestLabel)
+                                .addComponent(octaveSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addComponent(melchord, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(notepallet, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pianowindow.getAccessibleContext().setAccessibleName("");
@@ -256,14 +263,14 @@ public class MainGui extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -331,7 +338,6 @@ public class MainGui extends javax.swing.JFrame {
         }
         if (note >= 20 && note < 47 && y < whiteY && (y > blackY || note >27))
         {
-//comment added to test commit ability.  I've done an experiment to see if I fixed the problem.
             if (note >= 32 && note < 47 && y < blackY)
             {
                 System.out.println("d" + keyOctave + "s");
@@ -418,22 +424,13 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_octaveSetStateChanged
 
     private void anyType(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anyType
-        // TODO add your handling code here:
         this.musicType = false;
     }//GEN-LAST:event_anyType
-
-    private void toggleChord(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_toggleChord
-            chord=!chord;
-           
-            if(chord)chordCheck.setToolTipText(cch);
-            else chordCheck.setToolTipText(cm);
-    }//GEN-LAST:event_toggleChord
 
 
     @Override
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
-       
     }
     @Override
     public void paint(Graphics g)
@@ -457,7 +454,6 @@ public class MainGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel RestLabel;
     public javax.swing.JEditorPane browsePane;
-    private javax.swing.JCheckBox chordCheck;
     private javax.swing.JEditorPane editPane;
     private javax.swing.JComboBox instrumentBox;
     private javax.swing.JLabel jLabel2;
