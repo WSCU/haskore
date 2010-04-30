@@ -11,9 +11,9 @@ public class Prims {
 
         Prim upfn = new Prim() {
             public Value call(ArrayList<Thunk> args) {
-                ValNum arg2 = args.get(1).asNum();
-                ValMusic arg1 = args.get(0).asMusic();
-                return new ValMusic(Music.up(arg1.val, arg2.val.toInt()));
+                ValNum arg1 = args.get(0).asNum();
+                ValMusic arg2 = args.get(1).asMusic();
+                return new ValMusic(Music.up(arg2.val, arg1.val.toInt()));
             }
         };
        result.add(Symbol.toSymbol("up", true), new Thunk(new ValFuncPrim(2,upfn)));
@@ -167,9 +167,13 @@ result.add(Symbol.toSymbol("%"), new Thunk(new ValFuncPrim(2,modfn)));
                     return new ValBool(Lib.compare(args.get(0).asBool()
                             , args.get(1).asBool()));
                 else if(arg0.v.isNum() && arg1.v.isNum())
-                    return new ValBool(Lib.compare(arg0.asNum().val
+                     return new ValBool(Lib.compare(arg0.asNum().val
                             , arg1.asNum().val));
-                else throw new ExecutionError("Use bools or num, never mix them.");
+                else
+                {
+                    System.out.println("PRIMS EQEQ: "+arg0.v+"  "+arg1.v);
+                    throw new ExecutionError("Use bools or num, never mix them.");
+                }
             }
        };
 result.add(Symbol.toSymbol("=="), new Thunk(new ValFuncPrim(2,EqualsEqualsfn)));

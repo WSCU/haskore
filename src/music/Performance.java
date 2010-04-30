@@ -42,11 +42,14 @@ public class Performance {
             Sequencer sequencer = MidiSystem.getSequencer();//testing commit
             sequencer.setSequence(makeMusic());
             sequencer.open();
+            if(MainGui.MUTE)sequencer.stop();
+            System.out.println("MIDI SEQ "+sequencer.isRunning());
             sequencer.start();
             while (true) {
                 if (sequencer.isRunning()) {
                     try {
-                        Thread.sleep(1000); // Check every second
+                        if(MainGui.MUTE)sequencer.stop();
+                        Thread.sleep(10); // Check every second
                     } catch (InterruptedException ignore) {
                         break;
                     }
@@ -68,9 +71,9 @@ public class Performance {
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
             Instrument[] avail = synth.getAvailableInstruments();
-            for(Instrument i : avail){
-                System.out.println(i.getName());
-            }
+//            for(Instrument i : avail){
+//                System.out.println(i.getName());
+//            }
             Sequence sequence = new Sequence(Sequence.SMPTE_30, 2);
             Track track = sequence.createTrack();
             String prev = "";
@@ -79,7 +82,7 @@ public class Performance {
                 int du = n.duration.times(duration_multiplier).toInt();
                 //int du = n.duration.toInt();
                 int s = n.absolute.times(duration_multiplier).toInt();
-                System.out.println("MAGIC NUMBER "+ s +"--->"+du);
+                //System.out.println("MAGIC NUMBER "+ s +"--->"+du);
                 int dInst = 0;
                 int chan = 0;
                     for (Instrument ti : avail) {
