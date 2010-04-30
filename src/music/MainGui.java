@@ -34,7 +34,6 @@ public class MainGui extends javax.swing.JFrame {
     public class PianoWindow  extends JPanel
     {
         Keyboard k = new Keyboard();
-        //int octave = 0;
 
         public PianoWindow()
         {
@@ -50,10 +49,52 @@ public class MainGui extends javax.swing.JFrame {
             }
         }
     }
-    public class ImagePanel extends JPanel
+    public class MelChord extends JPanel
     {
         BufferedImage image;
-        public ImagePanel(String path)
+        int boxIndicator = 0;
+
+        public MelChord(String path)
+        {
+            try
+            {
+                image = ImageIO.read(new File(path));
+            }
+            catch (IOException ex)
+            {
+            System.out.println("Chris write your own code");
+            }
+        }
+        @Override
+        public void paintComponent(Graphics g)
+        {
+            super.paintComponent(g);
+            if (image != null)
+            {
+                g.drawImage(image, 0, 0, this);
+            }
+            if (boxIndicator == 1)
+            {
+                g.setColor(Color.black);
+                g.drawRect(0, 0, 64, 52);
+            }
+            if (boxIndicator == 2)
+            {
+                g.setColor(Color.black);
+                g.drawRect(74, 0, 126, 52);
+            }
+        }
+        public void setBoxIndicator(int set)
+        {
+            boxIndicator = set;
+        }
+    }
+    public class NotePallet extends JPanel
+    {
+        BufferedImage image;
+        int paintIndicator = 0;
+
+        public NotePallet(String path)
         {
             try
             {
@@ -86,8 +127,8 @@ public class MainGui extends javax.swing.JFrame {
         pianowindow = new PianoWindow();
         octaveSet = new javax.swing.JSpinner();
         RestLabel = new javax.swing.JLabel();
-        melchord = new ImagePanel("melchord.gif");
-        notepallet = new ImagePanel("pallete.gif");
+        melchord = new MelChord("melchord.gif");
+        notepallet = new NotePallet("pallete.gif");
         instrumentBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -173,7 +214,6 @@ public class MainGui extends javax.swing.JFrame {
             .addGap(0, 55, Short.MAX_VALUE)
         );
 
-        notepallet.setBackground(new java.awt.Color(83, 230, 47));
         notepallet.setPreferredSize(new java.awt.Dimension(234, 163));
         notepallet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -303,8 +343,6 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_musicClick
 
     private void pianowindowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pianowindowMouseClicked
-         //the following code is partially broken. If you click on a black key, it will only
-        //register as a sharp if it is on the left of the dividing line between notes.
         int x = evt.getX();
         int keyOctave;
         int y = evt.getY();
@@ -319,8 +357,6 @@ public class MainGui extends javax.swing.JFrame {
             keyOctave++;
             hiX -= 140;
         }
-        System.out.println("x = " + x + "y = " + y);
-
         if (note < 27 && y >=0 && y < whiteY)
         {
             if (note >= 12 && note < 27 && y < blackY)
@@ -330,11 +366,9 @@ public class MainGui extends javax.swing.JFrame {
             }
             else if(note < 20)
             {
-
                 System.out.println("c" + keyOctave);
                 noteName = "c" + keyOctave ;
             }
-
         }
         if (note >= 20 && note < 47 && y < whiteY && (y > blackY || note >27))
         {
@@ -405,11 +439,19 @@ public class MainGui extends javax.swing.JFrame {
    
     private void RestLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RestLabelMouseClicked
 
-
     }//GEN-LAST:event_RestLabelMouseClicked
 
     private void melchordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_melchordMouseClicked
-
+        int x = evt.getX();
+        int y = evt.getY();
+        if (x >= 0 && x < 65 && y < 53)
+        {
+            //setBoxIndicator(1);
+        }
+        if (x > 73 && x < 127 && y < 53)
+        {
+            //setBoxIndicator(2);
+        }
     }//GEN-LAST:event_melchordMouseClicked
 
     private void notepalletMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notepalletMouseClicked
@@ -427,7 +469,6 @@ public class MainGui extends javax.swing.JFrame {
         this.musicType = false;
     }//GEN-LAST:event_anyType
 
-
     @Override
     public void paintComponents(Graphics g) {
         super.paintComponents(g);
@@ -441,16 +482,16 @@ public class MainGui extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
+    public static void main(String args[])
+    {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new MainGui().setVisible(true);
-
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel RestLabel;
     public javax.swing.JEditorPane browsePane;
