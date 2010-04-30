@@ -331,7 +331,7 @@ public class MainGui extends javax.swing.JFrame {
         }
         if (note >= 20 && note < 47 && y < whiteY && (y > blackY || note >27))
         {
-
+//comment added to test commit ability.  I've done an experiment to see if I fixed the problem.
             if (note >= 32 && note < 47 && y < blackY)
             {
                 System.out.println("d" + keyOctave + "s");
