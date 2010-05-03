@@ -41,12 +41,25 @@ public class MainGui extends javax.swing.JFrame {
         @Override
         public void paint(Graphics g)
         {
+            octave = (Integer)octaveSet.getValue();
             super.paint(g);
             for (Key key: k.keys)
             {
                 key.paint(g, octave);
             }
+            drawOctave(g,k.keys.get(0),octave-1);
+            drawOctave(g,k.keys.get(12),octave);
+            drawOctave(g,k.keys.get(24),octave + 1);
         }
+
+    }
+    public void drawOctave(Graphics g, Key k, int octave)
+    {
+        String str = ""+ octave;
+        g.setFont(new java.awt.Font("Arial",1,11));
+        g.setColor(Color.black);
+        g.drawString(str,k.Width - 10, k.Height - 35);
+
     }
     public class MelChord extends JPanel
     {
@@ -388,76 +401,77 @@ public class MainGui extends javax.swing.JFrame {
         {
             if (note >= 12 && note < 27 && y < blackY)
             {
-                System.out.println("c" + keyOctave + "s");
-                noteName = "c" + keyOctave + "s";
+                System.out.println(noteType + " c" + keyOctave + "s");
+                noteName = noteType + " c" + keyOctave + "s";
+                
             }
             else if(note < 20)
             {
-                System.out.println("c" + keyOctave);
-                noteName = "c" + keyOctave ;
+                System.out.println(noteType + " c" + keyOctave);
+                noteName = noteType + " c" + keyOctave ;
             }
         }
         if (note >= 20 && note < 47 && y < whiteY && (y > blackY || note >27))
         {
             if (note >= 32 && note < 47 && y < blackY)
             {
-                System.out.println("d" + keyOctave + "s");
-                noteName = "d" + keyOctave + "s";
+                System.out.println(noteType + " d" + keyOctave + "s");
+                noteName = noteType + " d" + keyOctave + "s";
             }
             else if (note < 40)
             {
-                System.out.println("d" + keyOctave);
-                noteName = "d" + keyOctave ;
+                System.out.println(noteType + " d" + keyOctave);
+                noteName = noteType +  " d" + keyOctave ;
             }
         }
         if (note >= 40 && note < 60 && y < whiteY && (y > blackY || note > 47))
         {
-            System.out.println("e" + keyOctave);
-            noteName = "e" + keyOctave;
+            System.out.println(noteType + " e" + keyOctave);
+            noteName = noteType + " e" + keyOctave;
         }
         if (note >= 60 && note < 87 && y < whiteY )
         {
             if (note >= 72 && note < 87 && y < blackY)
             {
-                System.out.println("f" + keyOctave + "s");
-                noteName = "f" + keyOctave + "s";
+                System.out.println( noteType + " f" + keyOctave + "s");
+                noteName =  noteType + " f" + keyOctave + "s";
             }
             else if(note < 80)
             {
-                System.out.println("f" + keyOctave);
-                noteName = "f" + keyOctave;
+                System.out.println( noteType + " f" + keyOctave);
+                noteName = noteType +  " f" + keyOctave;
             }
         }
         if (note >= 80 && note < 107 && y < whiteY && (y > blackY || note > 87))
         {
             if (note >= 92 && note < 107 && y < blackY)
             {
-                System.out.println("g" + keyOctave + "s");
-                noteName = "g" + keyOctave + "s";
+                System.out.println( noteType + " g" + keyOctave + "s");
+                noteName = noteType + " g" + keyOctave + "s";
             }
             else if(note < 100)
             {
-                System.out.println("g" + keyOctave);
-                noteName = "g" + keyOctave;
+                System.out.println( noteType + " g" + keyOctave);
+                noteName = noteType + " g" + keyOctave;
             }
         }
        if (note >= 100 && note < 127 && y < whiteY && (y > blackY || note > 107))
         {
             if (note >= 112 && note < 127 && y < blackY)
             {
-                System.out.println("a" + keyOctave + "s");
-                noteName = "a" + keyOctave + "s";
+                System.out.println( noteType + " a" + keyOctave + "s");
+                noteName =  noteType + " a" + keyOctave + "s";
             }
             else if (note < 120)
             {
-                System.out.println("a" + keyOctave);
-                noteName = "a" + keyOctave;
+                System.out.println( noteType + " a" + keyOctave);
+                noteName =  noteType + " a" + keyOctave;
             }
         }
         if (note >= 120 && note < 140 && y < whiteY && (y > blackY || note > 127))
         {
-            System.out.println("b" + keyOctave);
-            noteName = "b" + keyOctave ;
+            System.out.println( noteType + " b" + keyOctave);
+            noteName = noteType + " b" + keyOctave ;
         }
         MusNote m= Music.note(noteName, new BigRational("1/4"), 80, "Piano");
         System.out.println(m);
@@ -490,6 +504,57 @@ public class MainGui extends javax.swing.JFrame {
     }//GEN-LAST:event_melchordMouseClicked
 
     private void notepalletMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notepalletMouseClicked
+        int x = evt.getX();
+        int y = evt.getY();
+        System.out.println("X = " + x + " Y = " + y);
+        if(y < 40)
+        {
+            if(x <27)
+            {
+                noteType = "q";
+            }
+            else if(x >=27 && x < 54)
+            {
+                noteType = "h";
+            }
+            else if(x >= 54 && x < 81)
+            {
+                noteType = "e";
+            }
+
+        }
+        if(y >= 40 && y < 76)
+        {
+            if(x <27)
+            {
+                noteType = "dq";
+            }
+            else if(x >=27 && x < 54)
+            {
+                noteType = "dh";
+            }
+            else if(x >= 54 && x < 81)
+            {
+                noteType = "de";
+            }
+
+        }
+        if(y >= 76)
+        {
+            if(x <27)
+            {
+                noteType = "p";
+            }
+            if(x >=27 && x < 54)
+            {
+                noteType = "ds";
+            }
+            else if(x >= 54 && x < 81)
+            {
+                noteType = "s";
+            }
+        }
+        System.out.println("note type = " + noteType);
 
     }//GEN-LAST:event_notepalletMouseClicked
 
