@@ -13,7 +13,7 @@ public class Desugaring {
                 ArrayList<Decl> repeats = new ArrayList<Decl>();
                 repeats.add(decls.get(i));
                 i++;
-                while (decls.get(i).LHS.asVar() == pat1.asVar()) {
+                while (i < decls.size() && decls.get(i).LHS.asVar() == pat1.asVar()) {
                     repeats.add(decls.get(i));
                     i++;
                 }
@@ -29,13 +29,13 @@ public class Desugaring {
             DeclVal dv = (DeclVal) d1;
             if (dv.args.size() > 0) {
                 for (int j = dv.args.size() - 1; j >= 0; j--) {
-                    if(dv.args.get(j).isVar()){
+                    if (dv.args.get(j).isVar()) {
                         dv.RHS = new ExpLambda(dv.args.get(j), dv.RHS);
                     }
                 }
             }
             dv.args = new ArrayList<Pat>();
-        }        
+        }
         return desugaredDecls;
     }
 
@@ -76,7 +76,7 @@ public class Desugaring {
             newArgs.add(new PatVar(easyToken("%_" + i)));
         }
 //Create the new Decl
-        Decl desugaredDecl = new DeclVal(((PatVar)originalName).body, originalName, ifStatement, newArgs);
+        Decl desugaredDecl = new DeclVal(((PatVar) originalName).body, originalName, ifStatement, newArgs);
         decls.add(desugaredDecl);
         return decls;
     }
@@ -91,36 +91,36 @@ public class Desugaring {
     }
 
     private static ExpIf bigIfStatement(ArrayList<Decl> decls) {
-        ExpIf result = new ExpIf(null,null,null);
+        ExpIf result = new ExpIf(null, null, null);
 
         for (int j = decls.size() - 1; j >= 0; j--) {
             DeclVal dv = (DeclVal) decls.get(j);
             Exp ifexp = getIf(dv);
             Exp callexp = CallDecl(dv);
-            if(result.elseExp == null){                
+            if (result.elseExp == null) {
                 result.elseExp = callexp;
-            }else{
-                if(result.thenExp == null){
+            } else {
+                if (result.thenExp == null) {
                     result.testExp = ifexp;
                     result.thenExp = callexp;
-                }else{
+                } else {
                     result = new ExpIf(ifexp, callexp, result);
                 }
-            }            
+            }
         }
         return result;
     }
 
     //Iterate through the args for dv and create one expcall to test them all
     private static Exp getIf(DeclVal dv) {
-        Exp prevExp = null;        
+        Exp prevExp = null;
         for (int i = dv.args.size() - 1; i >= 0; i--) {
             Pat currentArg = dv.args.get(i);
-            if (currentArg.isConst()){
+            if (currentArg.isConst()) {
                 ExpVar c1 = new ExpVar(easyToken("=="));
                 // %_# is our name for the actual value given to the function
                 ExpVar c2 = new ExpVar(easyToken("%_" + i));
-                ExpConst c3 = new ExpConst( ((PatConst)currentArg).body);
+                ExpConst c3 = new ExpConst(((PatConst) currentArg).body);
                 ExpCall c4 = new ExpCall(c1, c2);
                 ExpCall c5 = new ExpCall(c4, c3);
                 if (prevExp == null) {
@@ -135,8 +135,7 @@ public class Desugaring {
         return prevExp;
     }
 
-   
-    private static ExpVar ArgAsExp(int i){
+    private static ExpVar ArgAsExp(int i) {
         return new ExpVar(easyToken("%_" + i));
     }
 
