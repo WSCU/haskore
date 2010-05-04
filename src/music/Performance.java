@@ -128,7 +128,11 @@ public class Performance {
     }
 
     public void writeToFile(String filename){
-        writeTofile(makeMusic(), filename);
+        try {
+            MidiSystem.write(makeMusic(), 0, new File(filename + ".mid"));
+        } catch (IOException ex) {
+            System.out.println(filename+": "+ex.getMessage());
+        }
     }
     public void writeTofile(Sequence seq, String filename) {
         try {
