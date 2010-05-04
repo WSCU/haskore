@@ -152,8 +152,7 @@ Prim revfn = new Prim(){
             return new ValMusic(Music.reverse(arg0.val));
     }
 };
-
-result.add(Symbol.toSymbol("rev"), new Thunk(new ValFuncPrim(2,revfn)));
+result.add(Symbol.toSymbol("rev"), new Thunk(new ValFuncPrim(1,revfn)));
 
 Prim durationfn = new Prim(){
     public Value call(ArrayList<Thunk> args) {
@@ -161,14 +160,14 @@ Prim durationfn = new Prim(){
             return new ValNum(Music.duration(arg0.val));
     }
 };
-result.add(Symbol.toSymbol("duration"), new Thunk(new ValFuncPrim(2,durationfn)));
+result.add(Symbol.toSymbol("duration"), new Thunk(new ValFuncPrim(1,durationfn)));
 
-Prim dotfn = new Prim(){
-    public Value call(ArrayList<Thunk> args) {
-      return Top.envDefs.eval(Symbol.composefn);
-    }
-};
-result.add(Symbol.toSymbol("."), new Thunk(new ValFuncPrim(2,dotfn)));
+//Prim dotfn = new Prim(){
+//    public Value call(ArrayList<Thunk> args) {
+//      return Top.envDefs.eval(Symbol.composefn);
+//    }
+//};
+//result.add(Symbol.toSymbol("."), new Thunk(new ValFuncPrim(2,dotfn)));
 
  Prim andfn = new Prim() {
 

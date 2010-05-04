@@ -29,7 +29,9 @@ public class EditorTools
         if (txt.length() - 1 != pos) {
             String rep = txt.substring(0, pos) + sample + txt.substring(pos, txt.length());
             pane.setText(rep);
+            pane.select(pos+sample.length(), pos+sample.length());
         }
+        
     }
 
 }

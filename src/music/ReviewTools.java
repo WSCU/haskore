@@ -9,8 +9,10 @@ import javax.swing.text.BadLocationException;
 public class ReviewTools {
 
     private static TokenStream world;
+    private static ArrayList<Decl> worldDecl;
+    
 
-    public static Env compile(javax.swing.JEditorPane editPane,
+    public static EnvHash compile(javax.swing.JEditorPane editPane,
             javax.swing.JEditorPane browsePane) {
         Env top = Top.envDefs;//Prims.topEnv();
         EnvHash userEnv = new EnvHash(4000, top);
@@ -45,6 +47,7 @@ public class ReviewTools {
         
         HtmlRender(browsePane, str, binds, userEnv);
         world = str;
+        worldDecl= binds;
         return userEnv;
     }
 
@@ -57,11 +60,11 @@ public class ReviewTools {
     public static void action(javax.swing.event.HyperlinkEvent evt, javax.swing.JEditorPane pane) {
         int i = evt.getSourceElement().getStartOffset();
         int e = evt.getSourceElement().getEndOffset();
-        System.out.println(i + " " + e);
+        //System.out.println(i + " " + e);
         try {
             if (evt.getEventType() == EventType.ENTERED) {
                 Token var = world.findToken(pane.getText(i, e - i));
-                System.out.println("Token Body: " + var.body + " v: " + var.tokVal + " type: " + var.type);
+                //System.out.println("Token Body: " + var.body + " v: " + var.tokVal + " type: " + var.type);
             }
             if (evt.getEventType() == EventType.ACTIVATED) {
                 Token var = world.findToken(pane.getText(i, e - i));
@@ -75,11 +78,26 @@ public class ReviewTools {
                 if(var.tokVal.isFunc())
                 {
                    ValFuncPrim fn =(ValFuncPrim)var.tokVal;
-                    System.out.println(fn);
+                    //System.out.println(fn);
                 }
             }
         } catch (BadLocationException ex) {
             Logger.getLogger(ReviewTools.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void saveMusicMIDI(javax.swing.JEditorPane editpane, javax.swing.JEditorPane browsepane)
+    {
+        EnvHash tmpHash = compile(editpane, browsepane);
+        for(Decl d : worldDecl){
+            Pair<Symbol, Thunk> item = tmpHash.find(d.LHS.asVar());
+           if(item.second.v != null && item.second.v.isMusic())
+           {
+               ValMusic v = (ValMusic)item.second.v;
+               Performance result = new Performance(v.val);
+               result.writeTofile(item.first.toString());
+           }
+        }
+
     }
 }

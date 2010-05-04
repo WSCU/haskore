@@ -24,7 +24,6 @@ public class HTML {
                     if (func) {
                         if (dkeep != null) {
                             String c = dkeep.RHS.print();
-                            System.out.println(c);
                             if (!c.contains(t1.body)) {
                                 func = false;
                                 dkeep = null;
@@ -73,19 +72,6 @@ public class HTML {
             }
         }
         return generatedHTML;
-    }
-
-    public static void tokenstreamHTML2(TokenStream t, ArrayList<Decl> decls, EnvHash env) {
-        for (Decl d : decls) {
-            if (d.isPat()) {
-                System.out.println(d.firstToken);
-                System.out.println(d.LHS);
-            }
-            if (d.isExp()) {
-                System.out.println(d.RHS);
-            }
-        }
-
     }
 
     private static String HTMLVar(Token t) {

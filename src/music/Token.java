@@ -136,6 +136,7 @@ public class Token {
         String AtoG = "abcdefg";
         String numbers = "123456789";
         if(body.equals("r"))return true;
+        if(body.equals("empty"))return true;
         if (body.length() == 2) {
             char first = body.charAt(0);
             char second = body.charAt(1);
