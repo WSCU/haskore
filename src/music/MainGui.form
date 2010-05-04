@@ -123,8 +123,8 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="instrumentBox" min="-2" pref="114" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="RestLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                      <Component id="restPanel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="octaveSet" min="-2" max="-2" attributes="0"/>
@@ -149,16 +149,23 @@
                           <Group type="102" attributes="0">
                               <Component id="pianowindow" min="-2" pref="81" max="-2" attributes="0"/>
                               <EmptySpace pref="16" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                      <Component id="instrumentBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="RestLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="octaveSet" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                              <Component id="instrumentBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="octaveSet" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="melchord" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="melchord" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="restPanel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="notepallet" min="-2" pref="159" max="-2" attributes="0"/>
@@ -225,14 +232,6 @@
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="octaveSetStateChanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="RestLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Rest"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RestLabelMouseClicked"/>
-              </Events>
-            </Component>
             <Container class="javax.swing.JPanel" name="melchord">
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="melchordMouseClicked"/>
@@ -297,6 +296,27 @@
                 <Property name="text" type="java.lang.String" value="Octave:"/>
               </Properties>
             </Component>
+            <Container class="javax.swing.JPanel" name="restPanel">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="restPanelMouseClicked"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new RestPanel(&quot;rest.gif&quot;)"/>
+              </AuxValues>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
