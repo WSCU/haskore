@@ -22,7 +22,7 @@ public class MainGui extends javax.swing.JFrame {
     private String noteType = "";
     public int octave = 0;
     public int mBoxIndicator = 2;
-    public int pBoxIndicator = 1;
+    public int pBoxIndicator = 7;
     String cm = "Click to construct a melody with the & operator";
     String cch = "Click to construct chords with the ! operator";
     /** Creates new form gui */
