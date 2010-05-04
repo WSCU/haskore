@@ -46,23 +46,9 @@ public class Performance {
     //        absoluteTime = time;
     instruments = new ArrayList<Integer>();
     }*/
-
-    public void writeTofile(String name) {
-        try {
-            Sequencer sequencer = MidiSystem.getSequencer();//testing commit
-            sequencer.open();
-            sequencer.setSequence(makeMusic());
-            MidiSystem.write(makeMusic(), 0, new File(name + ".mid"));
-            sequencer.close();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage() + " Error in Saving MIDI file");
-        }
-    }
-
     public void perform() {
         try {
-            Sequencer sequencer = MidiSystem.getSequencer();//testing commit
-            
+            Sequencer sequencer = MidiSystem.getSequencer();//testing commi
             sequencer.open();
             sequencer.setSequence(makeMusic());
             sequencer.setTempoInBPM(120);
@@ -96,13 +82,19 @@ public class Performance {
     public Sequence makeMusic() {
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
-            Instrument[] avail = synth.getAvailableInstruments();
-//            for(Instrument i : avail){
-//                System.out.println(i.getName());
-//            }
             Sequence sequence = new Sequence(Sequence.SMPTE_30, 2);
+            return fillSequence(synth, sequence);   
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new Error("Midi Instrument error!");
+        }
+    }
+
+    public Sequence fillSequence(Synthesizer synth ,Sequence sequence)
+    {
             Track track = sequence.createTrack();
             String prev = "";
+            Instrument[] avail = synth.getAvailableInstruments();
             BigRational duration_multiplier = new BigRational(120);
             for (MusNote n : notes) {
                 int du = n.duration.times(duration_multiplier).toInt();
@@ -130,20 +122,57 @@ public class Performance {
                 prev = n.instrument;
                 track.add(createNoteOnEvent(n.pitch, chan, s, n.velocity));
                 track.add(createNoteOffEvent(n.pitch, chan, s + du));
-                
+
             }
-            
             return sequence;
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            throw new Error("Midi Instrument error!");
+    }
+
+    public void writeToFile(String filename){
+        writeTofile(makeMusic(), filename);
+    }
+    public void writeTofile(Sequence seq, String filename) {
+        try {
+            //Sequencer boiler-plate
+            Sequencer sequencer = MidiSystem.getSequencer();
+            sequencer.open();
+            //Magical voodo number 
+            Sequence newseq = new Sequence(Sequence.PPQ,30);
+            
+            sequencer.setSequence(newseq);
+            
+            //Multi-track recording is possible, but I believe it would only
+            //make things more confusing at this level.  It is also among the
+            //more bewildering and scary aspects of Midi.
+            Track track = newseq.createTrack();
+            //enables all recording from every channel.
+            // We need this because we're using multi-channels for instruments.
+            sequencer.recordEnable(track, -1);
+            sequencer.startRecording();
+            for(int i=0;i<seq.getTracks()[0].size();i++){
+                track.add(seq.getTracks()[0].get(i));
+            }
+           
+            //Inexplicable and strange behavior occurs if you don't stop,
+            //close and disable everything.  I don't think the order counts,
+            //just make sure it all gets closed beforing writing to a file.
+            sequencer.stopRecording();
+            sequencer.close();
+            sequencer.recordDisable(track);
+            MidiSystem.write(newseq, 1, new File(filename+".mid"));
+            MidiSystem.write(seq, 0, new File(filename+"2.mid"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            
         }
     }
+
 
     public void add(MusNote note) {
         //       note.absolute = absoluteTime;
         notes.add(note);
     }
+
+
 
     /**
      * ~~~~~~~~~~
@@ -240,6 +269,6 @@ public class Performance {
         //MusAfter tog3 = new MusAfter(note2, tog2);
         //MusAfter tog4 = new MusAfter(note1, tog3);
         Performance result = new Performance(Music.withVelocity(tog1, 5));
-        result.perform();
+        result.writeToFile("midin");
     }
 }

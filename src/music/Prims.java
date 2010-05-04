@@ -140,11 +140,10 @@ result.add(Symbol.toSymbol("faster"), new Thunk(new ValFuncPrim(2,fasterfn)));
 
 Prim withInstrfn = new Prim(){
     public Value call(ArrayList<Thunk> args) {
-            ValMusic arg0 = args.get(1).asMusic();
-            ValNum arg1 = args.get(0).asNum();
-            return new ValMusic(Music.withInstrument(arg0.val, arg1.val.toInt()));
+            ValMusic arg1 = args.get(1).asMusic();
+            ValNum arg0 = args.get(0).asNum();
+            return new ValMusic(Music.withInstrument(arg1.val, arg0.val.toInt()));
     }
-
 };
 result.add(Symbol.toSymbol("withInstrument"), new Thunk(new ValFuncPrim(2,withInstrfn)));
 

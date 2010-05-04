@@ -17,6 +17,9 @@
 slower d = faster (1/d);
 rest d = slower (d / duration r) r;
 
+dot = slower (3/2);
+ddot = slower (7/4);
+composefn f g x = f(g x);
 dw = dot . w;
 w = id;
 dh = dot . h;
@@ -27,13 +30,10 @@ de = dot . e;
 e = faster (8);
 ds = dot . s;
 s = faster (16);
-dot = slower (3/2);
-ddot = slower (7/4);
-composefn f g x = f(g x);
 
--- NOT WORKING
+--Instruments
 piano = withInstrument 0;
-harpsichord = withInstrument 1;
+harpsichord = withInstrument 6;
 vibes = withInstrument 2;
 organ = withInstrument 3;
 guitar = withInstrument 4;
@@ -53,6 +53,7 @@ flute = withInstrument 17;
 panFlute = withInstrument 18;
 kalimba = withInstrument 19;
 woodblock = withInstrument 20;
+goblins = withInstrument 101;
 
 repeat 0 music = empty;
 repeat n music = music & repeat (n-1) music;

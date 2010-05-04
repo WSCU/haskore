@@ -62,21 +62,21 @@ public class ReviewTools {
         try {
             if (evt.getEventType() == EventType.ENTERED) {
                 Token var = world.findToken(pane.getText(i, e - i));
-                //System.out.println("Token Body: " + var.body + " v: " + var.tokVal + " type: " + var.type);
+                System.out.println("Token Body: " + var.body + " v: " + var.tokVal + " type: " + var.type);
             }
             if (evt.getEventType() == EventType.ACTIVATED) {
                 Token var = world.findToken(pane.getText(i, e - i));
 
                 if(var.tokVal!=null && var.tokVal.isMusic())
                 {
-                    ValMusic tv = (ValMusic)var.tokVal;
+                    ValMusic tv = (ValMusic)var.tokVal;                    
                     Performance result = new Performance(tv.val);
                     result.perform();
                 }
                 if(var.tokVal.isFunc())
                 {
                    ValFuncPrim fn =(ValFuncPrim)var.tokVal;
-                    //System.out.println(fn);
+                   //System.out.println(fn);
                 }
             }
         } catch (BadLocationException ex) {
@@ -93,7 +93,7 @@ public class ReviewTools {
            {
                ValMusic v = (ValMusic)item.second.v;
                Performance result = new Performance(v.val);
-               result.writeTofile(item.first.toString());
+               result.writeToFile(item.first.toString());
            }
         }
 
