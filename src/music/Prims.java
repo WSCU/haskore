@@ -129,12 +129,14 @@ result.add(Symbol.toSymbol("=="), new Thunk(new ValFuncPrim(2,EqualsEqualsfn)));
 
 Prim fasterfn = new Prim(){
         public Value call(ArrayList<Thunk> args) {
-            ValMusic arg0 = args.get(0).asMusic();
-            ValNum arg1 = args.get(1).asNum();
-            return new ValMusic(Music.changeDuration(arg0.val, arg1.val));
+            ValMusic arg1 = args.get(1).asMusic();
+            ValNum arg0 = args.get(0).asNum();
+            return new ValMusic(Music.changeDuration(arg1.val, arg0.val.reciprocal()));
            }
        };
 result.add(Symbol.toSymbol("faster"), new Thunk(new ValFuncPrim(2,fasterfn)));
+
+
 
 Prim withInstrfn = new Prim(){
     public Value call(ArrayList<Thunk> args) {

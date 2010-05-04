@@ -27,6 +27,7 @@ public class Performance {
         this.notes = new ArrayList<MusNote>();
         n.perform(BigRational.ZERO, new Modifier(), notes);
     }
+    
 
     public boolean isIn(MusNote n) {
         for (MusNote i : this.notes) {
@@ -233,11 +234,12 @@ public class Performance {
         MusAfter tog0 = new MusAfter(c, Music.note("a3", new BigRational("1"), 80, inst3));
         MusAfter tog1 = new MusAfter(tog0, Music.up(tog0, 12));
 
+
         //MusAfter tog1 = new MusAfter(note4, tog0);
         //MusAfter tog2 = new MusAfter(note3, tog1);
         //MusAfter tog3 = new MusAfter(note2, tog2);
         //MusAfter tog4 = new MusAfter(note1, tog3);
-        Performance result = new Performance(tog1);
+        Performance result = new Performance(Music.withVelocity(tog1, 5));
         result.perform();
     }
 }

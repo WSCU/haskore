@@ -162,10 +162,9 @@ public class BigRational implements Comparable<BigRational> {
         return a.num.multiply(b.den).compareTo(a.den.multiply(b.num));
     }
 
-    public static BigRational max(BigRational a,BigRational b) throws Exception
+    public static BigRational max(BigRational a,BigRational b)
     {
-        if(a.compareTo(b)==0)throw new Exception("The args are equal, looking for maximum");
-        else if(a.compareTo(b)==-1)return b;
+        if(a.compareTo(b)==-1)return b;
         else return a;
     }
     // is this BigRational negative, zero, or positive?

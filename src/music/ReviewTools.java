@@ -24,8 +24,6 @@ public class ReviewTools {
             System.out.println(d.print());
             userEnv.add(d.LHS.asVar(), new Thunk(userEnv, d.RHS));
         }
-        
-            //assumes that every left hand side is a sple variable.
         for (Decl d : binds) {
             try{
             Value result = userEnv.eval(d.LHS.asVar());

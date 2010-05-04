@@ -471,6 +471,7 @@ public class MainGui extends javax.swing.JFrame {
         final int whiteY = 70;
         final int blackY = 40;
         String noteName = "";
+        String fullNote ="";
         keyOctave = (Integer)octaveSet.getValue();
         while (hiX > 0)
         {
@@ -482,13 +483,15 @@ public class MainGui extends javax.swing.JFrame {
             if (note >= 12 && note < 27 && y < blackY)
             {
                 System.out.println(noteType + " c" + keyOctave + "s");
-                noteName = noteType + " c" + keyOctave + "s";
+                noteName = " c" + keyOctave + "s";
+                fullNote = noteType +" "+ noteName;
                 
             }
             else if(note < 20)
             {
                 System.out.println(noteType + " c" + keyOctave);
-                noteName = noteType + " c" + keyOctave ;
+                noteName = "c" + keyOctave;
+                fullNote = noteType +" "+ noteName;
             }
         }
         if (note >= 20 && note < 47 && y < whiteY && (y > blackY || note >27))
@@ -496,30 +499,35 @@ public class MainGui extends javax.swing.JFrame {
             if (note >= 32 && note < 47 && y < blackY)
             {
                 System.out.println(noteType + " d" + keyOctave + "s");
-                noteName = noteType + " d" + keyOctave + "s";
+                noteName = " d" + keyOctave + "s";
+                fullNote = noteType +" "+ noteName;
             }
             else if (note < 40)
             {
                 System.out.println(noteType + " d" + keyOctave);
-                noteName = noteType +  " d" + keyOctave ;
+                noteName = "d" + keyOctave;
+                fullNote = noteType +" "+ noteName;
             }
         }
         if (note >= 40 && note < 60 && y < whiteY && (y > blackY || note > 47))
         {
             System.out.println(noteType + " e" + keyOctave);
-            noteName = noteType + " e" + keyOctave;
+            noteName = "e" + keyOctave;
+            fullNote = noteType +" "+ noteName;
         }
         if (note >= 60 && note < 87 && y < whiteY )
         {
             if (note >= 72 && note < 87 && y < blackY)
             {
                 System.out.println( noteType + " f" + keyOctave + "s");
-                noteName =  noteType + " f" + keyOctave + "s";
+                noteName = "f" + keyOctave + "s";
+                fullNote = noteType +" "+ noteName;
             }
             else if(note < 80)
             {
                 System.out.println( noteType + " f" + keyOctave);
-                noteName = noteType +  " f" + keyOctave;
+                noteName = "f" + keyOctave;
+                fullNote = noteType +" "+ noteName;
             }
         }
         if (note >= 80 && note < 107 && y < whiteY && (y > blackY || note > 87))
@@ -527,12 +535,14 @@ public class MainGui extends javax.swing.JFrame {
             if (note >= 92 && note < 107 && y < blackY)
             {
                 System.out.println( noteType + " g" + keyOctave + "s");
-                noteName = noteType + " g" + keyOctave + "s";
+                noteName = "g" + keyOctave+"s";
+                fullNote = noteType +" "+ noteName;
             }
             else if(note < 100)
             {
                 System.out.println( noteType + " g" + keyOctave);
-                noteName = noteType + " g" + keyOctave;
+                noteName = "g" + keyOctave;
+                fullNote = noteType +" "+ noteName;
             }
         }
        if (note >= 100 && note < 127 && y < whiteY && (y > blackY || note > 107))
@@ -540,24 +550,26 @@ public class MainGui extends javax.swing.JFrame {
             if (note >= 112 && note < 127 && y < blackY)
             {
                 System.out.println( noteType + " a" + keyOctave + "s");
-                noteName =  noteType + " a" + keyOctave + "s";
+                noteName = "a" + keyOctave + "s";
+                fullNote = noteType +" "+ noteName;
             }
             else if (note < 120)
             {
                 System.out.println( noteType + " a" + keyOctave);
-                noteName =  noteType + " a" + keyOctave;
+                noteName = "a" + keyOctave;
+                fullNote = noteType +" "+ noteName;
             }
         }
         if (note >= 120 && note < 140 && y < whiteY && (y > blackY || note > 127))
         {
             System.out.println( noteType + " b" + keyOctave);
-            noteName = noteType + " b" + keyOctave ;
+            fullNote = noteType + " b" + keyOctave ;
         }
         MusNote m= Music.note(noteName, new BigRational("1/4"), 80, "Piano");
         System.out.println(m);
         Performance result = new Performance(m);
-        if(musicType)noteName = chord ? " ! "+noteName:" & "+noteName;
-        EditorTools.smrtAddTxt(editPane, noteName);
+        if(musicType)fullNote = chord ? " ! "+fullNote:" & "+fullNote;
+        EditorTools.smrtAddTxt(editPane, fullNote);
         musicType=true;
         System.out.println("MAIN PIANO "+result.notes.size());
         result.perform();
