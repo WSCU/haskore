@@ -1,7 +1,16 @@
 package music;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.midi.*;
+import javax.sound.midi.spi.MidiFileWriter;
+
 /**
  * The Functional Music project
  * 
@@ -11,23 +20,22 @@ import javax.sound.midi.*;
  */
 public class Performance {
 
-    public ArrayList<MusNote> notes =null;
+    public ArrayList<MusNote> notes = null;
     //public BigRational absoluteTime;
 
-
     public Performance(Music n) {
-        this.notes =  new ArrayList<MusNote>();
+        this.notes = new ArrayList<MusNote>();
         n.perform(BigRational.ZERO, new Modifier(), notes);
     }
 
-    public boolean isIn(MusNote n)
-    {
-        for(MusNote i : this.notes)
-        {
+    public boolean isIn(MusNote n) {
+        for (MusNote i : this.notes) {
             boolean p = i.pitch == n.pitch;
             boolean t = i.absolute.equals(n.absolute);
             boolean d = i.duration.equals(n.duration);
-            if(p && t && d)return true;
+            if (p && t && d) {
+                return true;
+            }
         }
         return false;
     }
@@ -37,27 +45,44 @@ public class Performance {
     //        absoluteTime = time;
     instruments = new ArrayList<Integer>();
     }*/
+
+    public void writeTofile(String name) {
+        try {
+            Sequencer sequencer = MidiSystem.getSequencer();//testing commit
+            sequencer.open();
+            sequencer.setSequence(makeMusic());
+            MidiSystem.write(makeMusic(), 0, new File(name + ".mid"));
+            sequencer.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage() + " Error in Saving MIDI file");
+        }
+    }
+
     public void perform() {
         try {
             Sequencer sequencer = MidiSystem.getSequencer();//testing commit
-            sequencer.setSequence(makeMusic());
+            
             sequencer.open();
-            if(MainGui.MUTE)sequencer.stop();
-            System.out.println("MIDI SEQ "+sequencer.isRunning());
-            sequencer.start();
-            while (true) {
-                if (sequencer.isRunning()) {
-                    try {
-                        if(MainGui.MUTE)sequencer.stop();
-                        Thread.sleep(10); // Check every second
-                    } catch (InterruptedException ignore) {
-                        break;
+            sequencer.setSequence(makeMusic());
+            sequencer.setTempoInBPM(120);
+            if (MainGui.MUTE)sequencer.close();
+            if (!MainGui.MUTE) {
+                sequencer.start();
+                while (true) {
+                    if (sequencer.isRunning()) {
+                        try {
+                            if(MainGui.MUTE)sequencer.stop();
+                            Thread.sleep(0, 100); // Check every second
+                            }
+                        catch (InterruptedException ignore) {
+                                break;
+                            }
                     }
-                } else {
-                    break;
+                    else break;
                 }
-            }
             sequencer.stop();
+            }
+            
             sequencer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -85,24 +110,28 @@ public class Performance {
                 //System.out.println("MAGIC NUMBER "+ s +"--->"+du);
                 int dInst = 0;
                 int chan = 0;
-                    for (Instrument ti : avail) {
-                        if (n.instrument.equals(ti.getName()) ) {
-                            if(!(n.instrument.equals(prev)))dInst++;
-                            if (dInst < 17) {
-                                //synth.loadInstrument(ti);
-                                chan = dInst;
-                                track.add(createNoteEvent(ShortMessage.PROGRAM_CHANGE,
-                                        chan,ti.getPatch().getProgram(),n.velocity,s));
-                                System.out.println(chan +" "+ ti.getPatch().getProgram());
-                            } else {
-                                break;//need to make new track and put notes in it. no way.
-                            }
+                for (Instrument ti : avail) {
+                    if (n.instrument.equals(ti.getName())) {
+                        if (!(n.instrument.equals(prev))) {
+                            dInst++;
+                        }
+                        if (dInst < 17) {
+                            //synth.loadInstrument(ti);
+                            chan = dInst;
+                            track.add(createNoteEvent(ShortMessage.PROGRAM_CHANGE,
+                                    chan, ti.getPatch().getProgram(), n.velocity, s));
+                            System.out.println(chan + " " + ti.getPatch().getProgram());
+                        } else {
+                            break;//need to make new track and put notes in it. no way.
                         }
                     }
-                    prev = n.instrument;
-                    track.add(createNoteOnEvent(n.pitch, chan, s, n.velocity));
-                    track.add(createNoteOffEvent(n.pitch, chan, s + du));
                 }
+                prev = n.instrument;
+                track.add(createNoteOnEvent(n.pitch, chan, s, n.velocity));
+                track.add(createNoteOffEvent(n.pitch, chan, s + du));
+                
+            }
+            
             return sequence;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -115,7 +144,7 @@ public class Performance {
         notes.add(note);
     }
 
-  /**
+    /**
      * ~~~~~~~~~~
      * I have decided to make this private in this class, as I can't think of 
      * any reason why you'd want to fiddle with this outside of writing to a
@@ -150,6 +179,13 @@ public class Performance {
                 lTick);
     }
 
+    private MidiEvent createStop() {
+        return createNoteEvent(ShortMessage.STOP, 0,
+                0,
+                0,
+                1);
+    }
+
     private MidiEvent createNoteOffEvent(int nKey, int inst, long lTick) {
         return createNoteEvent(ShortMessage.NOTE_OFF, inst,
                 nKey,
@@ -161,7 +197,7 @@ public class Performance {
             int nKey,
             int nVelocity,
             long lTick) {
-        
+
         ShortMessage message = new ShortMessage();
         try {
             message.setMessage(nCommand,
@@ -184,8 +220,8 @@ public class Performance {
     }
 
     public static void main(String[] args) {
-        String inst1 ="Music Box";
-        String inst2 ="Pizzicato Strings";
+        String inst1 = "Music Box";
+        String inst2 = "Pizzicato Strings";
         String inst3 = "Music Box";
         //MusNote note1 = new MusNote(60, 70, inst1, new BigRational("1/4"));
         //MusNote note2 = new MusNote(20, 70, inst1, new BigRational("1/2"));
@@ -194,10 +230,9 @@ public class Performance {
         MusNote note5 = new MusNote(50, 80, inst2, new BigRational("1"));
         MusNote note6 = new MusNote(60, 70, inst1, new BigRational("4/4"));
         MusNote c = Music.note("c3", new BigRational("1"), 80, inst3);
-        MusAfter tog0 = new MusAfter(c , Music.note("a3", new BigRational("1"), 80, inst3)
-                );
+        MusAfter tog0 = new MusAfter(c, Music.note("a3", new BigRational("1"), 80, inst3));
         MusAfter tog1 = new MusAfter(tog0, Music.up(tog0, 12));
-        
+
         //MusAfter tog1 = new MusAfter(note4, tog0);
         //MusAfter tog2 = new MusAfter(note3, tog1);
         //MusAfter tog3 = new MusAfter(note2, tog2);
