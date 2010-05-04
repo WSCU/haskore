@@ -82,7 +82,7 @@ public class Performance {
     public Sequence makeMusic() {
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
-            Sequence sequence = new Sequence(Sequence.SMPTE_30, 2);
+            Sequence sequence = new Sequence(Sequence.PPQ,30);
             return fillSequence(synth, sequence);   
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

@@ -488,7 +488,7 @@ public class MainGui extends javax.swing.JFrame {
             if (note >= 12 && note < 27 && y < blackY)
             {
                 System.out.println(noteType + " c" + keyOctave + "s");
-                noteName = " c" + keyOctave + "s";
+                noteName = "c" + keyOctave + "s";
                 fullNote = noteType +" "+ noteName;
                 
             }
@@ -504,7 +504,7 @@ public class MainGui extends javax.swing.JFrame {
             if (note >= 32 && note < 47 && y < blackY)
             {
                 System.out.println(noteType + " d" + keyOctave + "s");
-                noteName = " d" + keyOctave + "s";
+                noteName = "d" + keyOctave + "s";
                 fullNote = noteType +" "+ noteName;
             }
             else if (note < 40)
@@ -568,7 +568,8 @@ public class MainGui extends javax.swing.JFrame {
         if (note >= 120 && note < 140 && y < whiteY && (y > blackY || note > 127))
         {
             System.out.println( noteType + " b" + keyOctave);
-            fullNote = noteType + " b" + keyOctave ;
+            noteName = "b" + keyOctave;
+            fullNote = noteType + noteName ;
         }
         MusNote m= Music.note(noteName, new BigRational("1/4"), 80, "Piano");
         System.out.println(m);

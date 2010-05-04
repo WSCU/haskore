@@ -236,12 +236,13 @@ result.add(Symbol.toSymbol("duration"), new Thunk(new ValFuncPrim(1,durationfn))
         result.add(Symbol.toSymbol("||"), new Thunk(new ValFuncPrim(2, orfn)));
 
 
-  Prim emptyfn = new Prim() {
-            public Value call(ArrayList<Thunk> args) {
-                return new ValMusic(MusNote.empty());
-            }
-       };
-result.add(Symbol.toSymbol("empty", true), new Thunk(new ValFuncPrim(0,emptyfn)));
+//  Prim emptyfn = new Prim() {
+//            public Value call(ArrayList<Thunk> args) {
+//                Music emp = MusNote.empty();
+//                return new ValMusic(emp);
+//            }
+//       };
+//result.add(Symbol.toSymbol("empty",), new Thunk(emptyfn));
 
 Prim musafter = new Prim() {
             public Value call(ArrayList<Thunk> args) {
@@ -277,6 +278,7 @@ result.add(Symbol.toSymbol("!"), new Thunk(new ValFuncPrim(2,mustogether)));
             }
         }
         result.add(Symbol.toSymbol("r"), new Thunk(new ValMusic(Music.note("r", WHOLE, 50, "Piano"))));
+        result.add(Symbol.toSymbol("empty"), new Thunk(new ValMusic(MusNote.empty())));
 
         return result;
     }
