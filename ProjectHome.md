@@ -1,0 +1,1 @@
+We are making a Java application that will teach kids how to program while creating music.
